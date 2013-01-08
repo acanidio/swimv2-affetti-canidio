@@ -7,8 +7,9 @@ public class FeedbackStorer implements DataStorer {
 	@Override
 	public void store(HttpServletRequest request) {
 		String description = request.getParameter("description");
+		String replyid = request.getParameter("replyid");
 
-		System.out.println("Feedback stored: " + description);
+		System.out.println("Feedback stored @reply"+replyid+": " + description);
 	}
 
 	@Override
