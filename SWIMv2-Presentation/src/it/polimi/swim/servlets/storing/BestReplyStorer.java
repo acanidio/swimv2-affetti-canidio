@@ -6,14 +6,14 @@ public class BestReplyStorer implements DataStorer {
 
 	@Override
 	public void store(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-
+		//sets the attribute best to true
+		
+		System.out.println("Best reply stored");
 	}
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return "loadhr.servlet?id="+request.getParameter("replyid");
 	}
 
 }

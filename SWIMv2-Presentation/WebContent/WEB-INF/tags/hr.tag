@@ -25,11 +25,11 @@
 <ul>
 <c:forEach var="reply" items="${helpreq.replies}">
 	<li><a href="loaduser.servlet?id=${reply.user.id}">${reply.user.name} ${reply.user.surname}</a>
-	<c:if test="${flag=='false'}">
+	<c:if test="${postedbyme=='true' && thereisbr=='false'}">
 		<form action="bestreply.store?replyid=${reply.id}" method="get"><input type="submit" value="Select as Best Reply"></form>
 	</c:if>
 	
-	<c:if test="${flag=='true' && reply.best==true && empty reply.feedback}">
+	<c:if test="${thereisbr=='true' && postedbyme=='true' && reply.best==true && empty reply.feedback}">
 		<form action="newfeed.view?replyid=${reply.id}" method="get"><input type="submit" value="Give a Feedback"></form>
 	</c:if>
 	</li>

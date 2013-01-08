@@ -2,18 +2,21 @@ package it.polimi.swim.servlets.storing;
 
 import javax.servlet.http.HttpServletRequest;
 
+import temporaryClasses.HelpRequest;
+
 public class HelpRequestStorer implements DataStorer {
+	
+	private HelpRequest hr;
 
 	@Override
 	public void store(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-
+		hr = new HelpRequest();
+		System.out.println("The help request has been stored");
 	}
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return "loadhr.servlet?id="+hr.getId();
 	}
 
 }

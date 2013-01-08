@@ -18,7 +18,7 @@
 	</c:when>
 	
 	<c:otherwise>
-		<a href="storefrship.servlet?id=${requestScope.user.id}">Add to friends</a>
+		<a href="frship.store?id=${requestScope.user.id}">Add to friends</a>
 	</c:otherwise>
 </c:choose>
 

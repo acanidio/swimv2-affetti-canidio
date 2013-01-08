@@ -10,7 +10,7 @@ public class ReplyStorer implements DataStorer {
 		String hrid = request.getParameter("hrid");
 
 		System.out.println("Reply stored:");
-		System.out.println("hr id: " + hrid);
+		System.out.println("@hr: " + hrid);
 		System.out.println("by user: "
 				+ request.getSession().getAttribute("user"));
 
