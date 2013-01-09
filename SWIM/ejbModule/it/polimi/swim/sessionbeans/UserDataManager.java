@@ -27,6 +27,7 @@ import org.jboss.ejb3.annotation.RemoteBinding;
 @Stateless
 @RemoteBinding(jndiBinding = UserDataManager.REMOTE)
 @LocalBinding(jndiBinding = UserDataManager.LOCAL)
+@SuppressWarnings("unchecked")
 public class UserDataManager implements UserDataManagerRemote, UserDataManagerLocal {
 
 	public static final String REMOTE = "UserDataManager/remote";
@@ -69,7 +70,7 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 
 	@Override
 	public User loadProfile(int IDUser) {
-		User user;
+		User user = null;
 		try {
 			user = manager.find(User.class, IDUser);
 		} catch (Exception e) {
@@ -82,39 +83,91 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 	public Hashtable<Ability, Float> loadUserAbilities(int IDUser) {
 		Hashtable<Ability, Float> possessedAbilities = new Hashtable<Ability, Float>();
 		try {
-			Query query = manager.createQuery("SELECT a, AVG(f.mark) " +
-											"FROM User u JOIN u.abilities a LEFT JOIN a.feedbacks f " +
-											"WHERE u.ID = :ID " +
-											"GROUP BY a");
-			// TODO
+			Query query = manager.createQuery("SELECT a " +
+											"FROM User u JOIN u.abilities a " +
+											"WHERE u.ID = :ID");
+			List<Ability> abilities = (List<Ability>) query.setParameter("ID", IDUser).getResultList();
+			for(Ability a: abilities) {
+				Float average = averageMark(IDUser, a.getID());
+				possessedAbilities.put(a, average);
+			}
 		} catch (Exception e) {
 			return null;
 		}
 		return possessedAbilities;
 	}
+	
+	private Float averageMark(int IDUser, int IDAbility) {
+		Float average = null;
+		try {
+			Query query = manager.createQuery("SELECT AVG(f.mark) " +
+											"FROM User u JOIN u.abilities a LEFT JOIN a.feedbacks f " +
+											"WHERE u.ID = :IDUser AND a.ID = :IDAbility");
+			average = (Float) query.setParameter("IDUser", IDUser)
+							.setParameter("IDAbility", IDAbility)
+							.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+		return average;
+	}
 
 	@Override
 	public List<HelpRequest> loadUserHelpRequests(int IDUser) {
-		// TODO Auto-generated method stub
-		return null;
+		List<HelpRequest> helprequests = null;
+		try {
+			Query query = manager.createQuery("SELECT h " +
+											"FROM User u JOIN u.helprequests h " +
+											"WHERE u.ID = :IDUser");
+			helprequests = query.setParameter("IDUser", IDUser)
+								.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		return helprequests;
 	}
 
 	@Override
 	public List<Conversation> loadConversations(int IDUser) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Conversation> conversations = null;
+		try {
+			Query query = manager.createQuery("SELECT c " +
+											"FROM Conversation c JOIN c.sender u1 JOIN c.receiver u2 " +
+											"WHERE u1.ID = :IDUser OR u2.ID = :IDUser");
+			conversations = (List<Conversation>) query.setParameter("IDUser", IDUser);
+		} catch (Exception e) {
+			return null;
+		}
+		return conversations;
 	}
 
 	@Override
 	public Conversation loadSpecificConversation(int IDConversation) {
-		// TODO Auto-generated method stub
-		return null;
+		Conversation conversation = null;
+		try {
+			Query query = manager.createQuery("SELECT c " +
+											"FROM Conversation c " +
+											"WHERE c.ID = :IDConversation");
+			conversation = (Conversation) query.setParameter("IDConversation", IDConversation);
+		} catch (Exception e) {
+			return null;
+		}
+		return conversation;
 	}
 
 	@Override
 	public List<Friendship> loadPendingFriendships(int IDUser) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Friendship> pendingFriendships = null;
+		try {
+			Query query = manager.createQuery("SELECT f " +
+											"FROM Friendship f JOIN f.sender u1 JOIN f.receiver u2 " +
+											"WHERE (u1.ID = :IDUser OR u2.ID = :IDUser) AND f.pending = true");
+			pendingFriendships = query.setParameter("IDUser", IDUser)
+										.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		return pendingFriendships;
 	}
 
 	@Override
