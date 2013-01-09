@@ -1,5 +1,6 @@
 package it.polimi.swim.sessionbeans;
 
+import it.polimi.swim.entities.Ability;
 import it.polimi.swim.entities.Conversation;
 import it.polimi.swim.entities.Friendship;
 import it.polimi.swim.entities.HelpRequest;
@@ -8,6 +9,7 @@ import it.polimi.swim.entities.Person;
 import it.polimi.swim.entities.User;
 
 import java.sql.Date;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -67,8 +69,28 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 
 	@Override
 	public User loadProfile(int IDUser) {
-		// TODO Auto-generated method stub
-		return null;
+		User user;
+		try {
+			user = manager.find(User.class, IDUser);
+		} catch (Exception e) {
+			return null;
+		}
+		return user;
+	}
+	
+	@Override
+	public Hashtable<Ability, Float> loadUserAbilities(int IDUser) {
+		Hashtable<Ability, Float> possessedAbilities = new Hashtable<Ability, Float>();
+		try {
+			Query query = manager.createQuery("SELECT a, AVG(f.mark) " +
+											"FROM User u JOIN u.abilities a LEFT JOIN a.feedbacks f " +
+											"WHERE u.ID = :ID " +
+											"GROUP BY a");
+			// TODO
+		} catch (Exception e) {
+			return null;
+		}
+		return possessedAbilities;
 	}
 
 	@Override

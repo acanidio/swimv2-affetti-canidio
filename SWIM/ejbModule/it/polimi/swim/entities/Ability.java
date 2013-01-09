@@ -1,6 +1,8 @@
 package it.polimi.swim.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -21,6 +23,12 @@ public class Ability implements Serializable {
 	private String name;
 	
 	private boolean pending;
+	
+	@OneToMany(targetEntity = HelpRequest.class, mappedBy = "ability")
+	private List<HelpRequest> helprequests;
+	
+	@OneToMany(targetEntity = Feedback.class, mappedBy = "ability")
+	private List<Feedback> feedbacks;
 
 	public Ability() {
 		super();
@@ -44,6 +52,22 @@ public class Ability implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<HelpRequest> getHelprequests() {
+		return helprequests;
+	}
+
+	public void setHelprequests(List<HelpRequest> helprequests) {
+		this.helprequests = helprequests;
+	}
+
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
 	}
    
 }
