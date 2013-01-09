@@ -6,12 +6,10 @@
 	<li>
 	<p>${ability.name}</p>
 	
-	<form method="get" action="answertoAbility.servlet?ans=accept">
-	<input type="submit" value="Accept">
-	</form>
-	
-	<form method="get" action="answertoAbility.servlet?ans=decline">
-	<input type="submit" value="Decline">
+	<form method="post" action="adability.store">
+	<input type="hidden" name="id" value="${ability.id}">
+	<input type="submit" name="ans" value="Accept">
+	<input type="submit" name="ans" value="Decline">
 	</form>
 	</li>
 </c:forEach>

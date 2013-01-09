@@ -7,18 +7,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>${requestScope.id}'s profile</title>
+<title>${requestScope.user.id}'s profile</title>
 </head>
 <body>
 
 <c:choose>
 
 	<c:when  test="${requestScope.user.id==sessionScope.user.id}">
-		<a href="modifyprofile.view">Modify profile</a>
+		<a href="loadabilities?path=modifyprofile.view">Modify profile</a>
 	</c:when>
 	
 	<c:otherwise>
-		<a href="frship.store?id=${requestScope.user.id}">Add to friends</a>
+		<c:if test="${sessionScope.type=='user'}">
+			<a href="frship.store?id=${requestScope.user.id}">Add to friends</a>
+		</c:if>
 	</c:otherwise>
 </c:choose>
 

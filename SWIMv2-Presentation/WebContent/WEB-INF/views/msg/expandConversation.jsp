@@ -14,7 +14,7 @@
 
 <swim:conv messages="${messages}"></swim:conv>
 
-<form method="post" action="message.store">
+<form method="post" action="message.store?id=${requestScope.id}">
 	<input type="text" name="text" height="50" width="200"><br>
 	<input type="submit" value="Send">
 </form>

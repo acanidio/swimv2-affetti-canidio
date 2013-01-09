@@ -8,7 +8,12 @@ public class MessageStorer implements DataStorer {
 	public void store(HttpServletRequest request) {
 		String recipient = request.getParameter("recipient");
 		String text = request.getParameter("text");
-		
+		String id = request.getParameter("id");
+
+		if (id == null || id.isEmpty()) {
+			request.setAttribute("id", (int) (Math.random() * 100));
+		}
+
 		System.out.println("Message stored:");
 		System.out.println(recipient);
 		System.out.println(text);
@@ -16,7 +21,7 @@ public class MessageStorer implements DataStorer {
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		return "expandconv.servlet?id="+request.getParameter("id");
+		return "expandconv.servlet?id=" + request.getParameter("id");
 	}
 
 }

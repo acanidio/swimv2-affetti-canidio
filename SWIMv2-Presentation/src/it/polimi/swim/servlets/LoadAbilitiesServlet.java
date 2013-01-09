@@ -1,4 +1,4 @@
-package it.polimi.swim.servlets.msg;
+package it.polimi.swim.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import temporaryClasses.Message;
-import temporaryClasses.User;
+import temporaryClasses.Ability;
 
 /**
- * Servlet implementation class ExpandConvServlet
+ * Servlet implementation class LoadAbilitiesServlet
  */
-public class ExpandConvServlet extends HttpServlet {
+public class LoadAbilitiesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ExpandConvServlet() {
+	public LoadAbilitiesServlet() {
 		super();
 	}
 
@@ -31,26 +30,18 @@ public class ExpandConvServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<Message> messages = new ArrayList<Message>();
-
-		User fromuser = new User("andrea", "canidio");
-		User me = new User("lorenzo", "affetti");
-
-		Message message1 = new Message("Hi man");
-		message1.setFromU(fromuser);
-
-		Message message2 = new Message("Hi man!");
-		message2.setFromU(me);
-
-		messages.add(message1);
-		messages.add(message2);
-
-		// loads from the db
-
-		request.setAttribute("messages", messages);
-
-		request.getRequestDispatcher("expandconv.view?id="+request.getParameter("id")).forward(request,
-				response);
+		//loads abilities from database
+		String forwardingPath= request.getParameter("path");
+		
+		List<Ability> abilities = new ArrayList<Ability>();
+		Ability a1 = new Ability("Cooker");
+		Ability a2 = new Ability("Musician");
+		abilities.add(a1);
+		abilities.add(a2);
+		
+		request.setAttribute("abilities", abilities);
+		
+		request.getRequestDispatcher(forwardingPath).forward(request, response);
 	}
 
 	/**
