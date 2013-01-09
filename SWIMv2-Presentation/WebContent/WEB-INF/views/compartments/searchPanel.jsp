@@ -2,4 +2,4 @@
 	<input type="text" value="username">
 	<input type="submit" value="Search">
 </form>
-<a href="advsearch.view">Advanced Search</a>
+<a href="loadabilities.servlet?path=advsearch.view">Advanced Search</a>

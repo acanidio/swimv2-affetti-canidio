@@ -1,1 +1,1 @@
-<a>Pending Abilities</a>
+<a href="pabilities.servlet">Pending abilities</a>

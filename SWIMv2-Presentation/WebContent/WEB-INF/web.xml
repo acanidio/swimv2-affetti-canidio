@@ -62,7 +62,6 @@
     <servlet-name>PMessagesServlet</servlet-name>
     <url-pattern>/PMessagesServlet</url-pattern>
   </servlet-mapping>
- 
   <servlet>
     <description></description>
     <display-name>LoadUserServlet</display-name>
@@ -103,7 +102,6 @@
     <servlet-name>LogOutServlet</servlet-name>
     <url-pattern>/LogOutServlet</url-pattern>
   </servlet-mapping>
- 
   <servlet>
     <description></description>
     <display-name>HomeServlet</display-name>
@@ -154,8 +152,7 @@
     <servlet-name>LoadHelpRequestServlet</servlet-name>
     <url-pattern>/LoadHelpRequestServlet</url-pattern>
   </servlet-mapping>
-  
- <servlet>
+  <servlet>
     <description></description>
     <display-name>StoreServlet</display-name>
     <servlet-name>StoreServlet</servlet-name>
@@ -164,5 +161,25 @@
   <servlet-mapping>
     <servlet-name>StoreServlet</servlet-name>
     <url-pattern>*.store</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoadAbilitiesServlet</display-name>
+    <servlet-name>LoadAbilitiesServlet</servlet-name>
+    <servlet-class>it.polimi.swim.servlets.LoadAbilitiesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadAbilitiesServlet</servlet-name>
+    <url-pattern>/LoadAbilitiesServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoadFilteredWallServlet</display-name>
+    <servlet-name>LoadFilteredWallServlet</servlet-name>
+    <servlet-class>it.polimi.swim.servlets.helprequest.LoadFilteredWallServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadFilteredWallServlet</servlet-name>
+    <url-pattern>/LoadFilteredWallServlet</url-pattern>
   </servlet-mapping>
 </web-app>

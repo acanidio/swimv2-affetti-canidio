@@ -1,2 +1,2 @@
 
-<a href="signup.view">Sign up</a>
+<a href="loadabilities.servlet?path=signup.view">Sign up</a>

@@ -6,16 +6,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Post Help Request</title>
+<title>Filter Wall</title>
 </head>
 <body>
 
-<form action="hr.store" method="post">
-	Subject: <input type="text" name="subject">
-	Ability: <swim:abilitiesCheckBox abilities="${abilities}"></swim:abilitiesCheckBox>
-	Date:	<input type="text" name="date">
-	Hour:	<input type="text" name="hour">
-	<input type="submit" value="Post">
+<form action="filterwall.servlet" method="get">
+<ul>
+<li>Friend: <input type="text" name="friend"></li>
+<li>City: <input type="text" name="city"></li>
+<li>Ability: <swim:abilitiesCheckBox abilities="${requestScope.abilities}"></swim:abilitiesCheckBox></li>
+<li><input type="submit" value="filter"></li>
+</ul>
+
 </form>
 
 </body>

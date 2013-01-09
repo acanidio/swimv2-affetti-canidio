@@ -6,17 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Post Help Request</title>
+<title>Filtered Wall</title>
 </head>
 <body>
 
-<form action="hr.store" method="post">
-	Subject: <input type="text" name="subject">
-	Ability: <swim:abilitiesCheckBox abilities="${abilities}"></swim:abilitiesCheckBox>
-	Date:	<input type="text" name="date">
-	Hour:	<input type="text" name="hour">
-	<input type="submit" value="Post">
-</form>
+<swim:hrList helpreqs="${requestScope.hrs}"></swim:hrList>
+
 
 </body>
 </html>

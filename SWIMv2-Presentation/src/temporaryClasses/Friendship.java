@@ -1,11 +1,23 @@
 package temporaryClasses;
 
-
 public class Friendship {
 
 	private boolean pending;
 	private User fromU;
 	private User toU;
+	private int id;
+
+	public Friendship() {
+		this.id = (int) (Math.random() * 100);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public boolean isPending() {
 		return pending;

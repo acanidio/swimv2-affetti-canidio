@@ -1,4 +1,6 @@
 <%@ attribute name="action" required="true"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="swim" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <form action="${action}" method="post">
 <ul>
@@ -8,12 +10,18 @@
 
 <li>E-mail address: <input type="text" name="email" value="${sessionScope.user.email}"></li>
 
+<c:if test="${action=='storemodif.servlet'}">
 <li>
-<select name="abilities">
-	<option value="cooker">Cooker</option>
-	<option value="blacksmith">Black-smith</option>
-	<option value="plumber">Plumber</option>
-</select>
+<ul>
+	<c:forEach var="ability" items="${sessionScope.user.abilities}">
+		<li>${ability.name}</li>
+	</c:forEach>
+</ul>
+</li>
+</c:if>
+
+<li>
+<swim:abilitiesCheckBox abilities="${abilities}"></swim:abilitiesCheckBox>
 <a href="newability.view">Other...</a>
 </li>
 
