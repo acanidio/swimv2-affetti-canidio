@@ -202,7 +202,22 @@ public class UserDataManager implements UserDataManagerRemote {
 			if(!modifiedUser.getSurname().equals(surname)) {
 				modifiedUser.setSurname(surname);
 			}
-			// TODO
+			if(!modifiedUser.getAvatar().equals(avatar)) {
+				modifiedUser.setAvatar(avatar);
+			}
+			if(!modifiedUser.getCity().equals(city)) {
+				modifiedUser.setCity(city);
+			}
+			if(modifiedUser.getGender() != gender) {
+				modifiedUser.setGender(gender);
+			}
+			if(!modifiedUser.getBirthday().equals(birthday)) {
+				modifiedUser.setBirthday(birthday);
+			}
+			if(!modifiedUser.getPhonenumber().equals(phonenumber)) {
+				modifiedUser.setPhonenumber(phonenumber);
+			}
+			manager.merge(modifiedUser);
 		} catch (Exception e) {
 			operationResult = false;
 		}
@@ -211,7 +226,17 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@Override
 	public boolean addAbilityToUser(int IDUser, int IDAbility) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			User user = manager.find(User.class, IDUser);
+			Ability ability = manager.find(Ability.class, IDAbility);
+			if(user.getAbilities().contains(ability)) {
+				return false;
+			}
+			user.getAbilities().add(ability);
+			manager.merge(user);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 }
