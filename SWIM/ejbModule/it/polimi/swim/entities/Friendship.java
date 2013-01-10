@@ -12,29 +12,22 @@ import javax.persistence.*;
 
 public class Friendship implements Serializable {
 
-	
-	private static final String RECEIVER = "IDReceiverFriendship";
-
-	private static final String SENDER = "IDSenderFriendship";
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
 	private boolean accepted;
 	
 	@ManyToOne(targetEntity = User.class, optional = false)
-	@JoinColumn(name = SENDER)
 	private User sender;
 	
 	@ManyToOne(targetEntity = User.class, optional = false)
-	@JoinColumn(name = RECEIVER)
 	private User receiver;
-
+	
 	public Friendship() {
 		super();
-		ID = (int) System.nanoTime();
 	}
 	
 	public int getID() {

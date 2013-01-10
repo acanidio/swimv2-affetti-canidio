@@ -20,6 +20,10 @@ public interface UserDataManagerRemote {
 	
 	public int registerNewUser(String email, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
 	
+	public boolean modifyUser(int IDUser, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
+	
+	public boolean addAbilityToUser(int IDUser, int IDAbility);
+	
 	public User loadProfile(int IDUser);
 	
 	public Hashtable<Ability, Float> loadUserAbilities(int IDUser);

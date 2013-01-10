@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.jboss.ejb3.annotation.LocalBinding;
 import org.jboss.ejb3.annotation.RemoteBinding;
 
 /**
@@ -17,14 +16,11 @@ import org.jboss.ejb3.annotation.RemoteBinding;
  */
 @Stateless
 @RemoteBinding(jndiBinding = AbilityManager.REMOTE)
-@LocalBinding(jndiBinding = AbilityManager.LOCAL)
-public class AbilityManager implements AbilityManagerRemote, AbilityManagerLocal {
+public class AbilityManager implements AbilityManagerRemote {
 
     public static final String REMOTE = "AbilityManager/remote";
     
-    public static final String LOCAL = "AbilityManager/local";
-    
-    @PersistenceContext(name = "SWIMPU")
+    @PersistenceContext(unitName = "SWIMPU")
     EntityManager manager;
 
 	@Override
@@ -84,8 +80,8 @@ public class AbilityManager implements AbilityManagerRemote, AbilityManagerLocal
 		return verified;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Ability> loadPendingAbilities() {
 		List<Ability> abilities;
 		try {

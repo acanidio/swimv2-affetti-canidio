@@ -8,11 +8,6 @@ import java.util.Set;
 import javax.persistence.*;
 
 @NamedQueries(value = {
-		@NamedQuery(name = "User.getByID",
-				query = "SELECT u " +
-						"FROM User u " +
-						"WHERE u.ID = :ID"
-		),
 		@NamedQuery(name = "User.getList",
 				query = "SELECT u " +
 						"FROM User u"

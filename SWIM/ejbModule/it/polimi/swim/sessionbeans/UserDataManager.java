@@ -18,7 +18,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.jboss.ejb3.annotation.LocalBinding;
 import org.jboss.ejb3.annotation.RemoteBinding;
 
 /**
@@ -26,12 +25,9 @@ import org.jboss.ejb3.annotation.RemoteBinding;
  */
 @Stateless
 @RemoteBinding(jndiBinding = UserDataManager.REMOTE)
-@LocalBinding(jndiBinding = UserDataManager.LOCAL)
-@SuppressWarnings("unchecked")
-public class UserDataManager implements UserDataManagerRemote, UserDataManagerLocal {
+public class UserDataManager implements UserDataManagerRemote {
 
 	public static final String REMOTE = "UserDataManager/remote";
-	public static final String LOCAL = "UserDataManager/local";
 	
 	@PersistenceContext(unitName = "SWIMPU")
 	private EntityManager manager;
@@ -79,6 +75,7 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 		return user;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Hashtable<Ability, Float> loadUserAbilities(int IDUser) {
 		Hashtable<Ability, Float> possessedAbilities = new Hashtable<Ability, Float>();
@@ -112,6 +109,7 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 		return average;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> loadUserHelpRequests(int IDUser) {
 		List<HelpRequest> helprequests = null;
@@ -127,6 +125,7 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 		return helprequests;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Conversation> loadConversations(int IDUser) {
 		List<Conversation> conversations = null;
@@ -155,6 +154,7 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 		return conversation;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Friendship> loadPendingFriendships(int IDUser) {
 		List<Friendship> pendingFriendships = null;
@@ -170,9 +170,48 @@ public class UserDataManager implements UserDataManagerRemote, UserDataManagerLo
 		return pendingFriendships;
 	}
 
+	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	public List<Message> loadNewReceivedMessages(int IDUser) {
-		// TODO Auto-generated method stub
+		List<Message> newMessages = null;
+		try {
+			Query query = manager.createQuery("SELECT m " +
+											"FROM Message JOIN f.sender u1 JOIN f.receiver u2 " +
+											"WHERE (u1.ID = :IDUser OR u2.ID = :IDUser) AND m.unreaded = true");
+			newMessages = query.setParameter("IDUser", IDUser)
+								.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 		return null;
+	}
+
+	@Override
+	public boolean modifyUser(int IDUser, String password, String name,
+			String surname, String avatar, String city, char gender,
+			Date birthday, String phonenumber) {
+		boolean operationResult = false;
+		try {
+			User modifiedUser = manager.find(User.class, IDUser);
+			if(!modifiedUser.getPassword().equals(password)) {
+				modifiedUser.setPassword(password);
+			}
+			if(!modifiedUser.getName().equals(name)) {
+				modifiedUser.setName(name);
+			}
+			if(!modifiedUser.getSurname().equals(surname)) {
+				modifiedUser.setSurname(surname);
+			}
+			// TODO
+		} catch (Exception e) {
+			operationResult = false;
+		}
+		return operationResult;
+	}
+
+	@Override
+	public boolean addAbilityToUser(int IDUser, int IDAbility) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

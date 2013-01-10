@@ -11,17 +11,10 @@ import javax.persistence.*;
 @Entity
 public class Message implements Serializable {
 
-	
-	private static final String CONVERSATION = "IDConversation";
-
-	private static final String SENDER = "IDSenderMessage";
-
-	private static final String RECEIVER = "IDReceiverMessage";
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
 	private String text;
@@ -29,15 +22,12 @@ public class Message implements Serializable {
 	private boolean unreaded;
 	
 	@ManyToOne(targetEntity = User.class, optional = false)
-	@JoinColumn(name = SENDER)
 	private User sender;
 	
 	@ManyToOne(targetEntity = User.class, optional = false)
-	@JoinColumn(name = RECEIVER)
 	private User receiver;
 	
 	@ManyToOne(targetEntity = Conversation.class, optional = false)
-	@JoinColumn(name = CONVERSATION)
 	private Conversation conversation;
 
 	public Message() {
