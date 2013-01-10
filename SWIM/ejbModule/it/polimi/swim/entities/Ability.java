@@ -17,7 +17,7 @@ public class Ability implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
 	private String name;
@@ -32,6 +32,7 @@ public class Ability implements Serializable {
 
 	public Ability() {
 		super();
+		pending = true;
 	}
 	
 	public int getID(){

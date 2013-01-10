@@ -8,11 +8,6 @@ import javax.persistence.*;
  *
  */
 @NamedQueries(value ={
-		@NamedQuery(name = "Person.getByID",
-				query = "SELECT p " +
-						"FROM Person p " +
-						"WHERE p.ID = :ID"
-		),
 		@NamedQuery(name = "Person.getByEmail",
 				query = "SELECT p " +
 						"FROM Person p " +
@@ -29,7 +24,7 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
 	private String name;

@@ -10,7 +10,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.jboss.ejb3.annotation.LocalBinding;
 import org.jboss.ejb3.annotation.RemoteBinding;
 
 /**
@@ -18,11 +17,9 @@ import org.jboss.ejb3.annotation.RemoteBinding;
  */
 @Stateless
 @RemoteBinding(jndiBinding = LoginManager.REMOTE)
-@LocalBinding(jndiBinding = LoginManager.LOCAL)
-public class LoginManager implements LoginManagerRemote, LoginManagerLocal {
+public class LoginManager implements LoginManagerRemote {
 
 	public static final String REMOTE = "LoginManager/remote";
-	public static final String LOCAL = "LoginManager/local";
 	
 	@PersistenceContext(unitName = "SWIMPU")
 	private EntityManager manager;

@@ -11,29 +11,23 @@ import javax.persistence.*;
 
 public class Reply implements Serializable {
 
-	
-	private static final String REQUEST = "IDRequestReply";
-
-	private static final String SENDER = "IDSenderReply";
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
 	@ManyToOne(targetEntity = User.class, optional = false)
-	@JoinColumn(name = SENDER)
 	private User sender;
 	
 	@ManyToOne(targetEntity = HelpRequest.class, optional = false)
-	@JoinColumn(name = REQUEST)
 	private HelpRequest request;
 	
 	private boolean best;
 
 	public Reply() {
 		super();
-		ID = (int) System.nanoTime();
+		best = false;
 	}
 
 	public int getID() {

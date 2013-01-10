@@ -20,6 +20,7 @@ public class HelpRequest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 
 	private String title;
@@ -42,7 +43,6 @@ public class HelpRequest implements Serializable {
 
 	public HelpRequest() {
 		super();
-		ID = (int) System.nanoTime();
 	}
 
 	public int getID() {

@@ -21,6 +21,7 @@ public class Feedback implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
 	private int mark;
@@ -41,7 +42,6 @@ public class Feedback implements Serializable {
 
 	public Feedback() {
 		super();
-		ID = (int) System.nanoTime();
 	}
 	
 	public int getID() {

@@ -9,11 +9,7 @@ import javax.persistence.*;
  *
  */
 @NamedQueries(value ={
-		@NamedQuery(name = "Administrator.getByID",
-				query = "SELECT a " +
-						"FROM Administrator a " +
-						"WHERE a.ID = :ID"
-		)
+
 })
 
 @Entity
