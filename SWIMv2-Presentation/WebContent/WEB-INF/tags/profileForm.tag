@@ -8,7 +8,18 @@
 
 <li>Surname: <input type="text" name="surname" value="${sessionScope.user.surname}"></li>
 
+<li>Avatar: <input type="file" name="avatar"></li>
+
+<li>Password: <input type="password" name="password"></li>
+<li>Confirm Password: <input type="password" name="cpassword"></li>
+
 <li>E-mail address: <input type="text" name="email" value="${sessionScope.user.email}"></li>
+
+<li>City: <input type="text" name="city" value="${sessionScope.user.city}"></li>
+
+<li>Birthday: <input type="date" name="birthday"></li>
+
+<li>Phone number: <input type="text" name="phonenumber"></li>
 
 <c:if test="${action=='storemodif.servlet'}">
 <li>
