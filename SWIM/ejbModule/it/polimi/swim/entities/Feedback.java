@@ -27,7 +27,10 @@ public class Feedback implements Serializable {
 	@ManyToOne(targetEntity = Ability.class, optional = false)
 	private Ability ability;
 	
-	@ManyToOne(targetEntity = Reply.class, optional = false)
+	@OneToOne(targetEntity = Reply.class, optional = true)
+	@JoinColumn(
+			name = "ID", unique = true
+	)
 	private Reply reply;
 
 	public Feedback() {

@@ -3,6 +3,7 @@ package it.polimi.swim.entities;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -34,6 +35,9 @@ public class HelpRequest implements Serializable {
 
 	@ManyToOne(targetEntity = Ability.class, optional = false)
 	private Ability ability;
+	
+	@OneToMany(mappedBy = "request")
+	private Set<Reply> replies;
 
 	public HelpRequest() {
 		super();
@@ -97,5 +101,13 @@ public class HelpRequest implements Serializable {
 
 	public void setAbility(Ability ability) {
 		this.ability = ability;
+	}
+
+	public Set<Reply> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(Set<Reply> replies) {
+		this.replies = replies;
 	}
 }

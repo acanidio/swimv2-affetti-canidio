@@ -22,6 +22,9 @@ public class Reply implements Serializable {
 	
 	@ManyToOne(targetEntity = HelpRequest.class, optional = false)
 	private HelpRequest request;
+
+	@OneToOne(targetEntity = Feedback.class, mappedBy = "reply", optional = false)
+	private Feedback feedback;
 	
 	private boolean best;
 
@@ -56,6 +59,14 @@ public class Reply implements Serializable {
 
 	public void setBest(boolean best) {
 		this.best = best;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
    
 }
