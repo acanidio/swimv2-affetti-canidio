@@ -34,10 +34,6 @@ public class Reply implements Serializable {
 		return ID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
-	}
-
 	public User getSender() {
 		return sender;
 	}

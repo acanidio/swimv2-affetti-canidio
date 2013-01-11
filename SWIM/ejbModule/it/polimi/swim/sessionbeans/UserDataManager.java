@@ -47,20 +47,24 @@ public class UserDataManager implements UserDataManagerRemote {
 	}
 
 	@Override
-	public int registerNewUser(String email, String password, String name,
+	public Integer registerNewUser(String email, String password, String name,
 			String surname, String avatar, String city, char gender,
 			Date birthday, String phonenumber) {
 		User user = new User();
-		user.setUsername(email);
-		user.setPassword(password);
-		user.setName(name);
-		user.setSurname(surname);
-		user.setAvatar(avatar);
-		user.setCity(city);
-		user.setGender(gender);
-		user.setBirthday(birthday);
-		user.setPhonenumber(phonenumber);
-		manager.persist(user);
+		try {
+			user.setUsername(email);
+			user.setPassword(password);
+			user.setName(name);
+			user.setSurname(surname);
+			user.setAvatar(avatar);
+			user.setCity(city);
+			user.setGender(gender);
+			user.setBirthday(birthday);
+			user.setPhonenumber(phonenumber);
+			manager.persist(user);
+		} catch (Exception e) {
+			return null;
+		}
 		return user.getID();
 	}
 

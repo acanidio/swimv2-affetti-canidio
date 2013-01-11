@@ -11,13 +11,6 @@ import javax.persistence.*;
 
 public class Feedback implements Serializable {
 
-	
-	private static final String REPLY = "IDReplyFeedback";
-
-	private static final String ABILITY = "IDAbilityFeedback";
-
-	private static final String SENDER = "IDSenderFeedback";
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -29,15 +22,12 @@ public class Feedback implements Serializable {
 	private String description;
 	
 	@ManyToOne(targetEntity = User.class, optional = false)
-	@JoinColumn(name = SENDER)
 	private User sender;
 	
 	@ManyToOne(targetEntity = Ability.class, optional = false)
-	@JoinColumn(name = ABILITY)
 	private Ability ability;
 	
 	@ManyToOne(targetEntity = Reply.class, optional = false)
-	@JoinColumn(name = REPLY)
 	private Reply reply;
 
 	public Feedback() {
