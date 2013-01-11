@@ -1,6 +1,7 @@
 package it.polimi.swim.sessionbeans;
 
 import it.polimi.swim.entities.Ability;
+import it.polimi.swim.entities.Feedback;
 import it.polimi.swim.entities.HelpRequest;
 import it.polimi.swim.entities.Reply;
 import it.polimi.swim.entities.User;
@@ -63,7 +64,12 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		try {
 			User u = manager.find(User.class, IDUser);
 			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
-			// TODO
+			if(!u.getAbilities().contains(hr.getAbility())) {
+				return false;
+			}
+			if(hr.getSender().equals(u)) {
+				return false;
+			}
 		} catch (Exception e) {
 			return false;
 		}
@@ -72,26 +78,59 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 
 	@Override
 	public boolean markAsBestReply(int IDReply) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Reply r = manager.find(Reply.class, IDReply);
+			r.setBest(true);
+			manager.merge(r);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean hasBestReply(int IDHelpRequest) {
-		// TODO Auto-generated method stub
+		try {
+			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
+			for(Reply r: hr.getReplies()) {
+				if(r.isBest()) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			return false;
+		}
 		return false;
 	}
 
 	@Override
 	public Integer createFeedback(int mark, String description, int IDUser,
 			int IDAbility, int IDReply) {
-		// TODO Auto-generated method stub
-		return 0;
+		Feedback f = new Feedback();
+		try {
+			f.setMark(mark);
+			f.setDescription(description);
+			f.setSender(manager.find(User.class, IDUser));
+			f.setAbility(manager.find(Ability.class, IDAbility));
+			f.setReply(manager.find(Reply.class, IDReply));
+		} catch (Exception e) {
+			return null;
+		}
+		return f.getID();
 	}
 
 	@Override
 	public boolean hasFeedback(int IDHelpRequest) {
-		// TODO Auto-generated method stub
+		try {
+			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
+			for(Reply r: hr.getReplies()) {
+				if(r.isBest() && (r.getFeedback() != null)) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			return false;
+		}
 		return false;
 	}
 }
