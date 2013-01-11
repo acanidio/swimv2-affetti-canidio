@@ -8,18 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import temporaryClasses.User;
+
 /**
  * Servlet implementation class ProfileDataServlet
  */
-public class ProfileDataServlet extends HttpServlet {
+public class ModifyProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProfileDataServlet() {
+	public ModifyProfileServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -42,9 +43,10 @@ public class ProfileDataServlet extends HttpServlet {
 		String email = request.getParameter("email");
 
 		// register modifications into the database
-		
-		RequestDispatcher disp = request.getRequestDispatcher("home.servlet");
-		disp.forward(request, response);
+		User loggedU = (User) request.getSession().getAttribute("id");
+
+		request.getRequestDispatcher("loaduser.servlet?id=" + loggedU.getId())
+				.forward(request, response);
 	}
 
 }

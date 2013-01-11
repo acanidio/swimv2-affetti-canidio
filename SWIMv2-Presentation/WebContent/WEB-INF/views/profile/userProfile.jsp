@@ -12,7 +12,6 @@
 <body>
 
 <c:choose>
-
 	<c:when  test="${requestScope.user.id==sessionScope.user.id}">
 		<a href="loadabilities?path=modifyprofile.view">Modify profile</a>
 	</c:when>

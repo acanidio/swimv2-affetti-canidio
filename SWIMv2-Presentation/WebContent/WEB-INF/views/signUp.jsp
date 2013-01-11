@@ -12,7 +12,7 @@
 
 <h1>Please enter your new profile information</h1><br><br><br>
 
-<swim:profileForm action="signup.servlet"></swim:profileForm>
+<swim:profileForm action="user.store"></swim:profileForm>
 
 </body>
 </html>

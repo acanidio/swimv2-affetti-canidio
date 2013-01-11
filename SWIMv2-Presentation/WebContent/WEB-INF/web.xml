@@ -13,13 +13,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ProfileDataServlet</display-name>
-    <servlet-name>ProfileDataServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.ProfileDataServlet</servlet-class>
+    <display-name>ModifyProfileServlet</display-name>
+    <servlet-name>ModifyProfileServlet</servlet-name>
+    <servlet-class>it.polimi.swim.servlets.ModifyProfileServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ProfileDataServlet</servlet-name>
-    <url-pattern>/ProfileDataServlet</url-pattern>
+    <servlet-name>ModifyProfileServlet</servlet-name>
+    <url-pattern>/ModifyProfileServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
