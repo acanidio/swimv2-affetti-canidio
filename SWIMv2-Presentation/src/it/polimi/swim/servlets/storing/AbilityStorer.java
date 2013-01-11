@@ -13,10 +13,10 @@ public class AbilityStorer implements DataStorer {
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		if (request.getSession().getAttribute("type").equals("user")) {
-			return "modifyprofile.view";
+		if (request.getSession().getAttribute("type") == null) {
+			return "home.servlet";
 		}
-		return "home.servlet";
+		return "modifyprofile.view";
 	}
 
 }

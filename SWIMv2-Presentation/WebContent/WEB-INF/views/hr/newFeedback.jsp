@@ -9,13 +9,13 @@
 <body>
 
 <form action="feedback.store?replyid=${replyid}" method="post">
-<fieldset >
+<fieldset>
 	<legend>Mark:</legend>
-	1<input type="radio" name="1">
-	2<input type="radio" name="2">
-	3<input type="radio" name="3">
-	4<input type="radio" name="4">
-	5<input type="radio" name="5">
+	1<input type="radio" value="1">
+	2<input type="radio" value="2">
+	3<input type="radio" value="3">
+	4<input type="radio" value="4">
+	5<input type="radio" value="5">
 </fieldset>
 Description: <input type="text" name="description">
 <input type="submit" value="Send">

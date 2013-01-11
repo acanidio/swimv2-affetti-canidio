@@ -63,7 +63,8 @@ public class LogInServlet extends HttpServlet {
 					request.getSession().setAttribute("type", "user");
 				}
 			} else {
-				request.setAttribute("exception", "noresult");
+				response.getWriter().println("Not valid log in!");
+				response.getWriter().println("<a href='home.servlet'>Back to home</a>");
 				return;
 			}
 
