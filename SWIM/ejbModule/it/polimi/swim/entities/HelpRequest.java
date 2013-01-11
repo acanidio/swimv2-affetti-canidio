@@ -13,10 +13,6 @@ import javax.persistence.*;
 @Entity
 public class HelpRequest implements Serializable {
 
-	private static final String ABILITY = "IDAbilityHelpRequest";
-
-	private static final String SENDER = "IDSenderHelpRequest";
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,11 +30,9 @@ public class HelpRequest implements Serializable {
 	private Time hour;
 
 	@ManyToOne(targetEntity = User.class, optional = false)
-	@JoinColumn(name = SENDER)
 	private User sender;
 
 	@ManyToOne(targetEntity = Ability.class, optional = false)
-	@JoinColumn(name = ABILITY)
 	private Ability ability;
 
 	public HelpRequest() {

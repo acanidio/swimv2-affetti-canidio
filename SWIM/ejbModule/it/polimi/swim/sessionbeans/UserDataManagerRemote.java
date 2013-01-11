@@ -18,7 +18,7 @@ public interface UserDataManagerRemote {
 
 	public boolean verifyUser(String email);
 	
-	public int registerNewUser(String email, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
+	public Integer registerNewUser(String email, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
 	
 	public boolean modifyUser(int IDUser, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
 	
