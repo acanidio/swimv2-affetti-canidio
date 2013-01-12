@@ -2,6 +2,7 @@ package it.polimi.swim.servlets;
 
 import it.polimi.swim.entities.Administrator;
 import it.polimi.swim.entities.Person;
+import it.polimi.swim.entities.User;
 import it.polimi.swim.sessionbeans.LoginManager;
 import it.polimi.swim.sessionbeans.LoginManagerRemote;
 import it.polimi.swim.utils.Configuration;
@@ -56,14 +57,16 @@ public class LogInServlet extends HttpServlet {
 
 			if (id != null) {
 				Person p = loginmgr.loadPerson(id);
+				
+				request.getSession().setAttribute("person", p);
 
 				if (p instanceof Administrator) {
-					request.getSession().setAttribute("type", "admin");
+					request.getSession().setAttribute("type", Administrator.TYPE);
 				} else {
-					request.getSession().setAttribute("type", "user");
+					request.getSession().setAttribute("type", User.TYPE);
 				}
 			} else {
-				response.getWriter().println("Not valid log in!");
+				response.getWriter().println("Not valid log in!<br>");
 				response.getWriter().println("<a href='home.servlet'>Back to home</a>");
 				return;
 			}

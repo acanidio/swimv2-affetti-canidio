@@ -1,15 +1,19 @@
 package it.polimi.swim.servlets;
 
+import it.polimi.swim.entities.Ability;
+import it.polimi.swim.sessionbeans.AbilityManager;
+import it.polimi.swim.sessionbeans.AbilityManagerRemote;
+import it.polimi.swim.utils.Configuration;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import temporaryClasses.Ability;
 
 /**
  * Servlet implementation class LoadAbilitiesServlet
@@ -30,16 +34,19 @@ public class LoadAbilitiesServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		//loads abilities from database
 		String forwardingPath= request.getParameter("path");
 		
-		List<Ability> abilities = new ArrayList<Ability>();
-		Ability a1 = new Ability("Cooker");
-		Ability a2 = new Ability("Musician");
-		abilities.add(a1);
-		abilities.add(a2);
-		
-		request.setAttribute("abilities", abilities);
+		InitialContext ctx = Configuration.getInitialContext();
+		AbilityManagerRemote abilitymgr;
+		try {
+			abilitymgr = (AbilityManagerRemote) ctx.lookup(AbilityManager.REMOTE);
+			
+			List<Ability> abilities = abilitymgr.getAbilityList();
+			
+			request.setAttribute("abilities", abilities);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 		
 		request.getRequestDispatcher(forwardingPath).forward(request, response);
 	}

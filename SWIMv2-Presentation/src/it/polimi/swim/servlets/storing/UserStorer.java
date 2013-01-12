@@ -1,6 +1,5 @@
 package it.polimi.swim.servlets.storing;
 
-
 import java.sql.Date;
 
 import it.polimi.swim.sessionbeans.UserDataManager;
@@ -16,9 +15,10 @@ public class UserStorer implements DataStorer {
 	@Override
 	public void store(HttpServletRequest request) {
 		InitialContext ctx = Configuration.getInitialContext();
-		
+
 		try {
-			UserDataManagerRemote datamgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
+			UserDataManagerRemote datamgr = (UserDataManagerRemote) ctx
+					.lookup(UserDataManager.REMOTE);
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
@@ -26,10 +26,24 @@ public class UserStorer implements DataStorer {
 			String avatar = request.getParameter("avatar");
 			String city = request.getParameter("city");
 			char gender = request.getParameter("gender").charAt(0);
-			Date birthday = Date.valueOf(request.getParameter("birthday"));
-			String phonenumber = request.getParameter("phonenumber");
+			String bday = request.getParameter("birthday");
+			Date birthday = null;
+
+			if (bday != null && !bday.isEmpty()) {
+				birthday = Date.valueOf(bday);
+			}
 			
-			datamgr.registerNewUser(email, password, name, surname, avatar, city, gender, birthday, phonenumber);
+			String phonenumber = request.getParameter("phonenumber");
+
+			int userID = datamgr.registerNewUser(email, password, name, surname, avatar,
+					city, gender, birthday, phonenumber);
+			
+			String abilityName = request.getParameter("ability0");
+			//TODO a method that returns an ability ID, given its name 
+			int abilityID = 0;
+			
+			datamgr.addAbilityToUser(userID, abilityID);
+			
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

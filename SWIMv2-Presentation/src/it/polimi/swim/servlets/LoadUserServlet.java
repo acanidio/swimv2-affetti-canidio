@@ -1,12 +1,18 @@
 package it.polimi.swim.servlets;
 
+import it.polimi.swim.entities.Person;
+import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.sessionbeans.UserDataManagerRemote;
+import it.polimi.swim.utils.Configuration;
+
 import java.io.IOException;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import temporaryClasses.User;
 
 /**
  * Servlet implementation class LoadUserServlet
@@ -19,22 +25,23 @@ public class LoadUserServlet extends HttpServlet {
      */
     public LoadUserServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//searches for the user specified into the URL
-		
-		//request.setAttribute("log", "You where looking for user: "+request.getParameter("id"));
-		
-		//TODO sample user
-		User sampleU = new User("sample", "user");
-		sampleU.setId(Integer.parseInt(request.getParameter("id")));
-		
-		request.setAttribute("user", sampleU);
+		InitialContext ctx = Configuration.getInitialContext();
+		UserDataManagerRemote usermgr;
+		try {
+			usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
+			
+			Person user = usermgr.loadProfile(Integer.parseInt(request.getParameter("id")));
+			
+			request.setAttribute("user", user);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 		
 		request.getRequestDispatcher("userprofile.view").forward(request, response);
 	}

@@ -23,8 +23,10 @@ function get(name){
 
 
 
-<form name="login" action="login.servlet" method="post" onsubmit="return checkFields()">
-E-mail address: <input type="text" name="email">
-Password: <input type="password" name="password">
-<input type="submit" value="Log In">
+<form name="login" action="login.servlet" method="post" onsubmit="return checkFields();">
+<ul>
+<li>E-mail address: <input type="text" name="email"></li>
+<li>Password: <input type="password" name="password"></li>
+<li><input type="submit" value="Log In"></li>
+</ul>
 </form>
