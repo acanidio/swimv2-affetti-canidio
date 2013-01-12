@@ -35,4 +35,6 @@ public interface UserDataManagerRemote {
 	public List<Friendship> loadPendingFriendships(int IDUser);
 	
 	public List<Message> loadNewReceivedMessages(int IDUser);
+	
+	public List<User> searchUsersByName(String name);
 }

@@ -123,4 +123,20 @@ public class AbilityManager implements AbilityManagerRemote {
 		}
 		return true;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Ability> searchAbilitiesByName(String name) {
+		List<Ability> abilities = null;
+		try {
+			Query query = manager.createQuery("SELECT a " +
+											"FROM Ability a " +
+											"WHERE a.name = :name");
+			abilities = query.setParameter("name", name)
+							.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		return abilities;
+	}
 }

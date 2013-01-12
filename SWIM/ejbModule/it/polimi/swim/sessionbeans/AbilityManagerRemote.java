@@ -22,4 +22,6 @@ public interface AbilityManagerRemote {
 	public boolean removeAbility(int ID);
 	
 	public boolean acceptAbility(int ID);
+	
+	public List<Ability> searchAbilitiesByName(String name);
 }
