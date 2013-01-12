@@ -12,9 +12,9 @@ public interface LoginManagerRemote {
 	
 	public Integer validLogin(String username, String password);
 
-	public Person loadPerson(String username) throws NoResultException;
+	public Person loadPerson(int IDPerson) throws NoResultException;
 	
-	public User loadUser(String username) throws NoResultException;
+	public User loadUser(int IDUser) throws NoResultException;
 	
-	public Administrator loadAdministrator(String username) throws NoResultException;
+	public Administrator loadAdministrator(int IDAdministrator) throws NoResultException;
 }
