@@ -32,8 +32,6 @@ public interface UserDataManagerRemote {
 	
 	public List<Conversation> loadConversations(int IDUser);
 	
-	public Conversation loadSpecificConversation(int IDConversation);
-	
 	public List<Friendship> loadPendingFriendships(int IDUser);
 	
 	public List<Message> loadNewReceivedMessages(int IDUser);

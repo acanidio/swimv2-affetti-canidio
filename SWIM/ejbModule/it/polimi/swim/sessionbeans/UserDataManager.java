@@ -144,20 +144,6 @@ public class UserDataManager implements UserDataManagerRemote {
 		return conversations;
 	}
 
-	@Override
-	public Conversation loadSpecificConversation(int IDConversation) {
-		Conversation conversation = null;
-		try {
-			Query query = manager.createQuery("SELECT c " +
-											"FROM Conversation c " +
-											"WHERE c.ID = :IDConversation");
-			conversation = (Conversation) query.setParameter("IDConversation", IDConversation);
-		} catch (Exception e) {
-			return null;
-		}
-		return conversation;
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Friendship> loadPendingFriendships(int IDUser) {
