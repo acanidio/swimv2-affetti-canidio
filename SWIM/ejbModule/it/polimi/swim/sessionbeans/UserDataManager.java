@@ -56,7 +56,11 @@ public class UserDataManager implements UserDataManagerRemote {
 			user.setPassword(password);
 			user.setName(name);
 			user.setSurname(surname);
-			user.setAvatar(avatar);
+			if(avatar == null) {
+				user.setAvatar("default.gif");
+			} else {
+				user.setAvatar(avatar);
+			}
 			user.setCity(city);
 			user.setGender(gender);
 			user.setBirthday(birthday);
