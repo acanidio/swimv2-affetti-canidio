@@ -25,10 +25,13 @@ public class LoginManager implements LoginManagerRemote {
 	private EntityManager manager;
 
 	@Override
-	public Integer validLogin(String username, String password) {
+	public Integer validLogin(String email, String password) {
 		Person person;
 		try {
-			person = loadPerson(username);
+			Query query = manager.createQuery("SELECT p " +
+					"FROM Person p " +
+					"WHERE p.email = :email");
+			person = (Person) query.setParameter("email", email).getSingleResult();
 			if(person.getPassword().equals(password)) {
 				return person.getID();
 			}
@@ -40,29 +43,35 @@ public class LoginManager implements LoginManagerRemote {
 	}
 
 	@Override
-	public Person loadPerson(String email) throws NoResultException{
-		Query query = manager.createQuery("SELECT p " +
-										"FROM Person p " +
-										"WHERE p.email = :email");
-		Person person = (Person) query.setParameter("email", email).getSingleResult();
+	public Person loadPerson(int IDPerson) throws NoResultException{
+		Person person = null;
+		try {
+			person = manager.find(Person.class, IDPerson);
+		} catch (Exception e) {
+			return null;
+		}
 		return person;
 	}
 
 	@Override
-	public User loadUser(String email) throws NoResultException{
-		Query query = manager.createQuery("SELECT u " +
-										"FROM User u " +
-										"WHERE u.email = :email");
-		User user = (User) query.setParameter("email", email).getSingleResult();
+	public User loadUser(int IDUser) throws NoResultException{
+		User user = null;
+		try {
+			user = manager.find(User.class, IDUser);
+		} catch (Exception e) {
+			return null;
+		}
 		return user;
 	}
 
 	@Override
-	public Administrator loadAdministrator(String email) throws NoResultException{
-		Query query = manager.createQuery("SELECT a " +
-										"FROM Administrator a " +
-										"WHERE a.email = :email");
-		Administrator administrator = (Administrator) query.setParameter("email", email).getSingleResult();
+	public Administrator loadAdministrator(int IDAdministrator) throws NoResultException{
+		Administrator administrator = null;
+		try {
+			administrator = manager.find(Administrator.class, IDAdministrator);
+		} catch (Exception e) {
+			return null;
+		}
 		return administrator;
 	}
 
