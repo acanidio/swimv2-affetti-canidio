@@ -54,6 +54,7 @@ public class ModifyProfileServlet extends HttpServlet {
 		try {
 			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
 			
+			//TODO review
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String surname = request.getParameter("surname");

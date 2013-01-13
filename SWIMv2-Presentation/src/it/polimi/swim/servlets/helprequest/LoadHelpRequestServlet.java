@@ -2,11 +2,14 @@ package it.polimi.swim.servlets.helprequest;
 
 import it.polimi.swim.entities.HelpRequest;
 import it.polimi.swim.entities.Person;
+import it.polimi.swim.entities.Reply;
 import it.polimi.swim.sessionbeans.HelpRequestManager;
 import it.polimi.swim.sessionbeans.HelpRequestManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
