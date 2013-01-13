@@ -38,11 +38,13 @@ public class UserStorer implements DataStorer {
 			int userID = datamgr.registerNewUser(email, password, name, surname, avatar,
 					city, gender, birthday, phonenumber);
 			
+			/*
 			String abilityName = request.getParameter("ability0");
 			//TODO a method that returns an ability ID, given its name 
 			int abilityID = 0;
 			
 			datamgr.addAbilityToUser(userID, abilityID);
+			*/
 			
 		} catch (NamingException e) {
 			e.printStackTrace();

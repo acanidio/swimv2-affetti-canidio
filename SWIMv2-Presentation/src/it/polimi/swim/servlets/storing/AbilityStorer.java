@@ -1,19 +1,57 @@
 package it.polimi.swim.servlets.storing;
 
+import it.polimi.swim.entities.Administrator;
+import it.polimi.swim.entities.User;
+import it.polimi.swim.sessionbeans.AbilityManager;
+import it.polimi.swim.sessionbeans.AbilityManagerRemote;
+import it.polimi.swim.utils.Configuration;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 
 public class AbilityStorer implements DataStorer {
 
+	private boolean error;
+
 	@Override
 	public void store(HttpServletRequest request) {
-		String ability = request.getParameter("newability");
 
-		System.out.println("Abilty stored: " + ability);
+		error = false;
+
+		String type = (String) request.getSession().getAttribute("type");
+		String name = request.getParameter("newability");
+		InitialContext ctx = Configuration.getInitialContext();
+
+		try {
+			AbilityManagerRemote abmgr = (AbilityManagerRemote) ctx
+					.lookup(AbilityManager.REMOTE);
+
+			if (abmgr.verifyNewAbility(name)) {
+				request.setAttribute("error",
+						"The ability is already into the database");
+				error = true;
+				return;
+			}
+
+			if (type.equals(Administrator.TYPE)) {
+				abmgr.createNewAcceptedAbility(name);
+			} else if (type.equals(User.TYPE)) {
+				abmgr.createNewPendingAbility(name);
+			}
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		if (request.getSession().getAttribute("type") == null) {
+		if (error) {
+			return "error.view";
+		}
+
+		if (request.getSession().getAttribute("type")
+				.equals(Administrator.TYPE)) {
 			return "home.servlet";
 		}
 		return "modifyprofile.view";

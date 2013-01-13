@@ -13,8 +13,6 @@
 </head>
 <body>
 
-<p align="center">${log}</p>
-
 <div>
 	<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
 </div>

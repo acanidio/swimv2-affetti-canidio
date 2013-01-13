@@ -13,8 +13,8 @@
 
 <swim:hr helpreq="${hr}"></swim:hr>
 
-<c:if test="${not (hr.user.id == sessionScope.user.id)}">
-	<form action="reply.store?hrid=${hr.id}" method="get"><input type="submit" value="Reply"></form>
+<c:if test="${requestScope.canReply == true}">
+	<form action="reply.store?hrid=${hr.ID}" method="get"><input type="submit" value="Reply"></form>
 </c:if>
 
 </body>
