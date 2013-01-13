@@ -46,13 +46,14 @@ public class UserDataManager implements UserDataManagerRemote {
 		return person != null;
 	}
 
+	//TODO need to check if the email already exists into the database!!
 	@Override
 	public Integer registerNewUser(String email, String password, String name,
 			String surname, String avatar, String city, char gender,
 			Date birthday, String phonenumber) {
 		User user = new User();
 		try {
-			user.setUsername(email);
+			user.setEmail(email);
 			user.setPassword(password);
 			user.setName(name);
 			user.setSurname(surname);
