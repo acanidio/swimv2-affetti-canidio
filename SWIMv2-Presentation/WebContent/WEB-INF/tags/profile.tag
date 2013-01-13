@@ -3,5 +3,5 @@
 <ul>
 <li>${user.name}</li>
 <li>${user.surname}</li>
-<li>${user.email}</li>
+<li>${user.email}
 </ul>

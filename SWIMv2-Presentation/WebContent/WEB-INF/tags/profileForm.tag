@@ -18,6 +18,7 @@ function mandatoryFields(){
 		return false;
 	}
 	
+	return true;
 }
 
 function differentPWs(){
@@ -28,6 +29,13 @@ function differentPWs(){
 		alert("Password different from confirmed password!");
 		return false;
 	}
+	
+	if(password.length < 3){
+		alert("Password has to be at least 3 characters long!");
+		return false;
+	}
+	
+	return true;
 	
 }
 
@@ -41,12 +49,22 @@ function notValidEmail(){
 		alert("E-mail address not valid!");
 		return false;
 	}
+	
+	return true;
 }
 
 function checkProfileForm(){
-	mandatoryFields();
-	notValidEmail();
-	differentPWs();
+	
+	if(!mandatoryFields()){
+		return false;
+	}
+	if(!notValidEmail()){
+		return false;
+	}
+	if(!differentPWs()){
+		return false;
+	}
+	
 	return true;
 }
 </script>
@@ -54,27 +72,36 @@ function checkProfileForm(){
 <script type="text/javascript">
  var counter = 1;
  
- function createCheckBox(){
-	 alert("i am creating a checkbox");
-	 
-	 /*
+ function appendSelect(){
 	 var select = document.createElement("select");
-	 select.name = "ability" + counter;
 	 
-	 for(var i=0; i<abilities.length; i++){
+	 select.name = "ability" + counter;
+
+	
+	 
+	 var options = new Array();
+	 
+	 var element = document.getElementById("option0");
+	 for(var i=1; element!=null ; i++){
+		 element = document.getElementById("option"+i);
+		 options[i] = element;
+	 }
+	 
+	 for(var i=0; i<options.length; i++){
 		 var option = document.createElement("option");
-		 option.value = abilities[i].name;
-		 
-		 var text = document.createTextNode(abilities[i].name);
+		 option.value = options[i].value;
+		 var text = document.createTextNode(option.value);
 		 
 		 option.appendChild(text);
 		 select.appendChild(option);
 	 }
 	 
-	 counter++;
+	 var listel = document.createElement("li");
+	 listel.appendChild(select);
 	 
-	 document.getElementById("abilities").appendChild(select);
-	 */
+	 document.getElementById("abilities").appendChild(listel);
+	 
+	 counter++;
  }
 </script>
 
@@ -125,18 +152,18 @@ function checkProfileForm(){
 <li>
 <ul id="abilities">
 <li>
-<select name="ability0">
-	<c:forEach var="ability" items="${abilities}">
-		<option value="${ability.name}">${ability.name}</option>
-	</c:forEach>
-</select>
+	<select id="select" name="ability0">
+	<c:set var="count" value="0"/>
+		<c:forEach var="ability" items="${abilities}">
+			<option id="option${count}" value="${ability.name}">${ability.name}</option>
+			<c:set var="count" value="${count+1}"/>
+		</c:forEach>
+	</select>
 </li>
 </ul>
 
-<!--
-<input type="button" value="+" onclick="createCheckBox();">
+<input type="button" value="+" onclick="appendSelect();">
 </li>
--->
 
 <li><a href="newability.view">Other...</a></li>
 
