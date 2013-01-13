@@ -28,7 +28,6 @@ public class HelpRequestStorer implements DataStorer {
 		String city = request.getParameter("city");
 		String description = request.getParameter("description");
 		String ability = request.getParameter("ability");
-		System.out.println(ability);
 		
 		//TODO work on this
 		Date date = null;

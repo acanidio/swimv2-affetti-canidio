@@ -1,14 +1,27 @@
 package it.polimi.swim.servlets.storing;
 
+import it.polimi.swim.sessionbeans.HelpRequestManager;
+import it.polimi.swim.sessionbeans.HelpRequestManagerRemote;
+import it.polimi.swim.utils.Configuration;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 
 public class BestReplyStorer implements DataStorer {
 
 	@Override
 	public void store(HttpServletRequest request) {
-		//sets the attribute best to true
+		InitialContext ctx = Configuration.getInitialContext();
+		int replyID = Integer.parseInt(request.getParameter("replyid"));
 		
-		System.out.println("Best reply stored");
+		try {
+			HelpRequestManagerRemote hrmgr = (HelpRequestManagerRemote) ctx.lookup(HelpRequestManager.REMOTE);
+			
+			hrmgr.markAsBestReply(replyID);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

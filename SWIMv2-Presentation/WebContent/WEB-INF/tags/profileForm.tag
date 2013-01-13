@@ -82,7 +82,7 @@ function checkProfileForm(){
 	 var options = new Array();
 	 
 	 var element = document.getElementById("option0");
-	 for(var i=1; element!=null ; i++){
+	 for(var i=0; element!=null ; i++){
 		 element = document.getElementById("option"+i);
 		 options[i] = element;
 	 }
@@ -125,11 +125,13 @@ function checkProfileForm(){
 
 <li>Avatar: <input type="file" name="avatar"></li>
 
+<c:if test="${action=='user.store'}">
 <li>Password*: <input type="password" name="password"></li>
 
 <li>Confirm Password*: <input type="password" name="cpassword"></li>
 
 <li>E-mail address*: <input type="text" name="email" value="${sessionScope.person.email}"></li>
+</c:if>
 
 <li>City: <input type="text" name="city" value="${sessionScope.person.email}"></li>
 
