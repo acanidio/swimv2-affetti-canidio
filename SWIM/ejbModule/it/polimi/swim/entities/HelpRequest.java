@@ -3,6 +3,7 @@ package it.polimi.swim.entities;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -41,6 +42,7 @@ public class HelpRequest implements Serializable {
 
 	public HelpRequest() {
 		super();
+		replies = new HashSet<Reply>();
 	}
 
 	public int getID() {
