@@ -12,12 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AbilityStorer implements DataStorer {
 
-	private boolean error;
+	private String forwardingPath = "loadabilities.servlet?path=modifyprofile.view";
 
 	@Override
 	public void store(HttpServletRequest request) {
-
-		error = false;
 
 		String type = (String) request.getSession().getAttribute("type");
 		String name = request.getParameter("newability");
@@ -30,7 +28,7 @@ public class AbilityStorer implements DataStorer {
 			if (abmgr.verifyNewAbility(name)) {
 				request.setAttribute("error",
 						"The ability is already into the database");
-				error = true;
+				forwardingPath = "error.view";
 				return;
 			}
 
@@ -46,15 +44,12 @@ public class AbilityStorer implements DataStorer {
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		if (error) {
-			return "error.view";
-		}
 
 		if (request.getSession().getAttribute("type")
 				.equals(Administrator.TYPE)) {
-			return "home.servlet";
+			forwardingPath = "home.servlet";
 		}
-		return "modifyprofile.view";
+		return forwardingPath;
 	}
 
 }

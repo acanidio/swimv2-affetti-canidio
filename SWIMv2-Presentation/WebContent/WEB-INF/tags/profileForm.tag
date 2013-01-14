@@ -165,7 +165,9 @@ function checkProfileForm(){
 <input type="button" value="+" onclick="appendSelect();">
 </li>
 
-<li><a href="newability.view">Other...</a></li>
+<c:if test="${action=='storemodif.servlet'}">
+	<li><a href="newability.view">Other...</a></li>
+</c:if>
 
 <li><input type="submit" value="Send profile information"></li>
 

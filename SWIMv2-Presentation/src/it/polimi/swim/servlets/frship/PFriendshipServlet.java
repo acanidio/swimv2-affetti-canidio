@@ -3,6 +3,7 @@ package it.polimi.swim.servlets.frship;
 import it.polimi.swim.entities.Friendship;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.sessionbeans.UserDataManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import java.io.IOException;
@@ -37,11 +38,11 @@ public class PFriendshipServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		InitialContext ctx = Configuration.getInitialContext();
 
-		Person user = (Person) request.getAttribute("person");
-
-		UserDataManager usermgr;
+		Person user = (Person) request.getSession().getAttribute("person");
+		
+		UserDataManagerRemote usermgr;
 		try {
-			usermgr = (UserDataManager) ctx.lookup(UserDataManager.REMOTE);
+			usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
 
 			List<Friendship> pfriendships = usermgr.loadPendingFriendships(user.getID());
 			request.setAttribute("pfriendships", pfriendships);
