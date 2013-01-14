@@ -24,5 +24,21 @@ public class Administrator extends Person implements Serializable {
 	public Administrator() {
 		super();
 	}
-   
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Administrator)) {
+			return false;
+		}
+		Administrator administrator = (Administrator) obj;
+		if(this.getID() == administrator.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getID();
+	}
 }

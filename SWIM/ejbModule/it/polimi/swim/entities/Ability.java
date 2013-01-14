@@ -70,5 +70,21 @@ public class Ability implements Serializable {
 	public void setFeedbacks(List<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
 	}
-   
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Ability)) {
+			return false;
+		}
+		Ability ability = (Ability) obj;
+		if(ID == ability.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }

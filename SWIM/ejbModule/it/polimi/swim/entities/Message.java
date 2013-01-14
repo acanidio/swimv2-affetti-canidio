@@ -78,5 +78,21 @@ public class Message implements Serializable {
 	public void setConversation(Conversation conversation) {
 		this.conversation = conversation;
 	}
-   
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Message)) {
+			return false;
+		}
+		Message message = (Message) obj;
+		if(ID == message.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }

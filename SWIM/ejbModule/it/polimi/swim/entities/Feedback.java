@@ -80,4 +80,21 @@ public class Feedback implements Serializable {
 	public void setReply(Reply reply) {
 		this.reply = reply;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Feedback)) {
+			return false;
+		}
+		Feedback feedback = (Feedback) obj;
+		if(ID == feedback.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }

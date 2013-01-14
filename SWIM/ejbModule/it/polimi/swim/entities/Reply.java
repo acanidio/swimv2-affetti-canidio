@@ -68,5 +68,21 @@ public class Reply implements Serializable {
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
 	}
-   
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Reply)) {
+			return false;
+		}
+		Reply reply = (Reply) obj;
+		if(ID == reply.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }
