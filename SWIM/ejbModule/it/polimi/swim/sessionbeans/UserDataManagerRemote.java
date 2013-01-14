@@ -37,4 +37,6 @@ public interface UserDataManagerRemote {
 	public List<Message> loadNewReceivedMessages(int IDUser);
 	
 	public List<User> searchUsersByName(String name);
+	
+	public Integer searchUserByEmail(String email);
 }

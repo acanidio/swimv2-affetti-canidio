@@ -27,7 +27,9 @@ public interface HelpRequestManagerRemote {
 	
 	public List<HelpRequest> getHelpRequests();
 	
-	public HelpRequest getHelpRequest(int id);
+	public HelpRequest getHelpRequest(int IDHr);
 	
 	public boolean postedByMe(int IDUser, int IDHr);
+	
+	public HelpRequest getHelpRequestFromReply(int IDReply);
 }

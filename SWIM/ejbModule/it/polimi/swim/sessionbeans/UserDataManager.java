@@ -250,4 +250,10 @@ public class UserDataManager implements UserDataManagerRemote {
 		}
 		return users;
 	}
+
+	@Override
+	public Integer searchUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
