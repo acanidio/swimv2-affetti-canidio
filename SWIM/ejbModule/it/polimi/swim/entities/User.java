@@ -43,25 +43,25 @@ public class User extends Person implements Serializable {
 	)
 	private Set<Ability> abilities;
 	
-	@OneToMany(targetEntity = HelpRequest.class, mappedBy = "sender")
+	@OneToMany(targetEntity = HelpRequest.class, mappedBy = "sender", fetch = FetchType.EAGER)
 	private Set<HelpRequest> helprequests; 
 	
-	@OneToMany(targetEntity = Reply.class, mappedBy = "sender")
+	@OneToMany(targetEntity = Reply.class, mappedBy = "sender", fetch = FetchType.EAGER)
 	private Set<Reply> replies;
 	
-	@OneToMany(targetEntity = Feedback.class, mappedBy = "sender")
+	@OneToMany(targetEntity = Feedback.class, mappedBy = "sender", fetch = FetchType.EAGER)
 	private Set<Feedback> feedbacks;
 	
-	@OneToMany(targetEntity = Message.class, mappedBy = "sender")
+	@OneToMany(targetEntity = Message.class, mappedBy = "sender", fetch = FetchType.EAGER)
 	private Set<Message> sendedMessages;
 	
-	@OneToMany(targetEntity = Message.class, mappedBy = "receiver")
+	@OneToMany(targetEntity = Message.class, mappedBy = "receiver", fetch = FetchType.EAGER)
 	private Set<Message> receivedMessages;
 	
-	@OneToMany(targetEntity = Friendship.class, mappedBy = "sender")
+	@OneToMany(targetEntity = Friendship.class, mappedBy = "sender", fetch = FetchType.EAGER)
 	private Set<Friendship> sendedRequests;
 	
-	@OneToMany(targetEntity = Friendship.class, mappedBy = "receiver")
+	@OneToMany(targetEntity = Friendship.class, mappedBy = "receiver", fetch = FetchType.EAGER)
 	private Set<Friendship> receivedRequests;
 	
 	public User() {

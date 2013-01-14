@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Conversation implements Serializable {
 	@ManyToOne(targetEntity = User.class, optional = false)
 	private User receiver;
 	
-	@OneToMany(targetEntity = Message.class, mappedBy = "conversation")
+	@OneToMany(targetEntity = Message.class, mappedBy = "conversation", fetch = FetchType.EAGER)
 	private List<Message> messages;
 	
 	public Conversation() {
