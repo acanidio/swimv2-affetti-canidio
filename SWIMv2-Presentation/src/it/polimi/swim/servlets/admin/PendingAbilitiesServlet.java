@@ -1,50 +1,62 @@
 package it.polimi.swim.servlets.admin;
 
+import it.polimi.swim.entities.Ability;
+import it.polimi.swim.sessionbeans.AbilityManager;
+import it.polimi.swim.sessionbeans.AbilityManagerRemote;
+import it.polimi.swim.utils.Configuration;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import temporaryClasses.Ability;
 
 /**
  * Servlet implementation class PendingAbilitiesServlet
  */
 public class PendingAbilitiesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PendingAbilitiesServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//loads pending abilities from the db
-		
-		List<Ability> abilities = new ArrayList<Ability>();
-		abilities.add(new Ability("Plumber"));
-		abilities.add(new Ability("Cooker"));
-		abilities.add(new Ability("Musician"));
-		abilities.add(new Ability("DeathEater"));
-		
-		request.setAttribute("pendAbilities", abilities);
-		
-		request.getRequestDispatcher("pendabilities.view").forward(request, response);
+	public PendingAbilitiesServlet() {
+		super();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-doGet(request, response);	}
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		InitialContext ctx = Configuration.getInitialContext();
+
+		AbilityManagerRemote abmgr;
+		try {
+			abmgr = (AbilityManagerRemote) ctx.lookup(AbilityManager.REMOTE);
+
+			List<Ability> abilities = abmgr.loadPendingAbilities();
+			request.setAttribute("pendAbilities", abilities);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+
+		request.getRequestDispatcher("pendabilities.view").forward(request,
+				response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 
 }

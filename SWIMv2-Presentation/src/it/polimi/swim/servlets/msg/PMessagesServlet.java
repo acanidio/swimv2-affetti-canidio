@@ -1,17 +1,20 @@
 package it.polimi.swim.servlets.msg;
 
+import it.polimi.swim.entities.Message;
+import it.polimi.swim.entities.Person;
+import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.utils.Configuration;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import temporaryClasses.Message;
-import temporaryClasses.User;
 
 /**
  * Servlet implementation class PMessagesServlet
@@ -34,20 +37,20 @@ public class PMessagesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		List messages = new ArrayList();
-
-		Message mess1 = new Message(
-				"Custom Tags are JSP elements which helps in maintaining reusable code in JSP.");
-		mess1.setFromU(new User("andrea", "canidio"));
-
-		Message mess2 = new Message(
-				"I pizzoccheri alla valtellinese, primo piatto tradizionale della Valtellina, sono un gustoso piatto unico molto nutriente e facile da realizzare.");
-		mess2.setFromU(new User("andrea", "brancaleoni"));
-
-		messages.add(mess1);
-		messages.add(mess2);
-
-		request.setAttribute("incoming", messages);
+InitialContext ctx = Configuration.getInitialContext();
+		
+		Person user = (Person) request.getAttribute("person");
+		
+		UserDataManager usermgr;
+		try {
+			usermgr = (UserDataManager) ctx.lookup(UserDataManager.REMOTE);
+			
+			List<Message> messages = usermgr.loadNewReceivedMessages(user.getID());
+			
+			request.setAttribute("incoming", messages);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 
 		RequestDispatcher disp = request
 				.getRequestDispatcher("incomingmsgs.view");

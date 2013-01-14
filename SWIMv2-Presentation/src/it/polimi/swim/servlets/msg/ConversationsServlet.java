@@ -1,18 +1,22 @@
 package it.polimi.swim.servlets.msg;
 
+import it.polimi.swim.entities.Conversation;
+import it.polimi.swim.entities.Person;
+import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.utils.Configuration;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import temporaryClasses.Conversation;
-import temporaryClasses.User;
 
 /**
  * Servlet implementation class ConversationsServlet
@@ -30,24 +34,21 @@ public class ConversationsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//loads from DB the personal conversation of the user contained in this session...
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		InitialContext ctx = Configuration.getInitialContext();
 		
-		//up to now we create sample conversations...
-		List convs = new ArrayList();
+		Person user = (Person) request.getAttribute("person");
 		
-		Conversation conv1 = new Conversation();
-		conv1.setUser(new User("Gianni", "Pinotto"));
-		conv1.setMessage("Hi man! I'm Gianni, wanna enjoy swim?");
+		UserDataManager usermgr;
+		try {
+			usermgr = (UserDataManager) ctx.lookup(UserDataManager.REMOTE);
+			
+			List<Conversation> convs = usermgr.loadConversations(user.getID());
+			request.setAttribute("convs", convs);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 		
-		Conversation conv2 = new Conversation();
-		conv2.setUser(new User("Pinotto", "Gianni"));
-		conv2.setMessage("Hi man! I'm Pinotto, wanna enjoy swim?");
-		
-		convs.add(conv1);
-		convs.add(conv2);
-		
-		request.setAttribute("convs", convs);
 		
 		RequestDispatcher disp = request.getRequestDispatcher("conversations.view");
 		disp.forward(request, response);
