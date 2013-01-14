@@ -9,6 +9,8 @@
 <title>My Help Requests</title>
 </head>
 <body>
+<swim:topMenu type="${sessionScope.type}" />
+
 
 <swim:hrList helpreqs="${myhrs}"></swim:hrList>
 

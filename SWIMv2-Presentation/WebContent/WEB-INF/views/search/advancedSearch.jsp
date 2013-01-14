@@ -10,6 +10,9 @@
 </head>
 <body>
 
+<swim:topMenu type="${sessionScope.type}" />
+
+
 	<form method="get" action="search.servlet">
 	<ul>
 		<li>Username: <input type="text" name="username"></li>

@@ -9,6 +9,8 @@
 <title>Filtered Wall</title>
 </head>
 <body>
+<swim:topMenu type="${sessionScope.type}" />
+
 
 <swim:hrList helpreqs="${requestScope.hrs}"></swim:hrList>
 

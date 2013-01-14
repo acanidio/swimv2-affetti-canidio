@@ -10,6 +10,9 @@
 </head>
 <body>
 
+<swim:topMenu type="${sessionScope.type}" />
+
+
 <form action="filterwall.servlet" method="get">
 <ul>
 <li>Friend: <input type="text" name="friend"></li>

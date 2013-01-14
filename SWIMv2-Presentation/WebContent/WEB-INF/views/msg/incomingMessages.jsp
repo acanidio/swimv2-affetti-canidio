@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Incoming Messages</h1><br>
+<swim:topMenu type="${sessionScope.type}" />
 
 <swim:inbox incomingmsgs="${incoming}"></swim:inbox>
 

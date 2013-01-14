@@ -9,6 +9,8 @@
 <title>Post Help Request</title>
 </head>
 <body>
+<swim:topMenu type="${sessionScope.type}" />
+
 
 <form action="hr.store" method="post">
 <ul>

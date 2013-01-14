@@ -9,6 +9,8 @@
 <title>Modify Profile</title>
 </head>
 <body>
+<swim:topMenu type="${sessionScope.type}" />
+
 
 <swim:profileForm action="storemodif.servlet"></swim:profileForm>
 
