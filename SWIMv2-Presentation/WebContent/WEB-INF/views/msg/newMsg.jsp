@@ -11,9 +11,11 @@
 <h1>Create a new Message</h1>
 
 <form action="message.store" method="post">
-	To: <input type="text" name="recipient" value="Friend's name"><br>
-	<input type="text" name="text" height="50" width="200"><br>
-	<input type="submit" value="Send">
+<ul>
+	<li>To: <input type="text" name="recipient" value="Friend's e-mail"></li>
+	<li><input type="text" name="text" height="50" width="200"></li>
+	<li><input type="submit" value="Send"></li>
+</ul>
 </form>
 
 </body>

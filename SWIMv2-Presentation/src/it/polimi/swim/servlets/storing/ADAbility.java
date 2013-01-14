@@ -1,5 +1,11 @@
 package it.polimi.swim.servlets.storing;
 
+import it.polimi.swim.sessionbeans.AbilityManager;
+import it.polimi.swim.sessionbeans.AbilityManagerRemote;
+import it.polimi.swim.utils.Configuration;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 
 public class ADAbility implements DataStorer {
@@ -7,8 +13,21 @@ public class ADAbility implements DataStorer {
 	@Override
 	public void store(HttpServletRequest request) {
 		String ans=request.getParameter("ans");
+		int abID = Integer.parseInt(request.getParameter("id"));
 		
-		System.out.println("The ability @id "+request.getParameter("id")+"has been "+ans);
+		InitialContext ctx = Configuration.getInitialContext();
+		
+		try {
+			AbilityManagerRemote abmgr = (AbilityManagerRemote) ctx.lookup(AbilityManager.REMOTE);
+			
+			if(ans.equals("accept")){
+				abmgr.acceptAbility(abID);
+			}else if(ans.equals("decline")){
+				abmgr.removeAbility(abID);
+			}
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
