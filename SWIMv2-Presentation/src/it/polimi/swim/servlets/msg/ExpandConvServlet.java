@@ -1,17 +1,17 @@
 package it.polimi.swim.servlets.msg;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import it.polimi.swim.entities.Conversation;
+import it.polimi.swim.sessionbeans.ConversationManager;
+import it.polimi.swim.sessionbeans.ConversationManagerRemote;
+import it.polimi.swim.utils.Configuration;
 
+import java.io.IOException;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import temporaryClasses.Message;
-import temporaryClasses.User;
-
 /**
  * Servlet implementation class ExpandConvServlet
  */
@@ -31,26 +31,24 @@ public class ExpandConvServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<Message> messages = new ArrayList<Message>();
+		InitialContext ctx = Configuration.getInitialContext();
 
-		User fromuser = new User("andrea", "canidio");
-		User me = new User("lorenzo", "affetti");
+		int convID = Integer.parseInt(request.getParameter("id"));
 
-		Message message1 = new Message("Hi man");
-		message1.setFromU(fromuser);
+		ConversationManagerRemote convmgr;
+		try {
+			convmgr = (ConversationManagerRemote) ctx
+					.lookup(ConversationManager.REMOTE);
+			Conversation conv = convmgr.loadSpecificConversation(convID);
 
-		Message message2 = new Message("Hi man!");
-		message2.setFromU(me);
+			request.setAttribute("conv", conv);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 
-		messages.add(message1);
-		messages.add(message2);
-
-		// loads from the db
-
-		request.setAttribute("messages", messages);
-
-		request.getRequestDispatcher("expandconv.view?id="+request.getParameter("id")).forward(request,
-				response);
+		request.getRequestDispatcher(
+				"expandconv.view").forward(
+				request, response);
 	}
 
 	/**

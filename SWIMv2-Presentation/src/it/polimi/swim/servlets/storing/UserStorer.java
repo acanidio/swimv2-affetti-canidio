@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserStorer implements DataStorer {
 
 	private String forwardingPath = "home.servlet";
-	
+
 	@Override
 	public void store(HttpServletRequest request) {
 		InitialContext ctx = Configuration.getInitialContext();
@@ -22,13 +22,14 @@ public class UserStorer implements DataStorer {
 			UserDataManagerRemote datamgr = (UserDataManagerRemote) ctx
 					.lookup(UserDataManager.REMOTE);
 			String email = request.getParameter("email");
-			
-			if(!datamgr.verifyUser(email)){
-				request.setAttribute("error", "The email entered is already into the database!");
+
+			if (!datamgr.verifyUser(email)) {
+				request.setAttribute("error",
+						"The email entered is already into the database!");
 				forwardingPath = "error.view";
 				return;
 			}
-			
+
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String surname = request.getParameter("surname");
@@ -41,20 +42,21 @@ public class UserStorer implements DataStorer {
 			if (bday != null && !bday.isEmpty()) {
 				birthday = Date.valueOf(bday);
 			}
-			
+
 			String phonenumber = request.getParameter("phonenumber");
 
-			int userID = datamgr.registerNewUser(email, password, name, surname, avatar,
-					city, gender, birthday, phonenumber);
-			
-			/*
-			String abilityName = request.getParameter("ability0");
-			//TODO a method that returns an ability ID, given its name 
-			int abilityID = 0;
-			
-			datamgr.addAbilityToUser(userID, abilityID);
-			*/
-			
+			int userID = datamgr.registerNewUser(email, password, name,
+					surname, avatar, city, gender, birthday, phonenumber);
+
+			String sabilityID = request.getParameter("ability0");
+
+			for (int i = 1; sabilityID != null && !sabilityID.isEmpty(); i++) {
+				int abilityID = Integer.parseInt(sabilityID);
+				datamgr.addAbilityToUser(userID, abilityID);
+
+				sabilityID = request.getParameter("ability" + i);
+			}
+
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

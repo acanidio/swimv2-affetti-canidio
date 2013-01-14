@@ -1,17 +1,20 @@
 package it.polimi.swim.servlets.frship;
 
+import it.polimi.swim.entities.Friendship;
+import it.polimi.swim.entities.Person;
+import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.utils.Configuration;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import temporaryClasses.Friendship;
-import temporaryClasses.User;
 
 /**
  * Servlet implementation class PFriendshipServlet
@@ -32,31 +35,20 @@ public class PFriendshipServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		//looks if there are some pending friendships into the db
-		
-		List pfriendships = new ArrayList();
-		
-		Friendship f1 = new Friendship();
-		f1.setFromU(new User("vanessa", "monterubbianesi"));
-		f1.setToU(new User("lorenzo", "affetti"));
-		f1.setPending(true);
-		
-		Friendship f2 = new Friendship();
-		f2.setFromU(new User("matteo", "daniele"));
-		f2.setToU(new User("lorenzo", "affetti"));
-		f2.setPending(true);
-		
-		Friendship f3 = new Friendship();
-		f3.setFromU(new User("andrea", "canidio"));
-		f3.setToU(new User("lorenzo", "affetti"));
-		f3.setPending(true);
-		
-		pfriendships.add(f1);
-		pfriendships.add(f2);
-		pfriendships.add(f3);
-		
-		request.setAttribute("pfriendships", pfriendships);
-		
+		InitialContext ctx = Configuration.getInitialContext();
+
+		Person user = (Person) request.getAttribute("person");
+
+		UserDataManager usermgr;
+		try {
+			usermgr = (UserDataManager) ctx.lookup(UserDataManager.REMOTE);
+
+			List<Friendship> pfriendships = usermgr.loadPendingFriendships(user.getID());
+			request.setAttribute("pfriendships", pfriendships);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+				
 		RequestDispatcher disp = request.getRequestDispatcher("pfrships.view");
 		disp.forward(request, response);
 	}
