@@ -23,7 +23,7 @@ public class UserStorer implements DataStorer {
 					.lookup(UserDataManager.REMOTE);
 			String email = request.getParameter("email");
 
-			if (!datamgr.verifyUser(email)) {
+			if (datamgr.emailAlreadyExists(email)) {
 				request.setAttribute("error",
 						"The email entered is already into the database!");
 				forwardingPath = "error.view";

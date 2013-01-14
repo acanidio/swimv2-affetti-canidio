@@ -3,6 +3,7 @@ package it.polimi.swim.servlets.msg;
 import it.polimi.swim.entities.Conversation;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.sessionbeans.UserDataManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import java.io.IOException;
@@ -37,11 +38,11 @@ public class ConversationsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		InitialContext ctx = Configuration.getInitialContext();
 		
-		Person user = (Person) request.getAttribute("person");
+		Person user = (Person) request.getSession().getAttribute("person");
 		
-		UserDataManager usermgr;
+		UserDataManagerRemote usermgr;
 		try {
-			usermgr = (UserDataManager) ctx.lookup(UserDataManager.REMOTE);
+			usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
 			
 			List<Conversation> convs = usermgr.loadConversations(user.getID());
 			request.setAttribute("convs", convs);

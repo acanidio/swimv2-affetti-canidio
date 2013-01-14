@@ -1,14 +1,12 @@
 package it.polimi.swim.servlets.storing;
 
-import java.sql.Date;
-import java.sql.Time;
-
 import it.polimi.swim.entities.Person;
-import it.polimi.swim.sessionbeans.AbilityManager;
-import it.polimi.swim.sessionbeans.AbilityManagerRemote;
 import it.polimi.swim.sessionbeans.HelpRequestManager;
 import it.polimi.swim.sessionbeans.HelpRequestManagerRemote;
 import it.polimi.swim.utils.Configuration;
+
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -27,7 +25,7 @@ public class HelpRequestStorer implements DataStorer {
 		String title = request.getParameter("title");
 		String city = request.getParameter("city");
 		String description = request.getParameter("description");
-		String ability = request.getParameter("ability");
+		int abilityID = Integer.parseInt(request.getParameter("ability0"));
 		
 		//TODO work on this
 		Date date = null;
@@ -39,11 +37,7 @@ public class HelpRequestStorer implements DataStorer {
 			HelpRequestManagerRemote hrmgr = (HelpRequestManagerRemote) ctx
 					.lookup(HelpRequestManager.REMOTE);
 			
-			AbilityManagerRemote abmgr = (AbilityManagerRemote) ctx.lookup(AbilityManager.REMOTE);
-			
-			int abID = abmgr.searchAbilitiesByName(ability.toLowerCase()).get(0).getID();
-			
-			hrID = hrmgr.createHelpRequest(title, city, description, date, hour, IDUser, abID);
+			hrID = hrmgr.createHelpRequest(title, city, description, date, hour, IDUser, abilityID);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

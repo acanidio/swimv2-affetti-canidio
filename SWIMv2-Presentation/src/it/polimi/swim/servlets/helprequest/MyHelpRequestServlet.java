@@ -3,6 +3,7 @@ package it.polimi.swim.servlets.helprequest;
 import it.polimi.swim.entities.HelpRequest;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.sessionbeans.UserDataManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import java.io.IOException;
@@ -36,11 +37,11 @@ public class MyHelpRequestServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		InitialContext ctx = Configuration.getInitialContext();
 
-		Person user = (Person) request.getAttribute("person");
+		Person user = (Person) request.getSession().getAttribute("person");
 
-		UserDataManager usermgr;
+		UserDataManagerRemote usermgr;
 		try {
-			usermgr = (UserDataManager) ctx.lookup(UserDataManager.REMOTE);
+			usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
 
 			List<HelpRequest> myhrs = usermgr
 					.loadUserHelpRequests(user.getID());
