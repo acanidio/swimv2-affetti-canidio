@@ -88,16 +88,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AnswerToFrshipServlet</display-name>
-    <servlet-name>AnswerToFrshipServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.frship.AnswerToFrshipServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AnswerToFrshipServlet</servlet-name>
-    <url-pattern>/AnswerToFrshipServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>LogOutServlet</display-name>
     <servlet-name>LogOutServlet</servlet-name>
     <servlet-class>it.polimi.swim.servlets.LogOutServlet</servlet-class>

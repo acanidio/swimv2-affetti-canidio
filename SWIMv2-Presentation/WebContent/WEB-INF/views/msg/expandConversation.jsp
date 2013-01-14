@@ -12,7 +12,7 @@
 
 <h1>Expand Conversation</h1>
 
-<swim:conv messages="${messages}"></swim:conv>
+<swim:conv conv="${conv}"></swim:conv>
 
 <form method="post" action="message.store">
 <ul>
