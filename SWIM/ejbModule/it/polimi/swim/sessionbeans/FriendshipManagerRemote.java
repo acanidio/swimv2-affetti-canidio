@@ -8,11 +8,11 @@ import javax.ejb.Remote;
 @Remote
 public interface FriendshipManagerRemote {
 	
-	public boolean haveFriendshipRequestBetween(User sender, User receiver);
+	public boolean haveFriendshipRequestBetween(int IDsender, int IDreceiver);
 
-	public Friendship addFriendshipRequest(User sender, User receiver);
+	public Friendship addFriendshipRequest(int IDsender, int IDreceiver);
 	
-	public Friendship getFriendshipRequest(User sender, User receiver);
+	public Friendship getFriendshipRequest(int IDsender, int IDreceiver);
 	
 	public Friendship getFriendshipRequest(int IDFriendshipRequest);
 	
