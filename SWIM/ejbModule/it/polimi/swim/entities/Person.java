@@ -74,4 +74,21 @@ public class Person implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Person)) {
+			return false;
+		}
+		Person person = (Person) obj;
+		if(ID == person.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }

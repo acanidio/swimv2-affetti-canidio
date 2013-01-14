@@ -1,7 +1,6 @@
 package it.polimi.swim.sessionbeans;
 
 import it.polimi.swim.entities.Friendship;
-import it.polimi.swim.entities.User;
 
 import javax.ejb.Remote;
 

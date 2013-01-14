@@ -172,4 +172,20 @@ public class User extends Person implements Serializable {
 		this.receivedRequests = receivedRequests;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Administrator)) {
+			return false;
+		}
+		User user = (User) obj;
+		if(this.getID() == user.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getID();
+	}
 }

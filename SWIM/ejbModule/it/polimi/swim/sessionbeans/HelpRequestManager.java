@@ -137,14 +137,14 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		return false;
 	}
 
-	// TODO review
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getHelpRequests() {
 		List<HelpRequest> helprequests = null;
 		try {
-			Query query = manager.createQuery("SELECT h "
-					+ "FROM HelpRequest h" + "ORDERBY h.ID descendent");
+			Query query = manager.createQuery("SELECT h " +
+											"FROM HelpRequest h" + 
+											"ORDERBY h.ID descendent");
 			helprequests = query.getResultList();
 		} catch (Exception e) {
 			return null;
@@ -152,7 +152,6 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		return helprequests;
 	}
 
-	// TODO review
 	@Override
 	public HelpRequest getHelpRequest(int IDHr) {
 		HelpRequest hr = null;
@@ -164,7 +163,6 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		return hr;
 	}
 
-	// TODO review
 	@Override
 	public boolean postedByMe(int IDUser, int IDHr) {
 		try {
@@ -180,7 +178,6 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		return true;
 	}
 
-	//TODO review
 	@Override
 	public HelpRequest getHelpRequestFromReply(int IDReply) {
 		HelpRequest hr = null;

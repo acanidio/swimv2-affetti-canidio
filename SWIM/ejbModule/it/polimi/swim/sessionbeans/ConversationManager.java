@@ -100,4 +100,18 @@ public class ConversationManager implements ConversationManagerRemote {
 		}
 		return c.getID();
 	}
+
+	@Override
+	public boolean isSender(int IDConversation, int IDUser) {
+		try {
+			Conversation c = manager.find(Conversation.class, IDConversation);
+			User u = manager.find(User.class, IDUser);
+			if(c.getSender().equals(u)) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
+	}
 }

@@ -110,4 +110,21 @@ public class HelpRequest implements Serializable {
 	public void setReplies(Set<Reply> replies) {
 		this.replies = replies;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof HelpRequest)) {
+			return false;
+		}
+		HelpRequest helpRequest = (HelpRequest) obj;
+		if(ID == helpRequest.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }

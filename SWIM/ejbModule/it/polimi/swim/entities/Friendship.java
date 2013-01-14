@@ -58,4 +58,20 @@ public class Friendship implements Serializable {
 		this.receiver = receiver;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Friendship)) {
+			return false;
+		}
+		Friendship friendship = (Friendship) obj;
+		if(ID == friendship.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }

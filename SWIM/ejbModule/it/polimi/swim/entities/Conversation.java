@@ -59,4 +59,25 @@ public class Conversation implements Serializable {
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
+	
+	public Message getLastMessage() {
+		return messages.get(messages.size() - 1);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Conversation)) {
+			return false;
+		}
+		Conversation cnv = (Conversation) obj;
+		if(ID == cnv.getID()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }
