@@ -4,7 +4,7 @@
 <ul>
 <c:forEach var="user" items="${users}">
 	
-	<li><a href="loaduser.servlet?id=${user.id}">${user.name} ${user.surname}</a></li>
+	<li><a href="loaduser.servlet?id=${user.ID}">${user.name} ${user.surname}</a></li>
 	
 </c:forEach>
 </ul>

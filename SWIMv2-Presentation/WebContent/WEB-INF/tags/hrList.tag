@@ -5,8 +5,8 @@
 <c:forEach var="helpreq" items="${helpreqs}">
 	<li>
 		<ul>
-			<li><a href="loaduser.servlet?id=${helpreq.user.id}">${helpreq.user.name} ${helpreq.user.surname}</a></li>
-			<li><a href="loadhr.servlet?id=${helpreq.id}">${helpreq.subject}</a></li>
+			<li><a href="loaduser.servlet?id=${helpreq.sender.ID}">${helpreq.sender.name} ${helpreq.sender.surname}</a></li>
+			<li><a href="loadhr.servlet?id=${helpreq.ID}">${helpreq.title}</a></li>
 			<li>${helpreq.ability.name}</li>
 			<li>${helpreq.date}</li>
 			<li>${helpreq.hour}</li>

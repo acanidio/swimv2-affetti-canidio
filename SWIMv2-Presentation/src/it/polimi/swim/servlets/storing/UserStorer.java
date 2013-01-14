@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class UserStorer implements DataStorer {
 
+	private String forwardingPath = "home.servlet";
+	
 	@Override
 	public void store(HttpServletRequest request) {
 		InitialContext ctx = Configuration.getInitialContext();
@@ -20,6 +22,13 @@ public class UserStorer implements DataStorer {
 			UserDataManagerRemote datamgr = (UserDataManagerRemote) ctx
 					.lookup(UserDataManager.REMOTE);
 			String email = request.getParameter("email");
+			
+			if(!datamgr.verifyUser(email)){
+				request.setAttribute("error", "The email entered is already into the database!");
+				forwardingPath = "error.view";
+				return;
+			}
+			
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String surname = request.getParameter("surname");
@@ -53,7 +62,7 @@ public class UserStorer implements DataStorer {
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		return "home.servlet";
+		return forwardingPath;
 	}
 
 }

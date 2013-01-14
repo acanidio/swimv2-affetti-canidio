@@ -12,7 +12,7 @@ public class ADAbility implements DataStorer {
 
 	@Override
 	public void store(HttpServletRequest request) {
-		String ans=request.getParameter("ans");
+		String ans=request.getParameter("ans").toLowerCase();
 		int abID = Integer.parseInt(request.getParameter("id"));
 		
 		InitialContext ctx = Configuration.getInitialContext();
