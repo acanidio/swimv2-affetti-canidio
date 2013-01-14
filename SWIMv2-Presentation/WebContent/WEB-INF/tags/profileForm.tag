@@ -73,11 +73,15 @@ function checkProfileForm(){
  var counter = 1;
  
  function appendSelect(){
+	 var originalSelect = document.getElementById("select0");
 	 var select = document.createElement("select");
 	 
 	 select.name = "ability" + counter;
+	 select.id = "select" + counter;
+	 
+	 select.innerHTML += originalSelect.innerHTML;
 
-	
+	/*
 	 
 	 var options = new Array();
 	 
@@ -95,7 +99,7 @@ function checkProfileForm(){
 		 option.appendChild(text);
 		 select.appendChild(option);
 	 }
-	 
+	 */
 	 var listel = document.createElement("li");
 	 listel.appendChild(select);
 	 
@@ -154,10 +158,10 @@ function checkProfileForm(){
 <li>
 <ul id="abilities">
 <li>
-	<select id="select" name="ability0">
+	<select id="select0" name="ability0">
 	<c:set var="count" value="0"/>
 		<c:forEach var="ability" items="${abilities}">
-			<option id="option${count}" value="${ability.name}">${ability.name}</option>
+			<option id="option${count}" value="${ability.ID}">${ability.name}</option>
 			<c:set var="count" value="${count+1}"/>
 		</c:forEach>
 	</select>
