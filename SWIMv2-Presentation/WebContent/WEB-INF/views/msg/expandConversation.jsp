@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Expand Conversation</h1>
+<swim:topMenu type="${sessionScope.type}" />
 
 <swim:conv conv="${conv}"></swim:conv>
 

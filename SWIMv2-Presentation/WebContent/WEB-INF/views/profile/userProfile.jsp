@@ -10,6 +10,8 @@
 <title>${requestScope.user.name}'s profile</title>
 </head>
 <body>
+<swim:topMenu type="${sessionScope.type}" />
+
 
 <c:set var="isfriendof" value="false"/>
 <c:forEach var="friendship" items="${requestScope.user.sendedRequests}">

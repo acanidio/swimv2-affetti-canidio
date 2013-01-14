@@ -9,6 +9,7 @@
 <title>Search Results</title>
 </head>
 <body>
+<swim:topMenu type="${sessionScope.type}" />
 
 <swim:userList users="${results}"></swim:userList>
 

@@ -11,6 +11,8 @@
 </head>
 <body>
 
+<swim:topMenu type="${sessionScope.type}" />
+
 <swim:hr helpreq="${hr}"></swim:hr>
 
 <c:if test="${requestScope.canReply == true}">
