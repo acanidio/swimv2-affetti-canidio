@@ -14,9 +14,12 @@
 
 <swim:conv messages="${messages}"></swim:conv>
 
-<form method="post" action="message.store?id=${requestScope.id}">
-	<input type="text" name="text" height="50" width="200"><br>
-	<input type="submit" value="Send">
+<form method="post" action="message.store">
+<ul>
+	<li><input type="hidden" name="convid" value="${requestScope.id}">
+	<li><input type="text" name="text" height="50" width="200"></li>
+	<li><input type="submit" value="Send"></li>
+</ul>
 </form>
 
 </body>

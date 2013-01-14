@@ -130,10 +130,10 @@ function checkProfileForm(){
 
 <li>Confirm Password*: <input type="password" name="cpassword"></li>
 
-<li>E-mail address*: <input type="text" name="email" value="${sessionScope.person.email}"></li>
+<li>E-mail address*: <input type="text" name="email"></li>
 </c:if>
 
-<li>City: <input type="text" name="city" value="${sessionScope.person.email}"></li>
+<li>City: <input type="text" name="city" value="${sessionScope.person.city}"></li>
 
 <li>Birthday: <input type="date" name="birthday"></li>
 

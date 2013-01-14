@@ -9,16 +9,22 @@
 <body>
 
 <form action="feedback.store?replyid=${replyid}" method="post">
+<ul>
+<li>
 <fieldset>
 	<legend>Mark:</legend>
-	1<input type="radio" value="1">
-	2<input type="radio" value="2">
-	3<input type="radio" value="3">
-	4<input type="radio" value="4">
-	5<input type="radio" value="5">
+	1<input name="mark" type="radio" value="1">
+	2<input name="mark" type="radio" value="2">
+	3<input name="mark" type="radio" value="3">
+	4<input name="mark" type="radio" value="4">
+	5<input name="mark" type="radio" value="5" checked="checked">
 </fieldset>
-Description: <input type="text" name="description">
-<input type="submit" value="Send">
+</li>
+
+<li>Description: <input type="text" name="description"></li>
+<li><input type="submit" value="Send"></li>
+
+</ul>
 </form>
 
 </body>

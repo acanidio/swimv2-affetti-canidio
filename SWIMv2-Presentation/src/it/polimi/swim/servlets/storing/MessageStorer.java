@@ -1,27 +1,68 @@
 package it.polimi.swim.servlets.storing;
 
+import it.polimi.swim.entities.Person;
+import it.polimi.swim.sessionbeans.ConversationManager;
+import it.polimi.swim.sessionbeans.ConversationManagerRemote;
+import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.sessionbeans.UserDataManagerRemote;
+import it.polimi.swim.utils.Configuration;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 
 public class MessageStorer implements DataStorer {
+	private Integer convID;
 
 	@Override
 	public void store(HttpServletRequest request) {
 		String recipient = request.getParameter("recipient");
 		String text = request.getParameter("text");
-		String id = request.getParameter("id");
+		String stringedConvid = request.getParameter("convid");
+		int recID;
+		
+		Person user = (Person) request.getSession().getAttribute("person");
+		
+		
+		InitialContext ctx = Configuration.getInitialContext();
+		
+		try {
+			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
+			ConversationManagerRemote convmgr = (ConversationManagerRemote) ctx.lookup(ConversationManager.REMOTE);
 
-		if (id == null || id.isEmpty()) {
-			request.setAttribute("id", (int) (Math.random() * 100));
+		if (recipient!=null && !recipient.isEmpty()) {
+			recID = usermgr.searchUserByEmail(recipient);	
+			
+		}else{
+			
+			convID = Integer.parseInt(stringedConvid);
+			
+			int tempRec = convmgr.loadSpecificConversation(convID).getReceiver().getID();
+			int tempSend = convmgr.loadSpecificConversation(convID).getSender().getID();
+			if(user.getID() == tempRec){
+			recID = tempSend;
+			}else{
+				recID = tempRec;
+			}
 		}
-
-		System.out.println("Message stored:");
-		System.out.println(recipient);
-		System.out.println(text);
+		
+		convID = convmgr.existConversationBetween(user.getID(), recID);
+		
+		if(convID == null){
+			convID = convmgr.createConversation(user.getID(), recID);
+		}
+		
+		convmgr.sendMessage(convID, user.getID(), text);
+		
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		return "expandconv.servlet?id=" + request.getParameter("id");
+		return "expandconv.servlet?id=" + convID;
 	}
 
 }
