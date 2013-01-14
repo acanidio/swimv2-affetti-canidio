@@ -4,7 +4,7 @@
 <ul>
 <c:forEach var="msg" items="${messages}">
 <li>
-	<p><a href="loaduser.servlet?id=${msg.fromU.id}">${msg.fromU.name} ${msg.fromU.surname}</a></p>
+	<p><a href="loaduser.servlet?id=${msg.sender.ID}">${msg.sender.name} ${msg.sender.surname}</a></p>
 	<p>${msg.text}</p>
 </li>	
 </c:forEach>

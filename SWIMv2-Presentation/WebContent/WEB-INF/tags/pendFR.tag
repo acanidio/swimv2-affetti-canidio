@@ -4,9 +4,10 @@
 <ul id="pfrships">
 <c:forEach var="fr" items="${pendingFR}">
 	<li>
-	<p><a href="loaduser.servlet">${fr.fromU.name} ${fr.fromU.surname}</a></p>
-	<input type="hidden" name="id" value="${fr.fromU.id}">
-	<form method="post" action="adfrship.store?id=${fr.id}">
+	<p><a href="loaduser.servlet?id=${fr.sender.ID}">${fr.sender.name} ${fr.sender.surname}</a></p>
+	
+	<form method="post" action="adfrship.store?">
+	<input type="hidden" name="id" value="${fr.ID}">
 	<input type="submit" name="ans" value="Accept">
 	<input type="submit" name="ans" value="Decline">
 	</form>
