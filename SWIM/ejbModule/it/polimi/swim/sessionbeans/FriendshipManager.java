@@ -23,20 +23,20 @@ public class FriendshipManager implements FriendshipManagerRemote {
 	private EntityManager manager;
 	
 	@Override
-	public boolean haveFriendshipRequestBetween(User sender, User receiver) {
-		if(getFriendshipRequest(sender, receiver) != null) {
+	public boolean haveFriendshipRequestBetween(int IDsender, int IDreceiver) {
+		if(getFriendshipRequest(IDsender, IDreceiver) != null) {
 			return true;
 		}
 		return false;
 	}
 	
 	@Override
-	public Friendship addFriendshipRequest(User sender, User receiver) {
+	public Friendship addFriendshipRequest(int IDsender, int IDreceiver) {
 		Friendship newFriendship;
 		try {
 			newFriendship = new Friendship();
-			newFriendship.setSender(sender);
-			newFriendship.setReceiver(receiver);
+			newFriendship.setSender(manager.find(User.class, IDsender));
+			newFriendship.setReceiver(manager.find(User.class, IDreceiver));
 			manager.persist(newFriendship);
 		} catch (Exception e) {
 			return null;
@@ -45,15 +45,15 @@ public class FriendshipManager implements FriendshipManagerRemote {
 	}
 
 	@Override
-	public Friendship getFriendshipRequest(User sender, User receiver) {
+	public Friendship getFriendshipRequest(int IDsender, int IDreceiver) {
 		Friendship request = null;
 		try {
 			Query query = manager.createQuery("SELECT f " +
 					"FROM f JOIN f.sender u1 JOIN f.receiver u2 " +
 					"WHERE (u1.ID = :first AND u2.ID = :second) OR " +
 					"(u2.ID = :first AND u1.ID = :second)");
-			request = (Friendship) query.setParameter("first", sender)
-							.setParameter("second", receiver)
+			request = (Friendship) query.setParameter("first", IDsender)
+							.setParameter("second", IDreceiver)
 							.getSingleResult();
 		} catch (Exception e) {
 			return null;
