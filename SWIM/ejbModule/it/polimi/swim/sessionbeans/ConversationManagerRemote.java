@@ -13,5 +13,5 @@ public interface ConversationManagerRemote {
 	
 	public Integer sendMessage(int IDConversation, int IDSender, String text);
 	
-	public Conversation loadSpecificConversation(int IDConversation, int IDReceiver);
+	public Conversation loadSpecificConversation(int IDConversation);
 }

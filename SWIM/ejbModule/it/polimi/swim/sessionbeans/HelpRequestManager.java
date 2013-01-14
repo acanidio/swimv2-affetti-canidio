@@ -24,10 +24,10 @@ import org.jboss.ejb3.annotation.RemoteBinding;
 @RemoteBinding(jndiBinding = HelpRequestManager.REMOTE)
 public class HelpRequestManager implements HelpRequestManagerRemote {
 
-    public static final String REMOTE = "HelpRequestManager/remote";
-    
-    @PersistenceContext(unitName = "SWIMPU")
-    private EntityManager manager;
+	public static final String REMOTE = "HelpRequestManager/remote";
+
+	@PersistenceContext(unitName = "SWIMPU")
+	private EntityManager manager;
 
 	@Override
 	public Integer createHelpRequest(String title, String city,
@@ -55,7 +55,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			r.setSender(manager.find(User.class, IDUser));
 			r.setRequest(manager.find(HelpRequest.class, IDHelpRequest));
 			manager.persist(r);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 		return r.getID();
@@ -66,10 +66,10 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		try {
 			User u = manager.find(User.class, IDUser);
 			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
-			if(!u.getAbilities().contains(hr.getAbility())) {
+			if (!u.getAbilities().contains(hr.getAbility())) {
 				return false;
 			}
-			if(hr.getSender().equals(u)) {
+			if (hr.getSender().equals(u)) {
 				return false;
 			}
 		} catch (Exception e) {
@@ -94,8 +94,8 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 	public boolean hasBestReply(int IDHelpRequest) {
 		try {
 			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
-			for(Reply r: hr.getReplies()) {
-				if(r.isBest()) {
+			for (Reply r : hr.getReplies()) {
+				if (r.isBest()) {
 					return true;
 				}
 			}
@@ -115,6 +115,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			f.setSender(manager.find(User.class, IDUser));
 			f.setAbility(manager.find(Ability.class, IDAbility));
 			f.setReply(manager.find(Reply.class, IDReply));
+			manager.persist(f);
 		} catch (Exception e) {
 			return null;
 		}
@@ -125,8 +126,8 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 	public boolean hasFeedback(int IDHelpRequest) {
 		try {
 			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
-			for(Reply r: hr.getReplies()) {
-				if(r.isBest() && (r.getFeedback() != null)) {
+			for (Reply r : hr.getReplies()) {
+				if (r.isBest() && (r.getFeedback() != null)) {
 					return true;
 				}
 			}
@@ -136,47 +137,59 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		return false;
 	}
 
-	//TODO review
+	// TODO review
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getHelpRequests() {
 		List<HelpRequest> helprequests = null;
 		try {
-			Query query = manager.createQuery("SELECT h " +
-											"FROM HelpRequest h" +
-											"ORDERBY ID descendent");
+			Query query = manager.createQuery("SELECT h "
+					+ "FROM HelpRequest h" + "ORDERBY h.ID descendent");
 			helprequests = query.getResultList();
 		} catch (Exception e) {
 			return null;
 		}
 		return helprequests;
-		}
+	}
 
-	//TODO review
+	// TODO review
 	@Override
-	public HelpRequest getHelpRequest(int id) {
+	public HelpRequest getHelpRequest(int IDHr) {
 		HelpRequest hr = null;
 		try {
-			hr = manager.find(HelpRequest.class, id);
+			hr = manager.find(HelpRequest.class, IDHr);
 		} catch (Exception e) {
 			return null;
 		}
 		return hr;
 	}
 
-	//TODO review
+	// TODO review
 	@Override
 	public boolean postedByMe(int IDUser, int IDHr) {
 		try {
 			User u = manager.find(User.class, IDUser);
 			HelpRequest hr = manager.find(HelpRequest.class, IDHr);
-			
-			if(hr.getSender().equals(u)) {
+
+			if (hr.getSender().equals(u)) {
 				return false;
 			}
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
+	}
+
+	//TODO review
+	@Override
+	public HelpRequest getHelpRequestFromReply(int IDReply) {
+		HelpRequest hr = null;
+		try {
+			Reply r = manager.find(Reply.class, IDReply);
+			hr = r.getRequest();
+		} catch (Exception e) {
+			return null;
+		}
+		return hr;
 	}
 }

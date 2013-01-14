@@ -22,15 +22,16 @@ public class ConversationManager implements ConversationManagerRemote {
 
 	@PersistenceContext(unitName = "SWIMPU")
 	private EntityManager manager;
-	
+
 	@Override
 	public Integer existConversationBetween(int IDFirstUser, int IDSecondUser) {
 		Conversation c = null;
 		try {
-			Query q = manager.createQuery("SELECT c " +
-										"FROM c JOIN c.sender u1 JOIN c.receiver u2 " +
-										"WHERE (u1.ID = :IDFirstUser AND u2.ID = :IDSecondUser) OR " +
-										"(u2.ID = :IDFirstUser AND u1.ID = :IDSecondUser)");
+			Query q = manager
+					.createQuery("SELECT c "
+							+ "FROM c JOIN c.sender u1 JOIN c.receiver u2 "
+							+ "WHERE (u1.ID = :IDFirstUser AND u2.ID = :IDSecondUser) OR "
+							+ "(u2.ID = :IDFirstUser AND u1.ID = :IDSecondUser)");
 			c = (Conversation) q.setParameter("IDFirstUser", IDFirstUser)
 					.setParameter("IDSecondUser", IDSecondUser)
 					.getSingleResult();
@@ -46,12 +47,14 @@ public class ConversationManager implements ConversationManagerRemote {
 		try {
 			Conversation c = manager.find(Conversation.class, IDConversation);
 			User sender = manager.find(User.class, IDSender);
-			// The sender is not either the conversation's sender or the conversation's receiver
-			if(!sender.equals(c.getSender())||!sender.equals(c.getReceiver())) {
+			// The sender is not either the conversation's sender or the
+			// conversation's receiver
+			if (!sender.equals(c.getSender())
+					|| !sender.equals(c.getReceiver())) {
 				return null;
 			}
 			User receiver;
-			if(sender.equals(c.getSender())) {
+			if (sender.equals(c.getSender())) {
 				receiver = c.getReceiver();
 			} else {
 				receiver = c.getSender();
@@ -67,18 +70,16 @@ public class ConversationManager implements ConversationManagerRemote {
 		}
 		return m.getID();
 	}
-	
+
 	@Override
-	public Conversation loadSpecificConversation(int IDConversation, int IDReceiver) {
+	public Conversation loadSpecificConversation(int IDConversation) {
 		Conversation conversation = null;
 		try {
 			conversation = manager.find(Conversation.class, IDConversation);
-			User receiver = manager.find(User.class, IDReceiver);
-			for(Message currentMessage: conversation.getMessages()) {
-				if(currentMessage.getReceiver().equals(receiver) && currentMessage.isUnreaded()) {
-					currentMessage.setUnreaded(false);
-					manager.merge(currentMessage);
-				}
+
+			for (Message currentMessage : conversation.getMessages()) {
+				currentMessage.setUnreaded(false);
+				manager.merge(currentMessage);
 			}
 		} catch (Exception e) {
 			return null;
