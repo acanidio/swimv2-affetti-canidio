@@ -29,6 +29,9 @@ public class Ability implements Serializable {
 	
 	@OneToMany(targetEntity = Feedback.class, mappedBy = "ability")
 	private List<Feedback> feedbacks;
+	
+	@ManyToMany(targetEntity = Ability.class, mappedBy = "abilities")
+	private List<Ability> users;
 
 	public Ability() {
 		super();
@@ -71,6 +74,14 @@ public class Ability implements Serializable {
 		this.feedbacks = feedbacks;
 	}
 	
+	public List<Ability> getAbilities() {
+		return users;
+	}
+
+	public void setAbilities(List<Ability> abilities) {
+		this.users = abilities;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Ability)) {
