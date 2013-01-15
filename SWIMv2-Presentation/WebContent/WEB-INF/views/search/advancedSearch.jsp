@@ -17,7 +17,7 @@
 	<ul>
 		<li>Username: <input type="text" name="username"></li>
 		<li>City: <input type="text" name="city"></li>
-		<li>Abilities: 	<swim:abilitiesCheckBox abilities="${abilities}"></swim:abilitiesCheckBox> </li>	
+		<li>Ability: 	<swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect> </li>	
 		<li><input type="submit" value="Search"></li>
 	</ul>
 	</form>

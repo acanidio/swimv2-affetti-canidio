@@ -12,8 +12,6 @@
 
 <swim:topMenu type="${sessionScope.type}" />
 
-<h1>Pending friendships</h1><br>
-
 <swim:pendFR pendingFR="${pfriendships}"></swim:pendFR>
 
 </body>

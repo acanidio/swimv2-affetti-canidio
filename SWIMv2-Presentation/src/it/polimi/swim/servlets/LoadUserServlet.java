@@ -63,7 +63,7 @@ public class LoadUserServlet extends HttpServlet {
 			FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx
 					.lookup(FriendshipManager.REMOTE);
 
-			boolean friendOf = frmgr.haveFriendshipRequestBetween(
+			boolean reqExists = frmgr.haveFriendshipRequestBetween(
 					loggedUser.getID(), otherUserID);
 			Friendship fr = frmgr.getFriendshipRequest(loggedUser.getID(),
 					otherUserID);
@@ -75,8 +75,8 @@ public class LoadUserServlet extends HttpServlet {
 				frID = fr.getID();
 			}
 
-			request.setAttribute("reqexixts", friendOf);
-			request.setAttribute("accepted", accepted);
+			request.setAttribute("reqexixts", Boolean.valueOf(reqExists));
+			request.setAttribute("accepted", Boolean.valueOf(accepted));
 			request.setAttribute("frid", frID);
 
 		} catch (NamingException e) {

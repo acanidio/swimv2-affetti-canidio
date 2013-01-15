@@ -146,7 +146,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		List<HelpRequest> helprequests = null;
 		try {
 			Query query = manager.createQuery("SELECT h " +
-											"FROM HelpRequest h" + 
+											"FROM HelpRequest h " + 
 											"ORDER BY h.ID DESC");
 			helprequests = query.getResultList();
 		} catch (Exception e) {
@@ -173,12 +173,12 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			HelpRequest hr = manager.find(HelpRequest.class, IDHr);
 
 			if (hr.getSender().equals(u)) {
-				return false;
+				return true;
 			}
 		} catch (Exception e) {
 			return false;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
