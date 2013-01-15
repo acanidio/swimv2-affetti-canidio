@@ -72,6 +72,9 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			if (hr.getSender().equals(u)) {
 				return false;
 			}
+			if(hasBestReply(IDHelpRequest)){
+				return false;
+			}
 		} catch (Exception e) {
 			return false;
 		}
