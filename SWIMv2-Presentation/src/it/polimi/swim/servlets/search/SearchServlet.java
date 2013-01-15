@@ -1,7 +1,15 @@
 package it.polimi.swim.servlets.search;
 
-import java.io.IOException;
+import it.polimi.swim.entities.User;
+import it.polimi.swim.sessionbeans.UserDataManager;
+import it.polimi.swim.sessionbeans.UserDataManagerRemote;
+import it.polimi.swim.utils.Configuration;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +34,31 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		//request.setAttribute("results", results);
-		
-		request.getRequestDispatcher("searchres.view").forward(request, response);
+
+		InitialContext ctx = Configuration.getInitialContext();
+
+		String username = request.getParameter("username");
+		String ability = request.getParameter("ability0");
+		String city = request.getParameter("city");
+		Integer abID = null;
+
+		if (ability != null && !ability.isEmpty()) {
+			abID = Integer.parseInt(ability);
+		}
+
+		try {
+			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx
+					.lookup(UserDataManager.REMOTE);
+
+			// TODO review
+			List<User> results = usermgr.searchUsersByName(username);
+			request.setAttribute("results", results);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+
+		request.getRequestDispatcher("searchres.view").forward(request,
+				response);
 	}
 
 	/**

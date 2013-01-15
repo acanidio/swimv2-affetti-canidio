@@ -2,6 +2,7 @@ package it.polimi.swim.servlets.storing;
 
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.FriendshipManager;
+import it.polimi.swim.sessionbeans.FriendshipManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import javax.naming.InitialContext;
@@ -18,7 +19,7 @@ public class FriendshipStorer implements DataStorer {
 		InitialContext ctx = Configuration.getInitialContext();
 		
 		try {
-			FriendshipManager frmgr = (FriendshipManager) ctx.lookup(FriendshipManager.REMOTE);
+			FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx.lookup(FriendshipManager.REMOTE);
 			
 			frmgr.addFriendshipRequest(user.getID(), recID);
 		} catch (NamingException e) {

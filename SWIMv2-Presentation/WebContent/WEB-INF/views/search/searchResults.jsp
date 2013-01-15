@@ -11,7 +11,7 @@
 <body>
 <swim:topMenu type="${sessionScope.type}" />
 
-<swim:userList users="${results}"></swim:userList>
+<swim:userList users="${requestScope.results}"></swim:userList>
 
 </body>
 </html>
