@@ -49,12 +49,13 @@ public class FriendshipManager implements FriendshipManagerRemote {
 		Friendship request = null;
 		try {
 			Query query = manager.createQuery("SELECT f " +
-					"FROM f JOIN f.sender u1 JOIN f.receiver u2 " +
+					"FROM Friendship f JOIN f.sender u1 JOIN f.receiver u2 " +
 					"WHERE (u1.ID = :first AND u2.ID = :second) OR " +
 					"(u2.ID = :first AND u1.ID = :second)");
 			request = (Friendship) query.setParameter("first", IDsender)
 							.setParameter("second", IDreceiver)
 							.getSingleResult();
+			//TODO review
 		} catch (Exception e) {
 			return null;
 		}
@@ -96,6 +97,12 @@ public class FriendshipManager implements FriendshipManagerRemote {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean isFriendOf(int IDLoggedUser, int IDOtherUser) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
