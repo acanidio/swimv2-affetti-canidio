@@ -16,7 +16,7 @@ import javax.ejb.Remote;
 @Remote
 public interface UserDataManagerRemote {
 
-	public boolean verifyUser(String email);
+	public boolean emailAlreadyExists(String email);
 	
 	public Integer registerNewUser(String email, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
 	

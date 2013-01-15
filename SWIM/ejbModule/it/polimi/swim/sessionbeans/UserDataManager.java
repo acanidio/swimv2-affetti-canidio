@@ -32,8 +32,9 @@ public class UserDataManager implements UserDataManagerRemote {
 	@PersistenceContext(unitName = "SWIMPU")
 	private EntityManager manager;
 
+	@SuppressWarnings("unused")
 	@Override
-	public boolean verifyUser(String email) {
+	public boolean emailAlreadyExists(String email) {
 		Person person = null;
 		try {
 			Query query = manager.createQuery("SELECT p " +
@@ -41,9 +42,9 @@ public class UserDataManager implements UserDataManagerRemote {
 											"WHERE p.email = :email");
 			person = (Person) query.setParameter("email", email).getSingleResult();
 		} catch (NoResultException e) {
-			return true;
+			return false;
 		}
-		return person != null;
+		return true;
 	}
 
 	@Override
@@ -252,7 +253,16 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@Override
 	public Integer searchUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+		try {
+			Query query = manager.createQuery("SELECT u " +
+											"FROM User u " +
+											"WHERE u.email = :email");
+			user = (User) query.setParameter("email", email)
+						.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+		return user.getID();
 	}
 }
