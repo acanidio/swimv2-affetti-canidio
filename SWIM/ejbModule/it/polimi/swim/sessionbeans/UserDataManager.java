@@ -230,6 +230,7 @@ public class UserDataManager implements UserDataManagerRemote {
 			user.getAbilities().add(ability);
 			manager.merge(user);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
