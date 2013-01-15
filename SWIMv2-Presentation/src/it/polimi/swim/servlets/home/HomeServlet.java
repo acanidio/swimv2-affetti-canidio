@@ -1,4 +1,4 @@
-package it.polimi.swim.servlets;
+package it.polimi.swim.servlets.home;
 
 import it.polimi.swim.entities.HelpRequest;
 import it.polimi.swim.entities.User;

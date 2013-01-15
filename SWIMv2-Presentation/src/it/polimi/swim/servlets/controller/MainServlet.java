@@ -1,4 +1,4 @@
-package it.polimi.swim.servlets;
+package it.polimi.swim.servlets.controller;
 
 import it.polimi.swim.utils.Configuration;
 

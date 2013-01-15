@@ -1,4 +1,4 @@
-package it.polimi.swim.servlets;
+package it.polimi.swim.servlets.profile;
 
 import it.polimi.swim.entities.Ability;
 import it.polimi.swim.entities.Friendship;
