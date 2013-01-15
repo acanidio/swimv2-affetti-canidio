@@ -1,4 +1,4 @@
-package it.polimi.swim.servlets;
+package it.polimi.swim.servlets.home;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

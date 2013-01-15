@@ -53,10 +53,10 @@ public class LoadHelpRequestServlet extends HttpServlet {
 			boolean hasFeed = hrmgr.hasFeedback(hrID);
 			boolean postedByMe = hrmgr.postedByMe(user.getID(), hrID);
 			
-			request.setAttribute("canReply", canReply);
-			request.setAttribute("hasBR", hasBR);
-			request.setAttribute("hasFeed", hasFeed);
-			request.setAttribute("postedByMe", postedByMe);
+			request.setAttribute("canReply", Boolean.valueOf(canReply));
+			request.setAttribute("hasBR", Boolean.valueOf(hasBR));
+			request.setAttribute("hasFeed", Boolean.valueOf(hasFeed));
+			request.setAttribute("postedByMe", Boolean.valueOf(postedByMe));
 
 		} catch (NamingException e) {
 			e.printStackTrace();

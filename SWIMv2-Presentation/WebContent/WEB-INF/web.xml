@@ -9,7 +9,7 @@
     <description></description>
     <display-name>LogInServlet</display-name>
     <servlet-name>LogInServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.LogInServlet</servlet-class>
+    <servlet-class>it.polimi.swim.servlets.home.LogInServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LogInServlet</servlet-name>
@@ -19,7 +19,7 @@
     <description></description>
     <display-name>ModifyProfileServlet</display-name>
     <servlet-name>ModifyProfileServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.ModifyProfileServlet</servlet-class>
+    <servlet-class>it.polimi.swim.servlets.profile.ModifyProfileServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ModifyProfileServlet</servlet-name>
@@ -29,7 +29,7 @@
     <description></description>
     <display-name>MainServlet</display-name>
     <servlet-name>MainServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.MainServlet</servlet-class>
+    <servlet-class>it.polimi.swim.servlets.controller.MainServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MainServlet</servlet-name>
@@ -70,7 +70,7 @@
     <description></description>
     <display-name>LoadUserServlet</display-name>
     <servlet-name>LoadUserServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.LoadUserServlet</servlet-class>
+    <servlet-class>it.polimi.swim.servlets.profile.LoadUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoadUserServlet</servlet-name>
@@ -90,7 +90,7 @@
     <description></description>
     <display-name>LogOutServlet</display-name>
     <servlet-name>LogOutServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.LogOutServlet</servlet-class>
+    <servlet-class>it.polimi.swim.servlets.home.LogOutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LogOutServlet</servlet-name>
@@ -100,7 +100,7 @@
     <description></description>
     <display-name>HomeServlet</display-name>
     <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.HomeServlet</servlet-class>
+    <servlet-class>it.polimi.swim.servlets.home.HomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
@@ -160,7 +160,7 @@
     <description></description>
     <display-name>LoadAbilitiesServlet</display-name>
     <servlet-name>LoadAbilitiesServlet</servlet-name>
-    <servlet-class>it.polimi.swim.servlets.LoadAbilitiesServlet</servlet-class>
+    <servlet-class>it.polimi.swim.servlets.profile.LoadAbilitiesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoadAbilitiesServlet</servlet-name>
