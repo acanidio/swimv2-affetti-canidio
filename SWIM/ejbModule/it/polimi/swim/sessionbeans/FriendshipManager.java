@@ -5,6 +5,7 @@ import it.polimi.swim.entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -55,7 +56,6 @@ public class FriendshipManager implements FriendshipManagerRemote {
 			request = (Friendship) query.setParameter("first", IDsender)
 							.setParameter("second", IDreceiver)
 							.getSingleResult();
-			//TODO review
 		} catch (Exception e) {
 			return null;
 		}
@@ -99,10 +99,24 @@ public class FriendshipManager implements FriendshipManagerRemote {
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
-	public boolean isFriendOf(int IDLoggedUser, int IDOtherUser) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isFriendOf(int IDFirstUser, int IDSecondUser) {
+		Friendship request = null;
+		try {
+			Query query = manager.createQuery("SELECT f " +
+					"FROM Friendship f JOIN f.sender u1 JOIN f.receiver u2 " +
+					"WHERE ((u1.ID = :first AND u2.ID = :second) OR " +
+					"(u2.ID = :first AND u1.ID = :second)) AND " +
+					"f.accepted = true");
+			request = (Friendship) query.setParameter("first", IDFirstUser)
+							.setParameter("second", IDSecondUser)
+							.getSingleResult();
+		} catch (NoResultException e) {
+			return false;
+		}
+		return true;
 	}
 
 }
+
