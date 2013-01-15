@@ -90,7 +90,7 @@ public class UserDataManager implements UserDataManagerRemote {
 		Hashtable<Ability, Float> possessedAbilities = new Hashtable<Ability, Float>();
 		try {
 			Query query = manager.createQuery("SELECT a " +
-											"FROM User u JOIN u.abilities a " +
+											"FROM Ability a, IN (a.users) u " +
 											"WHERE u.ID = :ID");
 			List<Ability> abilities = (List<Ability>) query.setParameter("ID", IDUser).getResultList();
 			for(Ability a: abilities) {
@@ -107,7 +107,7 @@ public class UserDataManager implements UserDataManagerRemote {
 		Float average = null;
 		try {
 			Query query = manager.createQuery("SELECT AVG(f.mark) " +
-											"FROM User u JOIN u.abilities a LEFT JOIN a.feedbacks f " +
+											"FROM User u, IN (u.abilities) a, IN (a.feedbacks) f " +
 											"WHERE u.ID = :IDUser AND a.ID = :IDAbility");
 			average = (Float) query.setParameter("IDUser", IDUser)
 							.setParameter("IDAbility", IDAbility)
@@ -124,7 +124,7 @@ public class UserDataManager implements UserDataManagerRemote {
 		List<HelpRequest> helprequests = null;
 		try {
 			Query query = manager.createQuery("SELECT h " +
-											"FROM User u JOIN u.helprequests h " +
+											"FROM User u, IN (u.helprequests) h " +
 											"WHERE u.ID = :IDUser");
 			helprequests = query.setParameter("IDUser", IDUser)
 								.getResultList();
@@ -155,8 +155,8 @@ public class UserDataManager implements UserDataManagerRemote {
 		List<Friendship> pendingFriendships = null;
 		try {
 			Query query = manager.createQuery("SELECT f " +
-											"FROM Friendship f JOIN f.sender u1 JOIN f.receiver u2 " +
-											"WHERE (u1.ID = :IDUser OR u2.ID = :IDUser) AND f.pending = true");
+											"FROM Friendship f JOIN f.receiver u " +
+											"WHERE u.ID = :IDUser AND f.pending = true");
 			pendingFriendships = query.setParameter("IDUser", IDUser)
 										.getResultList();
 		} catch (Exception e) {
@@ -171,8 +171,8 @@ public class UserDataManager implements UserDataManagerRemote {
 		List<Message> newMessages = null;
 		try {
 			Query query = manager.createQuery("SELECT m " +
-											"FROM Message JOIN f.sender u1 JOIN f.receiver u2 " +
-											"WHERE (u1.ID = :IDUser OR u2.ID = :IDUser) AND m.unreaded = true");
+											"FROM Message m JOIN f.receiver u " +
+											"WHERE u.ID = :IDUser AND m.unreaded = true");
 			newMessages = query.setParameter("IDUser", IDUser)
 								.getResultList();
 		} catch (Exception e) {
@@ -244,6 +244,7 @@ public class UserDataManager implements UserDataManagerRemote {
 			Query query = manager.createQuery("SELECT u " +
 											"FROM User u " +
 											"WHERE CONCAT(u.name,u.surname) LIKE :pattern");
+			pattern = pattern.replace(' ', '%');
 			users = query.setParameter("pattern", "%" + pattern + "%")
 						.getResultList();
 		} catch (Exception e) {
