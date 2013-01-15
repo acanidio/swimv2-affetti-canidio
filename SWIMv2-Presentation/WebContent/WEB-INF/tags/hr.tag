@@ -14,7 +14,7 @@
 <ul>
 <c:forEach var="reply" items="${helpreq.replies}">
 	<li><a href="loaduser.servlet?id=${reply.sender.ID}">${reply.sender.name} ${reply.sender.surname}</a>
-	<c:if test="${requestScope.canReply==true && requestScope.hasBR==false}">
+	<c:if test="${requestScope.postedByMe==true && requestScope.hasBR==false}">
 		<form action="bestreply.store?replyid=${reply.ID}" method="get"><input type="submit" value="Select as Best Reply"></form>
 	</c:if>
 	

@@ -19,7 +19,7 @@
 	<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
 </div>
 
-<c:import url="compartments/wall.jsp"></c:import>
+<c:import url="/WEB-INF/views/compartments/wall.jsp"></c:import>
 
 </body>
 </html>

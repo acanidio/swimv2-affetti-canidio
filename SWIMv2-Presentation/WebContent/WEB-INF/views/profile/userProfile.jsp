@@ -12,36 +12,17 @@
 <body>
 <swim:topMenu type="${sessionScope.type}" />
 
-
-<c:set var="isfriendof" value="false"/>
-<c:forEach var="friendship" items="${requestScope.user.sendedRequests}">
-	<c:if test="${friendship.receiver.ID == requestScope.user.ID}">
-		<c:set var="isfriendof" value="true"></c:set>
-	</c:if>
-</c:forEach>
-
-<c:if test="${isfriendof=='false'}">
-<c:set var="received" value="false"/>
-<c:forEach var="friendship" items="${requestScope.user.receivedRequests}">
-	<c:if test="${friendship.sender.ID == requestScope.user.ID}">
-		<c:set var="received" value="true"></c:set>
-		<c:set var="receivedID" value="${friendship.ID}"></c:set>
-	</c:if>
-</c:forEach>
-</c:if>
-
-
 <c:choose>
 	<c:when  test="${requestScope.user.ID==sessionScope.person.ID}">
 		<a href="loadabilities.servlet?path=modifyprofile.view">Modify profile</a>
 	</c:when>
 	
 	<c:otherwise>
-		<c:if test="${sessionScope.type=='USER' && isfriendof=='false' && received=='false'}">
+		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==false}">
 			<a href="frship.store?id=${requestScope.user.ID}">Add to friends</a>
 		</c:if>
-		<c:if test="${sessionScope.type=='USER' && isfriendof=='false' && received=='true'}">
-			<a href="adfrship.store?id=${receivedID}">Accept the friendship request</a>
+		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==true && requestScope.accepted==false}">
+			<a href="adfrship.store?id=${frid}">Accept the friendship request</a>
 		</c:if>
 	</c:otherwise>
 </c:choose>
