@@ -237,13 +237,13 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> searchUsersByName(String name) {
+	public List<User> searchUsersByName(String pattern) {
 		List<User> users = null;
 		try {
 			Query query = manager.createQuery("SELECT u " +
 											"FROM User u " +
-											"WHERE u.name = :name");
-			users = query.setParameter("name", name)
+											"WHERE CONCAT(u.name,u.surname) LIKE :pattern");
+			users = query.setParameter("pattern", "%" + pattern + "%")
 						.getResultList();
 		} catch (Exception e) {
 			return null;
