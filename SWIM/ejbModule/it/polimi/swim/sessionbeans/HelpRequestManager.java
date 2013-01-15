@@ -144,7 +144,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		try {
 			Query query = manager.createQuery("SELECT h " +
 											"FROM HelpRequest h" + 
-											"ORDERBY h.ID descendent");
+											"ORDER BY h.ID DESC");
 			helprequests = query.getResultList();
 		} catch (Exception e) {
 			return null;
