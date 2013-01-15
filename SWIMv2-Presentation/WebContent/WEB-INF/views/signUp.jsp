@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Please enter your new profile information</h1><br><br><br>
+<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
 
 <swim:profileForm action="user.store"></swim:profileForm>
 

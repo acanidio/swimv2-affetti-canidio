@@ -1,8 +1,11 @@
 package it.polimi.swim.servlets;
 
 import it.polimi.swim.entities.Ability;
+import it.polimi.swim.entities.Friendship;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.entities.User;
+import it.polimi.swim.sessionbeans.FriendshipManager;
+import it.polimi.swim.sessionbeans.FriendshipManagerRemote;
 import it.polimi.swim.sessionbeans.UserDataManager;
 import it.polimi.swim.sessionbeans.UserDataManagerRemote;
 import it.polimi.swim.utils.Configuration;
@@ -37,14 +40,14 @@ public class LoadUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		InitialContext ctx = Configuration.getInitialContext();
+		int otherUserID = Integer.parseInt(request.getParameter("id"));
 
 		UserDataManagerRemote usermgr;
 		try {
 			usermgr = (UserDataManagerRemote) ctx
 					.lookup(UserDataManager.REMOTE);
 
-			Person user = usermgr.loadProfile(Integer.parseInt(request
-					.getParameter("id")));
+			Person user = usermgr.loadProfile(otherUserID);
 
 			if (user instanceof User) {
 				Hashtable<Ability, Float> abilities = usermgr
@@ -53,7 +56,29 @@ public class LoadUserServlet extends HttpServlet {
 			}
 
 			request.setAttribute("user", user);
+
+			Person loggedUser = (Person) request.getSession().getAttribute(
+					"person");
+
+			FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx
+					.lookup(FriendshipManager.REMOTE);
+
+			boolean friendOf = frmgr.haveFriendshipRequestBetween(
+					loggedUser.getID(), otherUserID);
+			Friendship fr = frmgr.getFriendshipRequest(loggedUser.getID(),
+					otherUserID);
+			boolean accepted = false;
+			Integer frID = null;
 			
+			if (fr != null) {
+				accepted = fr.isAccepted();
+				frID = fr.getID();
+			}
+
+			request.setAttribute("reqexixts", friendOf);
+			request.setAttribute("accepted", accepted);
+			request.setAttribute("frid", frID);
+
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
