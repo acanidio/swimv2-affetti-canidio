@@ -12,7 +12,7 @@
 
 <swim:topMenu type="${sessionScope.type}" />
 
-<swim:pendFR pendingFR="${pfriendships}"></swim:pendFR>
+<swim:pendFR pendingFR="${requestScope.pfriendships}"></swim:pendFR>
 
 </body>
 </html>

@@ -18,10 +18,10 @@
 	</c:when>
 	
 	<c:otherwise>
-		<c:if test="${sessionScope.type=='USER' && not requestScope.reqexists}">
+		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==false}">
 			<a href="frship.store?id=${requestScope.user.ID}">Add to friends</a>
 		</c:if>
-		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists && not requestScope.accepted}">
+		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==true && requestScope.accepted==false}">
 			<a href="adfrship.store?id=${requestScope.frid}">Accept the friendship request</a>
 		</c:if>
 	</c:otherwise>

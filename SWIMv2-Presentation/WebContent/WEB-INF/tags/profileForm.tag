@@ -129,11 +129,12 @@ function checkProfileForm(){
 
 <li>Avatar: <input type="file" name="avatar"></li>
 
-<c:if test="${action=='user.store'}">
+
 <li>Password*: <input type="password" name="password"></li>
 
 <li>Confirm Password*: <input type="password" name="cpassword"></li>
 
+<c:if test="${action=='user.store'}">
 <li>E-mail address*: <input type="text" name="email"></li>
 </c:if>
 
