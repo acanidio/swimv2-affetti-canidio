@@ -27,9 +27,8 @@ public class HelpRequestStorer implements DataStorer {
 		String description = request.getParameter("description");
 		int abilityID = Integer.parseInt(request.getParameter("ability0"));
 		
-		//TODO work on this
-		Date date = null;
-		Time hour = null;
+		Date date = Date.valueOf(request.getParameter("date"));
+		Time hour =Time.valueOf(request.getParameter("hour"));
 		
 		int IDUser = user.getID();
 

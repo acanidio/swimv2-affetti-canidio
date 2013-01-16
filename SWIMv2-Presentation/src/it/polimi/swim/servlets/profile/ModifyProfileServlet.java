@@ -51,13 +51,15 @@ public class ModifyProfileServlet extends HttpServlet {
 		try {
 			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
 			
-			//TODO review
 			String password = request.getParameter("password");
+			
+			if(password == null || password.isEmpty()){
+				password = user.getPassword();
+			}
 			String name = request.getParameter("name");
 			String surname = request.getParameter("surname");
 			String avatar = request.getParameter("avatar");
 			String city = request.getParameter("city");
-			char gender = request.getParameter("gender").charAt(0);
 			String bday = request.getParameter("birthday");
 			Date birthday = null;
 
@@ -67,7 +69,7 @@ public class ModifyProfileServlet extends HttpServlet {
 			
 			String phonenumber = request.getParameter("phonenumber");
 			
-			usermgr.modifyUser(user.getID(), password, name, surname, avatar, city, gender, birthday, phonenumber);
+			usermgr.modifyUser(user.getID(), password, name, surname, avatar, city, birthday, phonenumber);
 			
 			Person updatedUser = usermgr.loadProfile(user.getID());
 			request.getSession().setAttribute("person", updatedUser);

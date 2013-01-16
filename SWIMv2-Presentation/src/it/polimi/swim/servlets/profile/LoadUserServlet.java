@@ -53,7 +53,15 @@ public class LoadUserServlet extends HttpServlet {
 				Hashtable<Ability, Float> abilities = usermgr
 						.loadUserAbilities(user.getID());
 				request.setAttribute("userAbilities", abilities);
+				
+				//TODO delete
+				for(Ability a : abilities.keySet()){
+					System.out.println(a.getName()+" - "+abilities.get(a));
+				}
 			}
+			
+			
+			
 
 			request.setAttribute("user", user);
 
@@ -78,6 +86,11 @@ public class LoadUserServlet extends HttpServlet {
 			request.setAttribute("reqexixts", Boolean.valueOf(reqExists));
 			request.setAttribute("accepted", Boolean.valueOf(accepted));
 			request.setAttribute("frid", frID);
+			
+			//TODO delete
+			System.out.println("reqexists: "+reqExists);
+			System.out.println("accepted: "+accepted);
+			System.out.println("frid: "+frID);
 
 		} catch (NamingException e) {
 			e.printStackTrace();

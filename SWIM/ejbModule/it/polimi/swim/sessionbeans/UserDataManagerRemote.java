@@ -20,7 +20,7 @@ public interface UserDataManagerRemote {
 	
 	public Integer registerNewUser(String email, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
 	
-	public boolean modifyUser(int IDUser, String password, String name, String surname, String avatar, String city, char gender, Date birthday, String phonenumber);
+	public boolean modifyUser(int IDUser, String password, String name, String surname, String avatar, String city, Date birthday, String phonenumber);
 	
 	public boolean addAbilityToUser(int IDUser, int IDAbility);
 	
