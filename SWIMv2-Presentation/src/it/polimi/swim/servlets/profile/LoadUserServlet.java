@@ -54,10 +54,12 @@ public class LoadUserServlet extends HttpServlet {
 						.loadUserAbilities(user.getID());
 				request.setAttribute("userAbilities", abilities);
 				
+				/*
 				//TODO delete
 				for(Ability a : abilities.keySet()){
 					System.out.println(a.getName()+" - "+abilities.get(a));
 				}
+				*/
 			}
 			
 			

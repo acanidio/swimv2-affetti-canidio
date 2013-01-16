@@ -38,6 +38,7 @@ public class FriendshipManager implements FriendshipManagerRemote {
 			newFriendship = new Friendship();
 			newFriendship.setSender(manager.find(User.class, IDsender));
 			newFriendship.setReceiver(manager.find(User.class, IDreceiver));
+			newFriendship.setAccepted(false);
 			manager.persist(newFriendship);
 		} catch (Exception e) {
 			return null;
@@ -91,7 +92,6 @@ public class FriendshipManager implements FriendshipManagerRemote {
 		Friendship request = null;
 		try {
 			request = manager.find(Friendship.class, IDFriendshipRequest);
-			request.setAccepted(true);
 			manager.remove(request);
 		} catch (Exception e) {
 			return false;
