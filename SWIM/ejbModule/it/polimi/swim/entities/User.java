@@ -36,7 +36,7 @@ public class User extends Person implements Serializable {
 	
 	private String phonenumber;
 	
-	@ManyToMany(targetEntity = Ability.class)
+	@ManyToMany(targetEntity = Ability.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "PersonAbility",
 			joinColumns = @JoinColumn(name = "IDPerson", referencedColumnName = "ID"),
 			inverseJoinColumns = @JoinColumn(name = "IDAbility", referencedColumnName = "ID")

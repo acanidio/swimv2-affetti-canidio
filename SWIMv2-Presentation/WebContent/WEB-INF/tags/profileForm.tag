@@ -147,7 +147,7 @@ function checkProfileForm(){
 <c:if test="${action=='storemodif.servlet'}">
 <li>
 <ul>
-	<c:forEach var="ability" items="${sessionScope.user.abilities}">
+	<c:forEach var="ability" items="${sessionScope.person.abilities}">
 		<li>${ability.name}</li>
 	</c:forEach>
 </ul>
