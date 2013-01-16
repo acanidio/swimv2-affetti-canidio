@@ -30,8 +30,8 @@ public class Ability implements Serializable {
 	@OneToMany(targetEntity = Feedback.class, mappedBy = "ability")
 	private List<Feedback> feedbacks;
 	
-	@ManyToMany(targetEntity = Ability.class, mappedBy = "abilities")
-	private List<Ability> users;
+	@ManyToMany(targetEntity = User.class, mappedBy = "abilities")
+	private List<User> users;
 
 	public Ability() {
 		super();
@@ -74,12 +74,12 @@ public class Ability implements Serializable {
 		this.feedbacks = feedbacks;
 	}
 	
-	public List<Ability> getAbilities() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setAbilities(List<Ability> abilities) {
-		this.users = abilities;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	@Override
