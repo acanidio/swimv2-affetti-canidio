@@ -28,7 +28,7 @@ public class HelpRequestStorer implements DataStorer {
 		int abilityID = Integer.parseInt(request.getParameter("ability0"));
 		
 		Date date = Date.valueOf(request.getParameter("date"));
-		Time hour =Time.valueOf(request.getParameter("hour"));
+		Time hour =Time.valueOf(request.getParameter("hour")+":00");
 		
 		int IDUser = user.getID();
 

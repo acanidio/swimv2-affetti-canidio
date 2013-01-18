@@ -46,11 +46,6 @@ public class PFriendshipServlet extends HttpServlet {
 
 			List<Friendship> pfriendships = usermgr.loadPendingFriendships(user.getID());
 			
-			for(Friendship fr : pfriendships){
-				System.out.println("Sender: "+fr.getSender());
-				System.out.println("Receiver: "+fr.getReceiver());
-				System.out.println("ID: "+fr.getID());
-			}
 			request.setAttribute("pfriendships", pfriendships);
 		} catch (NamingException e) {
 			e.printStackTrace();

@@ -28,7 +28,7 @@ import org.jboss.ejb3.annotation.RemoteBinding;
 public class UserDataManager implements UserDataManagerRemote {
 
 	public static final String REMOTE = "UserDataManager/remote";
-	
+
 	@PersistenceContext(unitName = "SWIMPU")
 	private EntityManager manager;
 
@@ -37,10 +37,10 @@ public class UserDataManager implements UserDataManagerRemote {
 	public boolean emailAlreadyExists(String email) {
 		Person person = null;
 		try {
-			Query query = manager.createQuery("SELECT p " +
-											"FROM Person p " +
-											"WHERE p.email = :email");
-			person = (Person) query.setParameter("email", email).getSingleResult();
+			Query query = manager.createQuery("SELECT p " + "FROM Person p "
+					+ "WHERE p.email = :email");
+			person = (Person) query.setParameter("email", email)
+					.getSingleResult();
 		} catch (NoResultException e) {
 			return false;
 		}
@@ -57,7 +57,7 @@ public class UserDataManager implements UserDataManagerRemote {
 			user.setPassword(password);
 			user.setName(name);
 			user.setSurname(surname);
-			if(avatar == null) {
+			if (avatar == null) {
 				user.setAvatar("default.gif");
 			} else {
 				user.setAvatar(avatar);
@@ -83,17 +83,17 @@ public class UserDataManager implements UserDataManagerRemote {
 		}
 		return user;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Hashtable<Ability, Float> loadUserAbilities(int IDUser) {
 		Hashtable<Ability, Float> possessedAbilities = new Hashtable<Ability, Float>();
 		try {
-			Query query = manager.createQuery("SELECT a " +
-											"FROM Ability a, IN (a.users) u " +
-											"WHERE u.ID = :ID");
-			List<Ability> abilities = (List<Ability>) query.setParameter("ID", IDUser).getResultList();
-			for(Ability a: abilities) {
+			Query query = manager.createQuery("SELECT a "
+					+ "FROM Ability a, IN (a.users) u " + "WHERE u.ID = :ID");
+			List<Ability> abilities = (List<Ability>) query.setParameter("ID",
+					IDUser).getResultList();
+			for (Ability a : abilities) {
 				Float average = averageMark(IDUser, a.getID());
 				possessedAbilities.put(a, average);
 			}
@@ -102,16 +102,15 @@ public class UserDataManager implements UserDataManagerRemote {
 		}
 		return possessedAbilities;
 	}
-	
+
 	private Float averageMark(int IDUser, int IDAbility) {
 		Float average = null;
 		try {
-			Query query = manager.createQuery("SELECT AVG(f.mark) " +
-											"FROM User u, IN (u.abilities) a, IN (a.feedbacks) f " +
-											"WHERE u.ID = :IDUser AND a.ID = :IDAbility");
+			Query query = manager.createQuery("SELECT AVG(f.mark) "
+					+ "FROM User u, IN (u.abilities) a, IN (a.feedbacks) f "
+					+ "WHERE u.ID = :IDUser AND a.ID = :IDAbility");
 			average = (Float) query.setParameter("IDUser", IDUser)
-							.setParameter("IDAbility", IDAbility)
-							.getSingleResult();
+					.setParameter("IDAbility", IDAbility).getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}
@@ -123,11 +122,10 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<HelpRequest> loadUserHelpRequests(int IDUser) {
 		List<HelpRequest> helprequests = null;
 		try {
-			Query query = manager.createQuery("SELECT h " +
-											"FROM User u, IN (u.helprequests) h " +
-											"WHERE u.ID = :IDUser");
-			helprequests = query.setParameter("IDUser", IDUser)
-								.getResultList();
+			Query query = manager.createQuery("SELECT h "
+					+ "FROM User u, IN (u.helprequests) h "
+					+ "WHERE u.ID = :IDUser");
+			helprequests = query.setParameter("IDUser", IDUser).getResultList();
 		} catch (Exception e) {
 			return null;
 		}
@@ -139,10 +137,12 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<Conversation> loadConversations(int IDUser) {
 		List<Conversation> conversations = null;
 		try {
-			Query query = manager.createQuery("SELECT c " +
-											"FROM Conversation c JOIN c.sender u1 JOIN c.receiver u2 " +
-											"WHERE u1.ID = :IDUser OR u2.ID = :IDUser");
-			conversations = (List<Conversation>) query.setParameter("IDUser", IDUser);
+			Query query = manager
+					.createQuery("SELECT c "
+							+ "FROM Conversation c JOIN c.sender u1 JOIN c.receiver u2 "
+							+ "WHERE u1.ID = :IDUser OR u2.ID = :IDUser");
+			conversations = (List<Conversation>) query.setParameter("IDUser",
+					IDUser);
 		} catch (Exception e) {
 			return null;
 		}
@@ -154,13 +154,13 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<Friendship> loadPendingFriendships(int IDUser) {
 		List<Friendship> pendingFriendships = null;
 		try {
-			Query query = manager.createQuery("SELECT f " +
-											"FROM Friendship f JOIN f.receiver u " +
-											"WHERE u.ID = :IDUser AND f.pending = true");
+			Query query = manager.createQuery("FROM Friendship f "
+					+ "WHERE f.receiver.ID = :IDUser AND f.accepted = false");
 			pendingFriendships = query.setParameter("IDUser", IDUser)
-										.getResultList();
+					.getResultList();
+
 		} catch (Exception e) {
-			return null;
+			e.printStackTrace();
 		}
 		return pendingFriendships;
 	}
@@ -170,11 +170,10 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<Message> loadNewReceivedMessages(int IDUser) {
 		List<Message> newMessages = null;
 		try {
-			Query query = manager.createQuery("SELECT m " +
-											"FROM Message m JOIN f.receiver u " +
-											"WHERE u.ID = :IDUser AND m.unreaded = true");
-			newMessages = query.setParameter("IDUser", IDUser)
-								.getResultList();
+			Query query = manager.createQuery("SELECT m "
+					+ "FROM Message m JOIN f.receiver u "
+					+ "WHERE u.ID = :IDUser AND m.unreaded = true");
+			newMessages = query.setParameter("IDUser", IDUser).getResultList();
 		} catch (Exception e) {
 			return null;
 		}
@@ -183,30 +182,30 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@Override
 	public boolean modifyUser(int IDUser, String password, String name,
-			String surname, String avatar, String city,
-			Date birthday, String phonenumber) {
+			String surname, String avatar, String city, Date birthday,
+			String phonenumber) {
 		boolean operationResult = false;
 		try {
 			User modifiedUser = manager.find(User.class, IDUser);
-			if(!modifiedUser.getPassword().equals(password)) {
+			if (!modifiedUser.getPassword().equals(password)) {
 				modifiedUser.setPassword(password);
 			}
-			if(!modifiedUser.getName().equals(name)) {
+			if (!modifiedUser.getName().equals(name)) {
 				modifiedUser.setName(name);
 			}
-			if(!modifiedUser.getSurname().equals(surname)) {
+			if (!modifiedUser.getSurname().equals(surname)) {
 				modifiedUser.setSurname(surname);
 			}
-			if(!modifiedUser.getAvatar().equals(avatar)) {
+			if (!modifiedUser.getAvatar().equals(avatar)) {
 				modifiedUser.setAvatar(avatar);
 			}
-			if(!modifiedUser.getCity().equals(city)) {
+			if (!modifiedUser.getCity().equals(city)) {
 				modifiedUser.setCity(city);
 			}
-			if(!modifiedUser.getBirthday().equals(birthday)) {
+			if (!modifiedUser.getBirthday().equals(birthday)) {
 				modifiedUser.setBirthday(birthday);
 			}
-			if(!modifiedUser.getPhonenumber().equals(phonenumber)) {
+			if (!modifiedUser.getPhonenumber().equals(phonenumber)) {
 				modifiedUser.setPhonenumber(phonenumber);
 			}
 			manager.merge(modifiedUser);
@@ -221,7 +220,7 @@ public class UserDataManager implements UserDataManagerRemote {
 		try {
 			User user = manager.find(User.class, IDUser);
 			Ability ability = manager.find(Ability.class, IDAbility);
-			if(user.getAbilities().contains(ability)) {
+			if (user.getAbilities().contains(ability)) {
 				return false;
 			}
 			user.getAbilities().add(ability);
@@ -238,12 +237,11 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<User> searchUsersByName(String pattern) {
 		List<User> users = null;
 		try {
-			Query query = manager.createQuery("SELECT u " +
-											"FROM User u " +
-											"WHERE CONCAT(u.name,u.surname) LIKE :pattern");
+			Query query = manager.createQuery("SELECT u " + "FROM User u "
+					+ "WHERE CONCAT(u.name,u.surname) LIKE :pattern");
 			pattern = pattern.replace(' ', '%');
 			users = query.setParameter("pattern", "%" + pattern + "%")
-						.getResultList();
+					.getResultList();
 		} catch (Exception e) {
 			return null;
 		}
@@ -254,11 +252,9 @@ public class UserDataManager implements UserDataManagerRemote {
 	public Integer searchUserByEmail(String email) {
 		User user = null;
 		try {
-			Query query = manager.createQuery("SELECT u " +
-											"FROM User u " +
-											"WHERE u.email = :email");
-			user = (User) query.setParameter("email", email)
-						.getSingleResult();
+			Query query = manager.createQuery("SELECT u " + "FROM User u "
+					+ "WHERE u.email = :email");
+			user = (User) query.setParameter("email", email).getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}

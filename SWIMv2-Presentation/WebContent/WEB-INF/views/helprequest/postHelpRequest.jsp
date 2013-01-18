@@ -18,8 +18,8 @@
 	<li>City: <input type="text" name="city"></li>
 	<li>Description: <input type="text" name="description"></li>
 	<li>Ability: <swim:abilitiesSelect abilities="${abilities}"></swim:abilitiesSelect></li>
-	<li>Date:	<input type="text" name="date"></li>
-	<li>Hour:	<input type="text" name="hour"></li>
+	<li>Date:	<input type="date" name="date"></li>
+	<li>Hour:	<input type="time" name="hour"></li>
 	<li><input type="submit" value="Post"></li>
 </ul>
 </form>
