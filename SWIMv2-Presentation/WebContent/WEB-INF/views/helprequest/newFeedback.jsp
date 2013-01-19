@@ -12,7 +12,8 @@
 <swim:topMenu type="${sessionScope.type}" />
 
 
-<form action="feedback.store?replyid=${replyid}" method="post">
+<form action="feedback.store" method="post">
+<input type="hidden" value="${replyid}" name="replyid">
 <ul>
 <li>
 <fieldset>
