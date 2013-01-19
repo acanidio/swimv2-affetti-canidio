@@ -24,14 +24,14 @@ public class AbilityManager implements AbilityManagerRemote {
     EntityManager manager;
 
 	@Override
-	public int createNewAcceptedAbility(String name) {
+	public Integer createNewAcceptedAbility(String name) {
 		Ability ability = new Ability();
 		ability.setName(name);
 		ability.setPending(false);
 		try {
 			manager.persist(ability);
 		} catch (Exception e) {
-			return 0;
+			return null;
 		}
 		return ability.getID();
 	}
@@ -55,7 +55,8 @@ public class AbilityManager implements AbilityManagerRemote {
 		List<Ability> abilities;
 		try {
 			Query query = manager.createQuery("SELECT a " +
-											"FROM Ability a");
+											"FROM Ability a " +
+											"WHERE a.pending = false");
 			abilities = (List<Ability>) query.getResultList();
 		} catch (Exception e) {
 			return null;
