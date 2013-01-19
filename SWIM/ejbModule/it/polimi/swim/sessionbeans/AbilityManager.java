@@ -99,6 +99,7 @@ public class AbilityManager implements AbilityManagerRemote {
 
 	@Override
 	public boolean removeAbility(int ID) {
+		// TODO Check removing Abilities
 		try {
 			Query query = manager.createQuery("SELECT a " +
 											"FROM Ability a " +
