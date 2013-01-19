@@ -1,10 +1,7 @@
 package it.polimi.swim.servlets.profile;
 
-import it.polimi.swim.entities.Ability;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.entities.User;
-import it.polimi.swim.sessionbeans.AbilityManager;
-import it.polimi.swim.sessionbeans.AbilityManagerRemote;
 import it.polimi.swim.sessionbeans.UserDataManager;
 import it.polimi.swim.sessionbeans.UserDataManagerRemote;
 import it.polimi.swim.utils.Configuration;

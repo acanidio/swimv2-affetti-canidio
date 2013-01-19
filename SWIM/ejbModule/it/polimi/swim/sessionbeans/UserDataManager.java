@@ -9,6 +9,7 @@ import it.polimi.swim.entities.Person;
 import it.polimi.swim.entities.User;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -261,9 +262,26 @@ public class UserDataManager implements UserDataManagerRemote {
 		return user.getID();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> loadFriends(int IDUser) {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> friends = new ArrayList<User>();
+
+		Query query = manager
+				.createQuery("FROM Friendship f WHERE (f.receiver.ID = :ID OR f.sender.ID = :ID) AND f.accepted = true");
+		List<Friendship> frships = (List<Friendship>) query.setParameter("ID",
+				IDUser).getResultList();
+
+		for (Friendship f : frships) {
+			int sender = f.getSender().getID();
+			int receiver = f.getReceiver().getID();
+
+			if (IDUser == sender) {
+				friends.add(manager.find(User.class, receiver));
+			} else if (IDUser == receiver) {
+				friends.add(manager.find(User.class, sender));
+			}
+		}
+		return friends;
 	}
 }
