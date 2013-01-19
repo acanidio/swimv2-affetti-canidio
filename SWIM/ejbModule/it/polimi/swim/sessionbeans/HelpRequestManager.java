@@ -76,6 +76,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			if(hasBestReply(IDHelpRequest)){
 				return false;
 			}
+			// TODO I cannot reply if I have already replied
 		} catch (Exception e) {
 			return false;
 		}
@@ -161,7 +162,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		HelpRequest hr = null;
 		try {
 			hr = manager.find(HelpRequest.class, IDHr);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			return null;
 		}
 		return hr;
