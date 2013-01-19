@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript">
-function mandatoryFields(){
+function mandatory_HR(){
 	var title = document.forms["newhr"]["title"].value;
 	var city = document.forms["newhr"]["city"].value;
 	var date = document.forms["newhr"]["date"].value;
@@ -33,7 +33,7 @@ function mandatoryFields(){
 <swim:topMenu type="${sessionScope.type}" />
 
 
-<form name="newhr" action="hr.store" method="post" onsubmit="return mandatoryFields();">
+<form name="newhr" action="hr.store" method="post" onsubmit="return mandatory_HR();">
 <ul>
 	<li>Title: <input type="text" name="title"></li>
 	<li>City: <input type="text" name="city"></li>
