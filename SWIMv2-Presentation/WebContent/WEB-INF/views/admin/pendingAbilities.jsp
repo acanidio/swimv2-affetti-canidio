@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+
 <swim:pendAbilities pendAbilities="${pendAbilities}"></swim:pendAbilities>
 
 </body>

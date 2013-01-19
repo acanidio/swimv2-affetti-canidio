@@ -53,11 +53,8 @@ public class LoadUserServlet extends HttpServlet {
 				Hashtable<Ability, Float> abilities = usermgr
 						.loadUserAbilities(user.getID());
 				request.setAttribute("userAbilities", abilities);
-				
+
 			}
-			
-			
-			
 
 			request.setAttribute("user", user);
 
@@ -74,11 +71,11 @@ public class LoadUserServlet extends HttpServlet {
 			boolean accepted = false;
 			boolean receiver = false;
 			Integer frID = null;
-			
+
 			if (fr != null) {
 				accepted = fr.isAccepted();
 				frID = fr.getID();
-				receiver = frmgr.isReceiver(user.getID(), frID);
+				receiver = frmgr.isReceiver(loggedUser.getID(), frID);
 			}
 
 			request.setAttribute("reqexists", Boolean.valueOf(reqExists));
