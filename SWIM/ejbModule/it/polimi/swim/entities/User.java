@@ -174,7 +174,7 @@ public class User extends Person implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof Administrator)) {
+		if(!(obj instanceof User)) {
 			return false;
 		}
 		User user = (User) obj;

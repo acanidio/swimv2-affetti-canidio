@@ -176,6 +176,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 				return true;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return false;
@@ -191,5 +192,20 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			return null;
 		}
 		return hr;
+	}
+
+	@Override
+	public Reply getBestReply(int IDHelpRequest) {
+		try {
+			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
+			for(Reply r : hr.getReplies()) {
+				if(r.isBest()) {
+					return r;
+				}
+			}
+		} catch (Exception e) {
+			return null;
+		}
+		return null;
 	}
 }

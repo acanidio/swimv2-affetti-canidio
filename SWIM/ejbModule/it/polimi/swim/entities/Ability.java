@@ -30,7 +30,7 @@ public class Ability implements Serializable {
 	@OneToMany(targetEntity = Feedback.class, mappedBy = "ability")
 	private List<Feedback> feedbacks;
 	
-	@ManyToMany(targetEntity = User.class, mappedBy = "abilities")
+	@ManyToMany(targetEntity = User.class, mappedBy = "abilities", fetch = FetchType.EAGER)
 	private List<User> users;
 
 	public Ability() {
