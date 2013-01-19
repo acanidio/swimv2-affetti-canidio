@@ -23,7 +23,7 @@ public class Reply implements Serializable {
 	@ManyToOne(targetEntity = HelpRequest.class, optional = false)
 	private HelpRequest request;
 
-	@OneToOne(targetEntity = Feedback.class, mappedBy = "reply", optional = false)
+	@OneToOne(targetEntity = Feedback.class, mappedBy = "reply", optional = true)
 	private Feedback feedback;
 	
 	private boolean best;
