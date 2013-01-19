@@ -91,7 +91,8 @@ public class UserDataManager implements UserDataManagerRemote {
 		Hashtable<Ability, Float> possessedAbilities = new Hashtable<Ability, Float>();
 		try {
 			Query query = manager.createQuery("SELECT a "
-					+ "FROM Ability a, IN (a.users) u " + "WHERE u.ID = :ID");
+					+ "FROM Ability a, IN (a.users) u "
+					+ "WHERE u.ID = :ID");
 			List<Ability> abilities = (List<Ability>) query.setParameter("ID",
 					IDUser).getResultList();
 			for (Ability a : abilities) {
@@ -99,6 +100,7 @@ public class UserDataManager implements UserDataManagerRemote {
 				possessedAbilities.put(a, average);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return possessedAbilities;
@@ -113,7 +115,11 @@ public class UserDataManager implements UserDataManagerRemote {
 			average = (Float) query.setParameter("IDUser", IDUser)
 					.setParameter("IDAbility", IDAbility).getSingleResult();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
+		}
+		if(average == null) {
+			average = (float) 0;
 		}
 		return average;
 	}
@@ -238,7 +244,8 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<User> searchUsersByName(String pattern) {
 		List<User> users = null;
 		try {
-			Query query = manager.createQuery("SELECT u " + "FROM User u "
+			Query query = manager.createQuery("SELECT u "
+					+ "FROM User u "
 					+ "WHERE CONCAT(u.name,u.surname) LIKE :pattern");
 			pattern = pattern.replace(' ', '%');
 			users = query.setParameter("pattern", "%" + pattern + "%")
@@ -253,7 +260,8 @@ public class UserDataManager implements UserDataManagerRemote {
 	public Integer searchUserByEmail(String email) {
 		User user = null;
 		try {
-			Query query = manager.createQuery("SELECT u " + "FROM User u "
+			Query query = manager.createQuery("SELECT u "
+					+ "FROM User u "
 					+ "WHERE u.email = :email");
 			user = (User) query.setParameter("email", email).getSingleResult();
 		} catch (Exception e) {
