@@ -267,21 +267,26 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<User> loadFriends(int IDUser) {
 		List<User> friends = new ArrayList<User>();
 
-		Query query = manager
-				.createQuery("FROM Friendship f WHERE (f.receiver.ID = :ID OR f.sender.ID = :ID) AND f.accepted = true");
-		List<Friendship> frships = (List<Friendship>) query.setParameter("ID",
-				IDUser).getResultList();
+		try {
+			Query query = manager
+					.createQuery("FROM Friendship f WHERE (f.receiver.ID = :ID OR f.sender.ID = :ID) AND f.accepted = true");
+			List<Friendship> frships = (List<Friendship>) query.setParameter(
+					"ID", IDUser).getResultList();
 
-		for (Friendship f : frships) {
-			int sender = f.getSender().getID();
-			int receiver = f.getReceiver().getID();
+			for (Friendship f : frships) {
+				int sender = f.getSender().getID();
+				int receiver = f.getReceiver().getID();
 
-			if (IDUser == sender) {
-				friends.add(manager.find(User.class, receiver));
-			} else if (IDUser == receiver) {
-				friends.add(manager.find(User.class, sender));
+				if (IDUser == sender) {
+					friends.add(manager.find(User.class, receiver));
+				} else if (IDUser == receiver) {
+					friends.add(manager.find(User.class, sender));
+				}
 			}
+		} catch (NoResultException e) {
+			return friends;
 		}
+
 		return friends;
 	}
 }
