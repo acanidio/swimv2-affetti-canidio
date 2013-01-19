@@ -110,6 +110,7 @@ public class AbilityManager implements AbilityManagerRemote {
 			manager.merge(ability);
 			manager.remove(ability);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -125,6 +126,7 @@ public class AbilityManager implements AbilityManagerRemote {
 			ability.setPending(false);
 			manager.merge(ability);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
