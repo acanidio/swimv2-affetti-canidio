@@ -75,11 +75,6 @@ public class MainServlet extends HttpServlet {
 			forwardPath = Configuration.getServlet(key);
 		}
 
-		// TODO remove these lines
-		System.out.println(path);
-		System.out.println(key);
-		System.out.println(forwardPath);
-
 		if (forwardPath == null) {
 			key = "home";
 			forwardPath = Configuration.getServlet(key);
