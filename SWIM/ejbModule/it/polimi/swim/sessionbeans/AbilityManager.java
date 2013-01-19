@@ -1,6 +1,7 @@
 package it.polimi.swim.sessionbeans;
 
 import it.polimi.swim.entities.Ability;
+import it.polimi.swim.entities.User;
 
 import java.util.List;
 
@@ -103,6 +104,10 @@ public class AbilityManager implements AbilityManagerRemote {
 											"FROM Ability a " +
 											"WHERE a.ID = :ID AND a.pending = true");
 			Ability ability = (Ability) query.setParameter("ID", ID).getSingleResult();
+			for(User user: ability.getUsers()) {
+				ability.getUsers().remove(user);
+			}
+			manager.merge(ability);
 			manager.remove(ability);
 		} catch (Exception e) {
 			return false;

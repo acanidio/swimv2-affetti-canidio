@@ -1,6 +1,7 @@
 package it.polimi.swim.sessionbeans;
 
 import it.polimi.swim.entities.HelpRequest;
+import it.polimi.swim.entities.Reply;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -32,4 +33,6 @@ public interface HelpRequestManagerRemote {
 	public boolean postedByMe(int IDUser, int IDHr);
 	
 	public HelpRequest getHelpRequestFromReply(int IDReply);
+	
+	public Reply getBestReply(int IDHelpRequest);
 }
