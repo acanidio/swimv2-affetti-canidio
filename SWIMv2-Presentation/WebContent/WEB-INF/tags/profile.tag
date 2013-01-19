@@ -10,8 +10,12 @@
 <li>${user.birthday}</li>
 </ul>
 
+<c:set var="pending" value=""></c:set>
 <ul>
 	<c:forEach var="ability" items="${requestScope.userAbilities}">
-		<li>${ability.key.name}: ${ability.value}</li>
+	<c:if test="${ability.key.pending == true}">
+		<c:set var="pending" value="(?)"></c:set>
+	</c:if>
+		<li>${ability.key.name} ${pending}: ${ability.value}</li>
 	</c:forEach>
 </ul>
