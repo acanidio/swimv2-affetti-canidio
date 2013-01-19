@@ -84,8 +84,6 @@ public class MainServlet extends HttpServlet {
 			forwardPath += splittedPath[i];
 		}
 		
-		System.out.println(forwardPath);
-
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher(forwardPath);
 

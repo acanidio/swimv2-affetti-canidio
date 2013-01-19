@@ -12,14 +12,22 @@
 </ul>
 
 <ul>
+<c:if test="${not empty requestScope.bestreply}">
+<li><a href="loaduser.servlet?id=${requestScope.bestreply.sender.ID}">${requestScope.bestreply.sender.name} ${requestScope.bestreply.sender.surname}</a>
+	<c:if test="${requestScope.hasFeed==false}">
+			<form action="newfeed.view?replyid=${reply.ID}" method="get"><input type="submit" value="Give a Feedback"></form>
+	</c:if>
+</li>
+</c:if>
+
+
+
+
 <c:forEach var="reply" items="${helpreq.replies}">
 	<li><a href="loaduser.servlet?id=${reply.sender.ID}">${reply.sender.name} ${reply.sender.surname}</a>
+	
 	<c:if test="${requestScope.postedByMe==true && requestScope.hasBR==false}">
 		<form action="bestreply.store?replyid=${reply.ID}" method="get"><input type="submit" value="Select as Best Reply"></form>
-	</c:if>
-	
-	<c:if test="${requestScope.hasBR==true && requestScope.postedByMe==true && reply.best==true && requestScope.hasFeed==false}">
-		<form action="newfeed.view?replyid=${reply.ID}" method="get"><input type="submit" value="Give a Feedback"></form>
 	</c:if>
 	</li>
 </c:forEach>
