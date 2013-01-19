@@ -6,7 +6,7 @@
 	<li>
 	<p><a href="loaduser.servlet?id=${fr.sender.ID}">${fr.sender.name} ${fr.sender.surname}</a></p>
 	
-	<form method="post" action="adfrship.store?">
+	<form method="post" action="adfrship.store">
 	<input type="hidden" name="id" value="${fr.ID}">
 	<input type="submit" name="ans" value="Accept">
 	<input type="submit" name="ans" value="Decline">

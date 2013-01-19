@@ -20,4 +20,6 @@ public interface FriendshipManagerRemote {
 	public boolean declineFriendshipRequest(int IDFriendshipRequest);
 	
 	public boolean isFriendOf(int IDLoggedUser, int IDOtherUser);
+	
+	public boolean isReceiver(int IDUser, int IDFriendship);
 }

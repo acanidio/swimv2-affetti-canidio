@@ -1,6 +1,7 @@
 package it.polimi.swim.servlets.profile;
 
 import it.polimi.swim.entities.Person;
+import it.polimi.swim.entities.User;
 import it.polimi.swim.sessionbeans.UserDataManager;
 import it.polimi.swim.sessionbeans.UserDataManagerRemote;
 import it.polimi.swim.utils.Configuration;
@@ -43,17 +44,18 @@ public class ModifyProfileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		Person user = (Person) request.getSession().getAttribute("person");
-		
+
 		InitialContext ctx = Configuration.getInitialContext();
-	
+
 		try {
-			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
-			
+			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx
+					.lookup(UserDataManager.REMOTE);
+
 			String password = request.getParameter("password");
-			
-			if(password == null || password.isEmpty()){
+
+			if (password == null || password.isEmpty()) {
 				password = user.getPassword();
 			}
 			String name = request.getParameter("name");
@@ -61,19 +63,33 @@ public class ModifyProfileServlet extends HttpServlet {
 			String avatar = request.getParameter("avatar");
 			String city = request.getParameter("city");
 			String bday = request.getParameter("birthday");
-			Date birthday = null;
+
+			User user1 = (User) user;
+			Date birthday = user1.getBirthday();
 
 			if (bday != null && !bday.isEmpty()) {
 				birthday = Date.valueOf(bday);
 			}
-			
+
 			String phonenumber = request.getParameter("phonenumber");
-			
-			usermgr.modifyUser(user.getID(), password, name, surname, avatar, city, birthday, phonenumber);
-			
+
+			usermgr.modifyUser(user.getID(), password, name, surname, avatar,
+					city, birthday, phonenumber);
+
+			String sabilityID = request.getParameter("ability0");
+
+			for (int i = 1; sabilityID != null && !sabilityID.isEmpty(); i++) {
+				if (!sabilityID.equals("none")) {
+					int abilityID = Integer.parseInt(sabilityID);
+					usermgr.addAbilityToUser(user.getID(), abilityID);
+				}
+
+				sabilityID = request.getParameter("ability" + i);
+			}
+
 			Person updatedUser = usermgr.loadProfile(user.getID());
 			request.getSession().setAttribute("person", updatedUser);
-			
+
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

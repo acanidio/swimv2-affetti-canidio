@@ -38,5 +38,7 @@ public interface UserDataManagerRemote {
 	
 	public List<User> searchUsersByName(String name);
 	
+	public List<User> loadFriends(int IDUser);
+	
 	public Integer searchUserByEmail(String email);
 }

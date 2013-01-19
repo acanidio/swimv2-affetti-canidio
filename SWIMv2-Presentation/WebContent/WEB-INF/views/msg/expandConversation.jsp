@@ -5,6 +5,19 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="swim" %>
 <html>
 <head>
+<script type="text/javascript">
+function mandatory(){
+	var text = document.forms["message"]["text"].value;
+	
+	if(text==null || text==""){
+		alert("Write some text please!");
+		return false
+	}
+	
+	return true;
+}
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Conversation</title>
 </head>
@@ -14,7 +27,7 @@
 
 <swim:conv conv="${conv}"></swim:conv>
 
-<form method="post" action="message.store">
+<form name="message" method="post" action="message.store" onsubmit="return mandatory();">
 <ul>
 	<li><input type="hidden" name="convid" value="${requestScope.id}">
 	<li><input type="text" name="text" height="50" width="200"></li>
