@@ -5,6 +5,19 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="swim"%>
 <html>
 <head>
+<script type="text/javascript">
+function mandatory(){
+	var text = document.forms["message"]["text"].value;
+	
+	if(text==null || text==""){
+		alert("Write some text please!");
+		return false
+	}
+	
+	return true;
+}
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>New message</title>
 </head>
@@ -12,9 +25,9 @@
 
 <swim:topMenu type="${sessionScope.type}" />
 
-<form action="message.store" method="post">
+<form name="message" action="message.store" method="post" onsubmit="return mandatory();">
 <ul>
-	<li>To: <input type="text" name="recipient" value="Friend's e-mail"></li>
+	<li>To: <swim:friendsSelect friends="${friends}"></swim:friendsSelect></li>
 	<li><input type="text" name="text" height="50" width="200"></li>
 	<li><input type="submit" value="Send"></li>
 </ul>

@@ -260,4 +260,10 @@ public class UserDataManager implements UserDataManagerRemote {
 		}
 		return user.getID();
 	}
+
+	@Override
+	public List<User> loadFriends(int IDUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

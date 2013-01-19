@@ -21,11 +21,13 @@
 		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==false}">
 			<a href="frship.store?id=${requestScope.user.ID}">Add to friends</a>
 		</c:if>
-		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==true && requestScope.accepted==false}">
-			<a href="adfrship.store?id=${requestScope.frid}">Accept the friendship request</a>
+		<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==true && requestScope.accepted==false && requestScope.imReceiver == true}">
+			<a href="adfrship.store?id=${requestScope.frid}&ans=accept">Accept the friendship request</a>
 		</c:if>
 	</c:otherwise>
 </c:choose>
+
+<a href="loadfriends.servlet?path=friends.view">My Friends</a>
 
 <swim:profile user="${requestScope.user}"></swim:profile>
 

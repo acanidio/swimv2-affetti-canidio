@@ -6,13 +6,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<script type="text/javascript">
+function mandatoryFields(){
+	var title = document.forms["newhr"]["title"].value;
+	var city = document.forms["newhr"]["city"].value;
+	var date = document.forms["newhr"]["date"].value;
+	var hour = document.forms["newhr"]["hour"].value;
+	
+	var nullFields = title==null || city==null || date==null || hour==null;
+	var emptyFields = title=="" || city=="" || date=="" || hour=="";
+	
+	if(nullFields || emptyFields){
+		alert("Some mandatory fields were not fulfilled!");
+		return false;
+	}
+	
+	return true;
+	
+}
+</script>
+
 <title>Post Help Request</title>
 </head>
 <body>
 <swim:topMenu type="${sessionScope.type}" />
 
 
-<form action="hr.store" method="post">
+<form name="newhr" action="hr.store" method="post" onsubmit="return mandatoryFields();">
 <ul>
 	<li>Title: <input type="text" name="title"></li>
 	<li>City: <input type="text" name="city"></li>
