@@ -2,6 +2,7 @@ package it.polimi.swim.servlets.helprequest;
 
 import it.polimi.swim.entities.HelpRequest;
 import it.polimi.swim.entities.Person;
+import it.polimi.swim.entities.Reply;
 import it.polimi.swim.sessionbeans.HelpRequestManager;
 import it.polimi.swim.sessionbeans.HelpRequestManagerRemote;
 import it.polimi.swim.utils.Configuration;
@@ -53,10 +54,27 @@ public class LoadHelpRequestServlet extends HttpServlet {
 			boolean hasFeed = hrmgr.hasFeedback(hrID);
 			boolean postedByMe = hrmgr.postedByMe(user.getID(), hrID);
 			
+			Reply bestReply = hrmgr.getBestReply(hrID);
+			
+			if(bestReply!=null){
+				hr.getReplies().remove(bestReply);
+			}
+			
+			request.setAttribute("bestreply", bestReply);
+			
 			request.setAttribute("canReply", Boolean.valueOf(canReply));
 			request.setAttribute("hasBR", Boolean.valueOf(hasBR));
 			request.setAttribute("hasFeed", Boolean.valueOf(hasFeed));
 			request.setAttribute("postedByMe", Boolean.valueOf(postedByMe));
+			
+			/*
+			System.out.println("can reply: "+canReply);
+			System.out.println("has br: "+hasBR);
+			System.out.println("has feedback: "+hasFeed);
+			System.out.println("posted by me: "+postedByMe);
+			System.out.println("HR ID: "+hrID);
+			System.out.println("USER ID: "+user.getID());
+			*/
 
 		} catch (NamingException e) {
 			e.printStackTrace();
