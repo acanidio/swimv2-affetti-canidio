@@ -56,6 +56,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			r.setRequest(manager.find(HelpRequest.class, IDHelpRequest));
 			manager.persist(r);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return r.getID();
