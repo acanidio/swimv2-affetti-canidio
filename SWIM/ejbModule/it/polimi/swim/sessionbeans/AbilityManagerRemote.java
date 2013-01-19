@@ -9,7 +9,7 @@ import javax.ejb.Remote;
 @Remote
 public interface AbilityManagerRemote {
 
-	public int createNewAcceptedAbility(String name);
+	public Integer createNewAcceptedAbility(String name);
 	
 	public int createNewPendingAbility(String name);
 	
