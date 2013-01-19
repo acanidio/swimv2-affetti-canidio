@@ -120,23 +120,15 @@ public class FriendshipManager implements FriendshipManagerRemote {
 
 	@Override
 	public boolean isReceiver(int IDUser, int IDFriendship) {
-		/*
-		Friendship request = null;
 		try {
-			Query query = manager.createQuery("SELECT f " +
-					"FROM Friendship f JOIN f.sender u1 JOIN f.receiver u2 " +
-					"WHERE ((u1.ID = :first AND u2.ID = :second) OR " +
-					"(u2.ID = :first AND u1.ID = :second)) AND " +
-					"f.accepted = true");
-			request = (Friendship) query.setParameter("first", IDFirstUser)
-							.setParameter("second", IDSecondUser)
-							.getSingleResult();
+			Friendship request = manager.find(Friendship.class, IDFriendship);
+			User user = manager.find(User.class, IDUser);
+			if(request.getReceiver().equals(user)) {
+				return true;
+			}
 		} catch (NoResultException e) {
 			return false;
 		}
-		return true;
-		*/
-		
 		return false;
 	}
 
