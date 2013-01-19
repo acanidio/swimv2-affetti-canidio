@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
 
-function mandatoryFields(){
+function mandatory_Modify(){
 	var name = document.forms["signup"]["name"].value;
 	var surname = document.forms["signup"]["surname"].value;
 	
@@ -49,7 +49,7 @@ function differentPWs(){
 
 function checkProfileForm(){
 	
-	if(!mandatoryFields()){
+	if(!mandatory_Modify()){
 		return false;
 	}
 	if(!differentPWs()){

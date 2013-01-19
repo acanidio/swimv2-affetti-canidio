@@ -54,12 +54,6 @@ public class LoadUserServlet extends HttpServlet {
 						.loadUserAbilities(user.getID());
 				request.setAttribute("userAbilities", abilities);
 				
-				/*
-				//TODO delete
-				for(Ability a : abilities.keySet()){
-					System.out.println(a.getName()+" - "+abilities.get(a));
-				}
-				*/
 			}
 			
 			
@@ -78,15 +72,18 @@ public class LoadUserServlet extends HttpServlet {
 			Friendship fr = frmgr.getFriendshipRequest(loggedUser.getID(),
 					otherUserID);
 			boolean accepted = false;
+			boolean receiver = false;
 			Integer frID = null;
 			
 			if (fr != null) {
 				accepted = fr.isAccepted();
 				frID = fr.getID();
+				receiver = frmgr.isReceiver(user.getID(), frID);
 			}
 
 			request.setAttribute("reqexists", Boolean.valueOf(reqExists));
 			request.setAttribute("accepted", Boolean.valueOf(accepted));
+			request.setAttribute("imReceiver", Boolean.valueOf(receiver));
 			request.setAttribute("frid", frID);
 
 		} catch (NamingException e) {

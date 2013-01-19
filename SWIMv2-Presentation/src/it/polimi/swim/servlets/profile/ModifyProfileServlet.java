@@ -45,7 +45,7 @@ public class ModifyProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		Person user = (Person) request.getSession().getAttribute("person");
+		User user = (User) request.getSession().getAttribute("person");
 
 		InitialContext ctx = Configuration.getInitialContext();
 
@@ -64,8 +64,7 @@ public class ModifyProfileServlet extends HttpServlet {
 			String city = request.getParameter("city");
 			String bday = request.getParameter("birthday");
 
-			User user1 = (User) user;
-			Date birthday = user1.getBirthday();
+			Date birthday = user.getBirthday();
 
 			if (bday != null && !bday.isEmpty()) {
 				birthday = Date.valueOf(bday);

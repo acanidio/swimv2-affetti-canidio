@@ -13,7 +13,7 @@
 <swim:topMenu type="${sessionScope.type}" />
 
 <c:choose>
-	<c:when  test="${requestScope.user.ID==sessionScope.person.ID}">
+	<c:when  test="${sessionScope.type=='USER' && requestScope.user.ID==sessionScope.person.ID}">
 		<a href="loadabilities.servlet?path=modifyprofile.view">Modify profile</a>
 	</c:when>
 	
@@ -27,7 +27,9 @@
 	</c:otherwise>
 </c:choose>
 
+<c:if test="${sessionScope.type=='USER' && requestScope.user.ID==sessionScope.person.ID}">
 <a href="loadfriends.servlet?path=friends.view">My Friends</a>
+</c:if>
 
 <swim:profile user="${requestScope.user}"></swim:profile>
 

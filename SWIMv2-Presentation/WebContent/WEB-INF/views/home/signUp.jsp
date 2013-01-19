@@ -15,7 +15,7 @@
 
 <script type="text/javascript">
 
-function mandatoryFields(){
+function mandatory_SignUp(){
 	var name = document.forms["signup"]["name"].value;
 	var surname = document.forms["signup"]["surname"].value;
 	var password = document.forms["signup"]["password"].value;
@@ -66,7 +66,7 @@ function notValidEmail(){
 
 function checkProfileForm(){
 	
-	if(!mandatoryFields()){
+	if(!mandatory_SignUp()){
 		return false;
 	}
 	if(!notValidEmail()){

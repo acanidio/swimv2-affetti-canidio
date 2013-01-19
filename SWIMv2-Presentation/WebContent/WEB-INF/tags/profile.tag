@@ -12,6 +12,6 @@
 
 <ul>
 	<c:forEach var="ability" items="${requestScope.userAbilities}">
-		<li>${ability.value}</li>
+		<li>${ability.key.name}: ${ability.value}</li>
 	</c:forEach>
 </ul>
