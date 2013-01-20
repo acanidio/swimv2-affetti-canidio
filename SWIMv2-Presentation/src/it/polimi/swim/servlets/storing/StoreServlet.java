@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  * Servlet implementation class StoreServlet
  */
@@ -23,26 +22,41 @@ public class StoreServlet extends HttpServlet {
 	}
 
 	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		storeData(request, response);
+	}
+
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
+		storeData(request, response);
+	}
+
+	private void storeData(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getServletPath();
-		
-		if(path.startsWith("/")){
+
+		if (path.startsWith("/")) {
 			path = path.substring(1);
-		} 
-		
-		String key= path.split(".store")[0];
-		
+		}
+
+		String key = path.split(".store")[0];
+
 		try {
-			DataStorer storer = (DataStorer) Class.forName(Configuration.getStoreClass(key)).newInstance();
+			DataStorer storer = (DataStorer) Class.forName(
+					Configuration.getStoreClass(key)).newInstance();
 
 			storer.store(request);
-			request.getRequestDispatcher(storer.getForwardingPath(request)).forward(
-					request, response);
+			request.getRequestDispatcher(storer.getForwardingPath(request))
+					.forward(request, response);
 
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -51,15 +65,6 @@ public class StoreServlet extends HttpServlet {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

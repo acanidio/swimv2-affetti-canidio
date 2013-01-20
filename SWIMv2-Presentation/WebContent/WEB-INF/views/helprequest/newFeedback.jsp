@@ -11,9 +11,11 @@
 <body>
 <swim:topMenu type="${sessionScope.type}" />
 
+<h1>${param.replyid}
+</h1>
 
 <form action="feedback.store" method="post">
-<input type="hidden" value="${replyid}" name="replyid">
+<input type="hidden" value="${param.replyid}" name="replyid">
 <ul>
 <li>
 <fieldset>

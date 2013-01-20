@@ -66,6 +66,7 @@ public class ConversationManager implements ConversationManagerRemote {
 			m.setText(text);
 			manager.persist(m);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return m.getID();

@@ -15,10 +15,14 @@
 <c:if test="${not empty requestScope.bestreply}">
 <li><a href="loaduser.servlet?id=${requestScope.bestreply.sender.ID}">${requestScope.bestreply.sender.name} ${requestScope.bestreply.sender.surname}</a>
 	<c:if test="${requestScope.hasFeed==false}">
-			<form action="newfeed.view" method="post">
-			<input type="hidden" value="${reply.ID}" name="replyid">
-			<input type="submit" value="Give a Feedback">
+			<form action="newfeed.view" method="get">
+				<input type="hidden" value="${requestScope.bestreply.ID}" name="replyid">
+				<input type="submit" value="Give a Feedback">
 			</form>
+	</c:if>
+	<c:if test="${requestScope.hasFeed==true}">
+		
+	${requestScope.bestreply.feedback.mark}
 	</c:if>
 </li>
 </c:if>
@@ -32,6 +36,7 @@
 	<c:if test="${requestScope.postedByMe==true && requestScope.hasBR==false}">
 		<form action="bestreply.store" method="post">
 		<input type="hidden" value="${reply.ID}" name="replyid">
+		<input type="hidden" value="${helpreq.ID}" name="hrid">
 		<input type="submit" value="Select as Best Reply">
 		</form>
 	</c:if>
