@@ -240,28 +240,63 @@ public class UserDataManager implements UserDataManagerRemote {
 		return true;
 	}
 
+	// TODO cosa ne pensi nid?? forse le condizione non sono esatte... vedi tu!
+	// però l'algortimo dovrebbe esserci!
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> searchUsers(String username, String city, int abilityID) {
-		/*List<User> users = null;
+	public List<User> searchUsers(String username, String city,
+			Integer abilityID) {
+		String ucond = "";
+		String ccond = "";
+		String acond = "";
+		List<User> users = null;
+
+		if (username != null && !username.isEmpty()) {
+			ucond += "CONCAT(u.name,u.surname) LIKE :pattern ";
+			username = "%" + username.replace(' ', '%') + "%";
+		}
+
+		if (city != null && !city.isEmpty()) {
+			ccond += "AND u.city LIKE :city ";
+			city = "%" + city.replace(' ', '%') + "%";
+		}
+
+		if (abilityID != null) {
+			acond += "AND u.abilities.ID = :abID";
+		}
+
+		String cond = ucond + ccond + acond;
+
+		if (cond.substring(0, 3).equals("AND")) {
+			cond = cond.substring(4);
+		}
+
 		try {
-			String queryString = "SELECT u " + "FROM User u "
-					+ "WHERE ";
-			if(username != null && !username.isEmpty()) {
-				queryString += "CONCAT(u.name,u.surname) LIKE :pattern ";
-				username = "%" + username.replace(' ', '%') + "%";
+			String queryString = "SELECT u FROM User u WHERE " + cond;
+
+			System.out.println(queryString);
+
+			Query query = manager.createQuery(queryString);
+
+			if (username != null && !username.isEmpty()) {
+				query = query.setParameter("pattern", username);
 			}
-			if(city != null && !username.isEmpty()) {
-				queryString += "u.city LIKE :city ";
+
+			if (city != null && !city.isEmpty()) {
+				query = query.setParameter("city", city);
 			}
-			users = query.setParameter("pattern", username)
-					.getResultList();
+
+			if (abilityID != null) {
+				query = query.setParameter("abID", abilityID);
+			}
+
+			users = (List<User>) query.getResultList();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
-		return users;*/
-		// TODO
-		return null;
+
+		return users;
 	}
 
 	@Override
