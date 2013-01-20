@@ -110,7 +110,7 @@ public class UserDataManager implements UserDataManagerRemote {
 		Double average = null;
 		try {
 			Query query = manager.createQuery("SELECT AVG(f.mark) "
-					+ "FROM User u, IN (u.abilities) a, IN (a.feedbacks) f "
+					+ "FROM Feedback f JOIN f.reply r JOIN r.sender u JOIN f.ability a "
 					+ "WHERE u.ID = :IDUser AND a.ID = :IDAbility");
 			average = (Double) query.setParameter("IDUser", IDUser)
 					.setParameter("IDAbility", IDAbility).getSingleResult();
@@ -148,9 +148,10 @@ public class UserDataManager implements UserDataManagerRemote {
 					.createQuery("SELECT c "
 							+ "FROM Conversation c JOIN c.sender u1 JOIN c.receiver u2 "
 							+ "WHERE u1.ID = :IDUser OR u2.ID = :IDUser");
-			conversations = (List<Conversation>) query.setParameter("IDUser",
-					IDUser);
+			conversations = (List<Conversation>) query.setParameter("IDUser", IDUser)
+					.getResultList();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return conversations;
