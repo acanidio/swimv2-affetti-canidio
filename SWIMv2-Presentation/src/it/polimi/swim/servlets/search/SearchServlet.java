@@ -42,7 +42,7 @@ public class SearchServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		Integer abID = null;
 
-		if (ability != null && !ability.isEmpty()) {
+		if (!ability.equals("none")) {
 			abID = Integer.parseInt(ability);
 		}
 
@@ -50,8 +50,7 @@ public class SearchServlet extends HttpServlet {
 			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx
 					.lookup(UserDataManager.REMOTE);
 
-			// TODO review
-			List<User> results = usermgr.searchUsersByName(username);
+			List<User> results = usermgr.searchUsers(username, city, abID);
 			request.setAttribute("results", results);
 		} catch (NamingException e) {
 			e.printStackTrace();
