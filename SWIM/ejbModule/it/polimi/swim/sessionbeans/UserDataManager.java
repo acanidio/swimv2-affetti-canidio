@@ -87,8 +87,8 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Hashtable<Ability, Float> loadUserAbilities(int IDUser) {
-		Hashtable<Ability, Float> possessedAbilities = new Hashtable<Ability, Float>();
+	public Hashtable<Ability, Double> loadUserAbilities(int IDUser) {
+		Hashtable<Ability, Double> possessedAbilities = new Hashtable<Ability, Double>();
 		try {
 			Query query = manager.createQuery("SELECT a "
 					+ "FROM Ability a, IN (a.users) u "
@@ -96,7 +96,7 @@ public class UserDataManager implements UserDataManagerRemote {
 			List<Ability> abilities = (List<Ability>) query.setParameter("ID",
 					IDUser).getResultList();
 			for (Ability a : abilities) {
-				Float average = averageMark(IDUser, a.getID());
+				Double average = averageMark(IDUser, a.getID());
 				possessedAbilities.put(a, average);
 			}
 		} catch (Exception e) {
@@ -106,20 +106,20 @@ public class UserDataManager implements UserDataManagerRemote {
 		return possessedAbilities;
 	}
 
-	private Float averageMark(int IDUser, int IDAbility) {
-		Float average = null;
+	private Double averageMark(int IDUser, int IDAbility) {
+		Double average = null;
 		try {
 			Query query = manager.createQuery("SELECT AVG(f.mark) "
 					+ "FROM User u, IN (u.abilities) a, IN (a.feedbacks) f "
 					+ "WHERE u.ID = :IDUser AND a.ID = :IDAbility");
-			average = (Float) query.setParameter("IDUser", IDUser)
+			average = (Double) query.setParameter("IDUser", IDUser)
 					.setParameter("IDAbility", IDAbility).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 		if(average == null) {
-			average = (float) 0;
+			average = (double) 0;
 		}
 		return average;
 	}

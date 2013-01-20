@@ -50,7 +50,7 @@ public class LoadUserServlet extends HttpServlet {
 			Person user = usermgr.loadProfile(otherUserID);
 
 			if (user instanceof User) {
-				Hashtable<Ability, Float> abilities = usermgr
+				Hashtable<Ability, Double> abilities = usermgr
 						.loadUserAbilities(user.getID());
 				request.setAttribute("userAbilities", abilities);
 
