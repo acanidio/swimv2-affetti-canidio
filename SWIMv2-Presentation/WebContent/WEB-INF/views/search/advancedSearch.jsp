@@ -6,12 +6,12 @@
 <html>
 <head>
 <script type="text/javascript">
-function mandatory(){
+function mandatory_advSearch(){
 	var username = document.forms["search"]["username"].value;
 	var city = document.forms["search"]["city"].value;
 	var ability = document.forms["search"]["ability0"].value;
 	
-	var emptyFields = (username==null || username=="") && (city==null || city=="") && ability=="None";
+	var emptyFields = (username==null || username=="") && (city==null || city=="") && ability=="none";
 	
 	if(emptyFields){
 		alert("You must fill at least one field!");
@@ -43,7 +43,7 @@ function addNone(){
 <swim:topMenu type="${sessionScope.type}" />
 
 
-	<form name="search" method="get" action="search.servlet" onsubmit="return mandatory();">
+	<form name="search" method="get" action="search.servlet" onsubmit="return mandatory_advSearch();">
 	<ul>
 		<li>Username: <input type="text" name="username"></li>
 		<li>City: <input type="text" name="city"></li>
