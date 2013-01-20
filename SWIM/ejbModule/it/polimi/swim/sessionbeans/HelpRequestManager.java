@@ -76,7 +76,12 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 			if(hasBestReply(IDHelpRequest)){
 				return false;
 			}
-			// TODO I cannot reply if I have already replied
+			if(postedByMe(IDUser, IDHelpRequest)) {
+				return false;
+			}
+			if(haveAlreadyReplied(IDUser, IDHelpRequest)) {
+				return false;
+			}
 		} catch (Exception e) {
 			return false;
 		}
@@ -206,8 +211,26 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean haveAlreadyReplied(int IDUser, int IDHelpRequest) {
+		try {
+			HelpRequest hr = manager.find(HelpRequest.class, IDHelpRequest);
+			User user = manager.find(User.class, IDUser);
+			for(Reply r : hr.getReplies()) {
+				if(r.getSender().equals(user)) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
 	}
 }

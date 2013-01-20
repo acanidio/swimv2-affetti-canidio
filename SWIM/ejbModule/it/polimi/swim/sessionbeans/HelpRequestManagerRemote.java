@@ -35,4 +35,6 @@ public interface HelpRequestManagerRemote {
 	public HelpRequest getHelpRequestFromReply(int IDReply);
 	
 	public Reply getBestReply(int IDHelpRequest);
+	
+	public boolean haveAlreadyReplied(int IDUser, int IDHelpRequest);
 }
