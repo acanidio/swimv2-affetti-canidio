@@ -45,7 +45,7 @@ public class ConversationsServlet extends HttpServlet {
 			usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
 			
 			List<Conversation> convs = usermgr.loadConversations(user.getID());
-			System.out.println(convs);
+			
 			request.setAttribute("convs", convs);
 		} catch (NamingException e) {
 			e.printStackTrace();

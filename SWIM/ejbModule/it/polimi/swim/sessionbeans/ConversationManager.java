@@ -29,13 +29,14 @@ public class ConversationManager implements ConversationManagerRemote {
 		try {
 			Query q = manager
 					.createQuery("SELECT c "
-							+ "FROM c JOIN c.sender u1 JOIN c.receiver u2 "
+							+ "FROM Conversation c JOIN c.sender u1 JOIN c.receiver u2 "
 							+ "WHERE (u1.ID = :IDFirstUser AND u2.ID = :IDSecondUser) OR "
 							+ "(u2.ID = :IDFirstUser AND u1.ID = :IDSecondUser)");
 			c = (Conversation) q.setParameter("IDFirstUser", IDFirstUser)
 					.setParameter("IDSecondUser", IDSecondUser)
 					.getSingleResult();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return c.getID();
@@ -47,18 +48,14 @@ public class ConversationManager implements ConversationManagerRemote {
 		try {
 			Conversation c = manager.find(Conversation.class, IDConversation);
 			User sender = manager.find(User.class, IDSender);
-			// The sender is not either the conversation's sender or the
-			// conversation's receiver
-			if (!sender.equals(c.getSender())
-					|| !sender.equals(c.getReceiver())) {
-				return null;
-			}
+
 			User receiver;
 			if (sender.equals(c.getSender())) {
 				receiver = c.getReceiver();
 			} else {
 				receiver = c.getSender();
 			}
+			
 			m = new Message();
 			m.setConversation(c);
 			m.setSender(sender);
