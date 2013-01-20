@@ -242,18 +242,26 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> searchUsersByName(String pattern) {
-		List<User> users = null;
+	public List<User> searchUsers(String username, String city, int abilityID) {
+		/*List<User> users = null;
 		try {
-			Query query = manager.createQuery("SELECT u " + "FROM User u "
-					+ "WHERE CONCAT(u.name,u.surname) LIKE :pattern");
-			pattern = pattern.replace(' ', '%');
-			users = query.setParameter("pattern", "%" + pattern + "%")
+			String queryString = "SELECT u " + "FROM User u "
+					+ "WHERE ";
+			if(username != null && !username.isEmpty()) {
+				queryString += "CONCAT(u.name,u.surname) LIKE :pattern ";
+				username = "%" + username.replace(' ', '%') + "%";
+			}
+			if(city != null && !username.isEmpty()) {
+				queryString += "u.city LIKE :city ";
+			}
+			users = query.setParameter("pattern", username)
 					.getResultList();
 		} catch (Exception e) {
 			return null;
 		}
-		return users;
+		return users;*/
+		// TODO
+		return null;
 	}
 
 	@Override

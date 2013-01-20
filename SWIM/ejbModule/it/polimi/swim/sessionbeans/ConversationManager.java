@@ -117,23 +117,6 @@ public class ConversationManager implements ConversationManagerRemote {
 	}
 
 	@Override
-	public Message getLastMessage(int IDConversation) {
-		Message lastMessage = null;
-		try {
-			Query query = manager.createQuery("SELECT m " + "FROM Message m "
-					+ "WHERE m.conversation.ID = :IDConv AND m.ID = ("
-					+ "SELECT MAX(m.ID) " + "FROM Message m "
-					+ "WHERE m.conversation.ID = :IDConv" + ")");
-			lastMessage = (Message) query
-					.setParameter("IDConv", IDConversation).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		return lastMessage;
-	}
-
-	@Override
 	public Conversation getConversation(int IDConversation) {
 		Conversation conv = null;
 		try {

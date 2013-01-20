@@ -36,7 +36,7 @@ public interface UserDataManagerRemote {
 	
 	public List<Message> loadNewReceivedMessages(int IDUser);
 	
-	public List<User> searchUsersByName(String name);
+	public List<User> searchUsers(String username, String city, int abilityID);
 	
 	public List<User> loadFriends(int IDUser);
 	
