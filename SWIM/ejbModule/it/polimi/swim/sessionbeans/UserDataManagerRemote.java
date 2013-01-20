@@ -26,7 +26,7 @@ public interface UserDataManagerRemote {
 	
 	public User loadProfile(int IDUser);
 	
-	public Hashtable<Ability, Float> loadUserAbilities(int IDUser);
+	public Hashtable<Ability, Double> loadUserAbilities(int IDUser);
 	
 	public List<HelpRequest> loadUserHelpRequests(int IDUser);
 	
