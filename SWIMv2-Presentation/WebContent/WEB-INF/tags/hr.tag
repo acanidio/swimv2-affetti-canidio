@@ -14,7 +14,7 @@
 <ul>
 <c:if test="${not empty requestScope.bestreply}">
 <li><a href="loaduser.servlet?id=${requestScope.bestreply.sender.ID}">${requestScope.bestreply.sender.name} ${requestScope.bestreply.sender.surname}</a>
-	<c:if test="${requestScope.hasFeed==false}">
+	<c:if test="${requestScope.hasFeed==false && requestScope.postedByMe==true}">
 			<form action="newfeed.view" method="get">
 				<input type="hidden" value="${requestScope.bestreply.ID}" name="replyid">
 				<input type="submit" value="Give a Feedback">

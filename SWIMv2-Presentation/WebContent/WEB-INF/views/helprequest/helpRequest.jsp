@@ -15,7 +15,7 @@
 
 <swim:hr helpreq="${hr}"></swim:hr>
 
-<c:if test="${requestScope.canReply == true && requestScope.postedByMe == false}">
+<c:if test="${requestScope.canReply == true}">
 	<form action="reply.store" method="post">
 	<input type="hidden" value="${hr.ID}" name="hrid">
 	<input type="submit" value="Reply">
