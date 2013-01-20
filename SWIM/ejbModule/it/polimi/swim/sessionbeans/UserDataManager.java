@@ -240,8 +240,7 @@ public class UserDataManager implements UserDataManagerRemote {
 		return true;
 	}
 
-	// TODO cosa ne pensi nid?? forse le condizione non sono esatte... vedi tu!
-	// però l'algortimo dovrebbe esserci!
+	// TODO cosa ne pensi nid??
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> searchUsers(String username, String city,
@@ -249,6 +248,8 @@ public class UserDataManager implements UserDataManagerRemote {
 		String ucond = "";
 		String ccond = "";
 		String acond = "";
+		String from = "FROM User u ";
+		String select = "SELECT u ";
 		List<User> users = null;
 
 		if (username != null && !username.isEmpty()) {
@@ -262,17 +263,18 @@ public class UserDataManager implements UserDataManagerRemote {
 		}
 
 		if (abilityID != null) {
-			acond += "AND u.abilities.ID = :abID";
+			acond += "AND a.ID = :abID";
+			from += "JOIN u.abilities a ";
 		}
 
-		String cond = ucond + ccond + acond;
+		String where = ucond + ccond + acond;
 
-		if (cond.substring(0, 3).equals("AND")) {
-			cond = cond.substring(4);
+		if (where.substring(0, 3).equals("AND")) {
+			where = where.substring(4);
 		}
 
 		try {
-			String queryString = "SELECT u FROM User u WHERE " + cond;
+			String queryString = select + from + "WHERE " + where;
 
 			System.out.println(queryString);
 
