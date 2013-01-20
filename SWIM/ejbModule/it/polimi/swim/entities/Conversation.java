@@ -1,7 +1,7 @@
 package it.polimi.swim.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +27,7 @@ public class Conversation implements Serializable {
 	private User receiver;
 	
 	@OneToMany(targetEntity = Message.class, mappedBy = "conversation", fetch = FetchType.EAGER)
-	private List<Message> messages;
+	private Set<Message> messages;
 	
 	public Conversation() {
 		super();
@@ -53,16 +53,12 @@ public class Conversation implements Serializable {
 		this.receiver = receiver;
 	}
 
-	public List<Message> getMessages() {
+	public Set<Message> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(List<Message> messages) {
+	public void setMessages(Set<Message> messages) {
 		this.messages = messages;
-	}
-	
-	public Message getLastMessage() {
-		return messages.get(messages.size() - 1);
 	}
 	
 	@Override
