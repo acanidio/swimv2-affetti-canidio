@@ -3,8 +3,6 @@ package it.polimi.swim.servlets.storing;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.ConversationManager;
 import it.polimi.swim.sessionbeans.ConversationManagerRemote;
-import it.polimi.swim.sessionbeans.UserDataManager;
-import it.polimi.swim.sessionbeans.UserDataManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import javax.naming.InitialContext;
@@ -16,7 +14,7 @@ public class MessageStorer implements DataStorer {
 
 	@Override
 	public void store(HttpServletRequest request) {
-		String recipient = request.getParameter("recipient");
+		String recipient = request.getParameter("friends");
 		String text = request.getParameter("text");
 		String stringedConvid = request.getParameter("convid");
 		int recID;
@@ -27,11 +25,10 @@ public class MessageStorer implements DataStorer {
 		InitialContext ctx = Configuration.getInitialContext();
 		
 		try {
-			UserDataManagerRemote usermgr = (UserDataManagerRemote) ctx.lookup(UserDataManager.REMOTE);
 			ConversationManagerRemote convmgr = (ConversationManagerRemote) ctx.lookup(ConversationManager.REMOTE);
 
 		if (recipient!=null && !recipient.isEmpty()) {
-			recID = usermgr.searchUserByEmail(recipient);	
+			recID = Integer.parseInt(recipient);	
 			
 		}else{
 			

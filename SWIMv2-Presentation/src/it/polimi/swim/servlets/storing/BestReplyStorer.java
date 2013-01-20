@@ -26,7 +26,7 @@ public class BestReplyStorer implements DataStorer {
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		return "loadhr.servlet?id="+request.getParameter("replyid");
+		return "loadhr.servlet?id="+request.getParameter("hrid");
 	}
 
 }
