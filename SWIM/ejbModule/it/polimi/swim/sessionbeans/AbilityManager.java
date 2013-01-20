@@ -98,23 +98,31 @@ public class AbilityManager implements AbilityManagerRemote {
 	}
 
 	@Override
-	public boolean removeAbility(int ID) {
-		// TODO Check removing Abilities
+	public boolean removeAbility(int IDAbility) {
 		try {
-			Query query = manager.createQuery("SELECT a " +
-											"FROM Ability a " +
-											"WHERE a.ID = :ID AND a.pending = true");
-			Ability ability = (Ability) query.setParameter("ID", ID).getSingleResult();
-			for(User user: ability.getUsers()) {
-				ability.getUsers().remove(user);
+			Ability ability = manager.find(Ability.class, IDAbility);
+			List<User> users = ability.getUsers();
+			for(User u: users) {
+				removeAbilityFromUser(IDAbility, u.getID());
 			}
-			manager.merge(ability);
 			manager.remove(ability);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
+	}
+
+	private void removeAbilityFromUser(int iDAbility, int id) {
+		try {
+			User u = manager.find(User.class, id);
+			Ability a = manager.find(Ability.class, iDAbility);
+			u.getAbilities().remove(a);
+			manager.merge(u);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
 	}
 
 	@Override
