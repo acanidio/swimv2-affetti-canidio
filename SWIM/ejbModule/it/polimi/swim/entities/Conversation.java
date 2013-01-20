@@ -61,6 +61,17 @@ public class Conversation implements Serializable {
 		this.messages = messages;
 	}
 	
+	public Message getLastMessage() {
+		int maxID = 0;
+		Message lastMessage = null;
+		for(Message m: messages) {
+			if(m.getID()>maxID) {
+				lastMessage = m;
+			}
+		}
+		return lastMessage;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Conversation)) {

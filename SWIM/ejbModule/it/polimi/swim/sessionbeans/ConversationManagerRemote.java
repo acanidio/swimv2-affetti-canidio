@@ -1,7 +1,6 @@
 package it.polimi.swim.sessionbeans;
 
 import it.polimi.swim.entities.Conversation;
-import it.polimi.swim.entities.Message;
 
 import javax.ejb.Remote;
 
@@ -17,8 +16,6 @@ public interface ConversationManagerRemote {
 	public Conversation loadSpecificConversation(int IDConversation, int IDReceiver);
 	
 	public boolean isSender(int IDConversation, int IDUser);
-	
-	public Message getLastMessage(int IDConversation);
 	
 	public Conversation getConversation(int IDConversation);
 }
