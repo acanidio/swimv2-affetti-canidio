@@ -240,7 +240,6 @@ public class UserDataManager implements UserDataManagerRemote {
 		return true;
 	}
 
-	// TODO cosa ne pensi nid??
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> searchUsers(String username, String city,
@@ -249,11 +248,11 @@ public class UserDataManager implements UserDataManagerRemote {
 		String ccond = "";
 		String acond = "";
 		String from = "FROM User u ";
-		String select = "SELECT u ";
+		String select = "SELECT DISTINCT u ";
 		List<User> users = null;
 
 		if (username != null && !username.isEmpty()) {
-			ucond += "CONCAT(u.name,u.surname) LIKE :pattern ";
+			ucond += "(CONCAT(u.name,CONCAT(' ',u.surname)) LIKE :pattern OR CONCAT(u.surname,CONCAT(' ',u.name)) LIKE :pattern) ";
 			username = "%" + username.replace(' ', '%') + "%";
 		}
 
@@ -264,7 +263,7 @@ public class UserDataManager implements UserDataManagerRemote {
 
 		if (abilityID != null) {
 			acond += "AND a.ID = :abID";
-			from += "JOIN u.abilities a ";
+			from += "LEFT JOIN u.abilities a ";
 		}
 
 		String where = ucond + ccond + acond;
