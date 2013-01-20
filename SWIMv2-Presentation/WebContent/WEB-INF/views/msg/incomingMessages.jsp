@@ -12,7 +12,7 @@
 
 <swim:topMenu type="${sessionScope.type}" />
 
-<swim:inbox incomingmsgs="${incoming}"></swim:inbox>
+<swim:inbox incomingmsgs="${requestScope.incoming}"></swim:inbox>
 
 </body>
 </html>

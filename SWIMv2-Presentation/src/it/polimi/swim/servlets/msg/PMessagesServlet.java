@@ -28,7 +28,6 @@ public class PMessagesServlet extends HttpServlet {
 	 */
 	public PMessagesServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

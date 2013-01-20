@@ -91,8 +91,7 @@ public class UserDataManager implements UserDataManagerRemote {
 		Hashtable<Ability, Double> possessedAbilities = new Hashtable<Ability, Double>();
 		try {
 			Query query = manager.createQuery("SELECT a "
-					+ "FROM Ability a, IN (a.users) u "
-					+ "WHERE u.ID = :ID");
+					+ "FROM Ability a, IN (a.users) u " + "WHERE u.ID = :ID");
 			List<Ability> abilities = (List<Ability>) query.setParameter("ID",
 					IDUser).getResultList();
 			for (Ability a : abilities) {
@@ -109,16 +108,17 @@ public class UserDataManager implements UserDataManagerRemote {
 	private Double averageMark(int IDUser, int IDAbility) {
 		Double average = null;
 		try {
-			Query query = manager.createQuery("SELECT AVG(f.mark) "
-					+ "FROM Feedback f JOIN f.reply r JOIN r.sender u JOIN f.ability a "
-					+ "WHERE u.ID = :IDUser AND a.ID = :IDAbility");
+			Query query = manager
+					.createQuery("SELECT AVG(f.mark) "
+							+ "FROM Feedback f JOIN f.reply r JOIN r.sender u JOIN f.ability a "
+							+ "WHERE u.ID = :IDUser AND a.ID = :IDAbility");
 			average = (Double) query.setParameter("IDUser", IDUser)
 					.setParameter("IDAbility", IDAbility).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		if(average == null) {
+		if (average == null) {
 			average = (double) 0;
 		}
 		return average;
@@ -148,8 +148,8 @@ public class UserDataManager implements UserDataManagerRemote {
 					.createQuery("SELECT c "
 							+ "FROM Conversation c JOIN c.sender u1 JOIN c.receiver u2 "
 							+ "WHERE u1.ID = :IDUser OR u2.ID = :IDUser");
-			conversations = (List<Conversation>) query.setParameter("IDUser", IDUser)
-					.getResultList();
+			conversations = (List<Conversation>) query.setParameter("IDUser",
+					IDUser).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -173,19 +173,19 @@ public class UserDataManager implements UserDataManagerRemote {
 		return pendingFriendships;
 	}
 
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public List<Message> loadNewReceivedMessages(int IDUser) {
 		List<Message> newMessages = null;
 		try {
-			Query query = manager.createQuery("SELECT m "
-					+ "FROM Message m JOIN f.receiver u "
-					+ "WHERE u.ID = :IDUser AND m.unreaded = true");
+			Query query = manager.createQuery("FROM Message m "
+					+ "WHERE m.receiver.ID = :IDUser AND m.unreaded = true");
 			newMessages = query.setParameter("IDUser", IDUser).getResultList();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
-		return null;
+		return newMessages;
 	}
 
 	@Override
@@ -245,8 +245,7 @@ public class UserDataManager implements UserDataManagerRemote {
 	public List<User> searchUsersByName(String pattern) {
 		List<User> users = null;
 		try {
-			Query query = manager.createQuery("SELECT u "
-					+ "FROM User u "
+			Query query = manager.createQuery("SELECT u " + "FROM User u "
 					+ "WHERE CONCAT(u.name,u.surname) LIKE :pattern");
 			pattern = pattern.replace(' ', '%');
 			users = query.setParameter("pattern", "%" + pattern + "%")
@@ -261,8 +260,7 @@ public class UserDataManager implements UserDataManagerRemote {
 	public Integer searchUserByEmail(String email) {
 		User user = null;
 		try {
-			Query query = manager.createQuery("SELECT u "
-					+ "FROM User u "
+			Query query = manager.createQuery("SELECT u " + "FROM User u "
 					+ "WHERE u.email = :email");
 			user = (User) query.setParameter("email", email).getSingleResult();
 		} catch (Exception e) {

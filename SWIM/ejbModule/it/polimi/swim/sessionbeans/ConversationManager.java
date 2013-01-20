@@ -6,6 +6,7 @@ import it.polimi.swim.entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -36,7 +37,6 @@ public class ConversationManager implements ConversationManagerRemote {
 					.setParameter("IDSecondUser", IDSecondUser)
 					.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 		return c.getID();
@@ -55,7 +55,7 @@ public class ConversationManager implements ConversationManagerRemote {
 			} else {
 				receiver = c.getSender();
 			}
-			
+
 			m = new Message();
 			m.setConversation(c);
 			m.setSender(sender);
@@ -70,13 +70,14 @@ public class ConversationManager implements ConversationManagerRemote {
 	}
 
 	@Override
-	public Conversation loadSpecificConversation(int IDConversation, int IDReceiver) {
+	public Conversation loadSpecificConversation(int IDConversation,
+			int IDReceiver) {
 		Conversation conversation = null;
 		try {
 			conversation = manager.find(Conversation.class, IDConversation);
 			User receiver = manager.find(User.class, IDReceiver);
 			for (Message currentMessage : conversation.getMessages()) {
-				if(currentMessage.getSender().equals(receiver)) {
+				if (currentMessage.getReceiver().equals(receiver)) {
 					currentMessage.setUnreaded(false);
 					manager.merge(currentMessage);
 				}
@@ -106,7 +107,7 @@ public class ConversationManager implements ConversationManagerRemote {
 		try {
 			Conversation c = manager.find(Conversation.class, IDConversation);
 			User u = manager.find(User.class, IDUser);
-			if(c.getSender().equals(u)) {
+			if (c.getSender().equals(u)) {
 				return true;
 			}
 		} catch (Exception e) {
@@ -114,23 +115,33 @@ public class ConversationManager implements ConversationManagerRemote {
 		}
 		return false;
 	}
-	
+
+	@Override
 	public Message getLastMessage(int IDConversation) {
 		Message lastMessage = null;
 		try {
-			Query query = manager.createQuery("SELECT m " +
-											"FROM Message m " +
-											"WHERE m.conversation.ID = :IDConv AND m.ID = (" +
-											"SELECT MAX(m.ID) " +
-											"FROM Message m " +
-											"WHERE m.conversation.ID = :IDConv" +
-											")");
-			lastMessage = (Message) query.setParameter("IDConv", IDConversation)
-					.getSingleResult();
+			Query query = manager.createQuery("SELECT m " + "FROM Message m "
+					+ "WHERE m.conversation.ID = :IDConv AND m.ID = ("
+					+ "SELECT MAX(m.ID) " + "FROM Message m "
+					+ "WHERE m.conversation.ID = :IDConv" + ")");
+			lastMessage = (Message) query
+					.setParameter("IDConv", IDConversation).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 		return lastMessage;
+	}
+
+	@Override
+	public Conversation getConversation(int IDConversation) {
+		Conversation conv = null;
+		try {
+			conv = manager.find(Conversation.class, IDConversation);
+		} catch (NoResultException e) {
+			return null;
+		}
+
+		return conv;
 	}
 }

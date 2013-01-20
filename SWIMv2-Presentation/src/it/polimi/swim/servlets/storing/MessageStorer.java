@@ -38,9 +38,9 @@ public class MessageStorer implements DataStorer {
 
 				convID = Integer.parseInt(stringedConvid);
 
-				int tempRec = convmgr.loadSpecificConversation(convID)
+				int tempRec = convmgr.getConversation(convID)
 						.getReceiver().getID();
-				int tempSend = convmgr.loadSpecificConversation(convID)
+				int tempSend = convmgr.getConversation(convID)
 						.getSender().getID();
 				if (user.getID() == tempRec) {
 					recID = tempSend;

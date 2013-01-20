@@ -19,4 +19,6 @@ public interface ConversationManagerRemote {
 	public boolean isSender(int IDConversation, int IDUser);
 	
 	public Message getLastMessage(int IDConversation);
+	
+	public Conversation getConversation(int IDConversation);
 }
