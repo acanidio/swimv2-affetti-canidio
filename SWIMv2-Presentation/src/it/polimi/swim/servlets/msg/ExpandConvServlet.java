@@ -1,6 +1,7 @@
 package it.polimi.swim.servlets.msg;
 
 import it.polimi.swim.entities.Conversation;
+import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.ConversationManager;
 import it.polimi.swim.sessionbeans.ConversationManagerRemote;
 import it.polimi.swim.utils.Configuration;
@@ -34,12 +35,13 @@ public class ExpandConvServlet extends HttpServlet {
 		InitialContext ctx = Configuration.getInitialContext();
 
 		int convID = Integer.parseInt(request.getParameter("id"));
+		Person user = (Person) request.getSession().getAttribute("person");
 
 		ConversationManagerRemote convmgr;
 		try {
 			convmgr = (ConversationManagerRemote) ctx
 					.lookup(ConversationManager.REMOTE);
-			Conversation conv = convmgr.loadSpecificConversation(convID);
+			Conversation conv = convmgr.loadSpecificConversation(convID, user.getID());
 
 			request.setAttribute("conv", conv);
 		} catch (NamingException e) {

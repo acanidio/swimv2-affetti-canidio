@@ -28,8 +28,8 @@ function mandatory(){
 <swim:conv conv="${requestScope.conv}"></swim:conv>
 
 <form name="message" method="post" action="message.store" onsubmit="return mandatory();">
+<input type="hidden" name="convid" value="${requestScope.conv.ID}">
 <ul>
-	<li><input type="hidden" name="convid" value="${requestScope.conv.ID}"></li>
 	<li><input type="text" name="text" height="50" width="200"></li>
 	<li><input type="submit" value="Send"></li>
 </ul>
