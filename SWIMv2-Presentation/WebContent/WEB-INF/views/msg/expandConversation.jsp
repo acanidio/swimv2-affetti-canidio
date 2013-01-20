@@ -29,7 +29,7 @@ function mandatory(){
 
 <form name="message" method="post" action="message.store" onsubmit="return mandatory();">
 <ul>
-	<li><input type="hidden" name="convid" value="${requestScope.id}">
+	<li><input type="hidden" name="convid" value="${requestScope.id}"></li>
 	<li><input type="text" name="text" height="50" width="200"></li>
 	<li><input type="submit" value="Send"></li>
 </ul>
