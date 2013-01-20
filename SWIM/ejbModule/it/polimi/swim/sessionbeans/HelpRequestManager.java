@@ -157,6 +157,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 											"ORDER BY h.ID DESC");
 			helprequests = query.getResultList();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return helprequests;

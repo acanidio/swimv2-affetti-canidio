@@ -70,14 +70,16 @@ public class ConversationManager implements ConversationManagerRemote {
 	}
 
 	@Override
-	public Conversation loadSpecificConversation(int IDConversation) {
+	public Conversation loadSpecificConversation(int IDConversation, int IDReceiver) {
 		Conversation conversation = null;
 		try {
 			conversation = manager.find(Conversation.class, IDConversation);
-
+			User receiver = manager.find(User.class, IDReceiver);
 			for (Message currentMessage : conversation.getMessages()) {
-				currentMessage.setUnreaded(false);
-				manager.merge(currentMessage);
+				if(currentMessage.getSender().equals(receiver)) {
+					currentMessage.setUnreaded(false);
+					manager.merge(currentMessage);
+				}
 			}
 		} catch (Exception e) {
 			return null;
@@ -111,5 +113,24 @@ public class ConversationManager implements ConversationManagerRemote {
 			return false;
 		}
 		return false;
+	}
+	
+	public Message getLastMessage(int IDConversation) {
+		Message lastMessage = null;
+		try {
+			Query query = manager.createQuery("SELECT m " +
+											"FROM Message m " +
+											"WHERE m.conversation.ID = :IDConv AND m.ID = (" +
+											"SELECT MAX(m.ID) " +
+											"FROM Message m " +
+											"WHERE m.conversation.ID = :IDConv" +
+											")");
+			lastMessage = (Message) query.setParameter("IDConv", IDConversation)
+					.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return lastMessage;
 	}
 }
