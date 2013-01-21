@@ -275,8 +275,6 @@ public class UserDataManager implements UserDataManagerRemote {
 		try {
 			String queryString = select + from + "WHERE " + where;
 
-			System.out.println(queryString);
-
 			Query query = manager.createQuery(queryString);
 
 			if (username != null && !username.isEmpty()) {
