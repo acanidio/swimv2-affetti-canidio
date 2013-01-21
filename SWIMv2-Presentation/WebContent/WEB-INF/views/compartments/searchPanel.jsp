@@ -12,10 +12,13 @@ function mandatory_Search(){
 	return true;
 }
 </script>
-
-<form name="search" method="get" action="search.servlet" onsubmit="return mandatory_Search();">
-	<input type="text" value="Username" style="color:#C0C0C0" name="username" onclick="if(value=='Username'){value=''; style.color='#000000';}" 
-																				onblur="if(value==''){value='Username'; style.color='#C0C0C0';}" />
-	<input type="submit" value="Search" />
-</form>
-<a href="loadabilities.servlet?path=advsearch.view">Advanced Search</a>
+<div>
+	<form name="search" method="get" action="search.servlet" onsubmit="return mandatory_Search();">
+		<ul>
+			<li><input type="text" value="Username" style="color:#C0C0C0" name="username" onclick="if(value=='Username'){value=''; style.color='#000000';}" 
+																						onblur="if(value==''){value='Username'; style.color='#C0C0C0';}" /></li>
+			<li><input type="submit" value="Search" /></li>
+			<li><a href="loadabilities.servlet?path=advsearch.view">Advanced Search</a></li>
+		</ul>
+	</form>
+</div>

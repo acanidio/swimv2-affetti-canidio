@@ -1,2 +1,1 @@
-
-<a href="loadabilities.servlet?path=signup.view">Sign up</a>
+<div><a href="loadabilities.servlet?path=signup.view">Sign up</a></div>
