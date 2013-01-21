@@ -37,4 +37,6 @@ public interface HelpRequestManagerRemote {
 	public Reply getBestReply(int IDHelpRequest);
 	
 	public boolean haveAlreadyReplied(int IDUser, int IDHelpRequest);
+	
+	public List<HelpRequest> searchHelpRequests(boolean onlyFriends, int userID, String city, Integer abilityID);
 }
