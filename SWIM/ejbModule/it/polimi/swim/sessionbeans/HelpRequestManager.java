@@ -234,4 +234,47 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		}
 		return false;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HelpRequest> searchHelpRequests(boolean onlyFriends, int userID,
+			String city, Integer abilityID) {
+		String where = "WHERE ";
+		String from = "FROM HelpRequest h ";
+		if(onlyFriends) {
+			from += "JOIN h.sender u JOIN u.sendedRequests r1 JOIN u.receivedRequests r2 ";
+			where += "((r1.accepted = true AND (r1.sender.ID = :userID OR r1.receiver.ID = :userID)) OR ((r2.accepted = true AND (r2.sender.ID = :userID OR r2.receiver.ID = :userID)) ";
+		}
+		if (city != null && !city.isEmpty()) {
+			where += "AND u.city LIKE :city ";
+			city = "%" + city.replace(' ', '%') + "%";
+		}
+		if (abilityID != null) {
+			where += "AND a.ID = :abID";
+			from += "JOIN h.ability a ";
+		}
+		if (where.substring(0, 3).equals("AND")) {
+			where = where.substring(4);
+		}
+		String queryString = "SELECT DISTINCT h " + from + where;
+		System.out.println(queryString);
+		List<HelpRequest> helprequests= null;
+		try {
+			Query query = manager.createQuery(queryString);
+			if(onlyFriends) {
+				query.setParameter("userID", userID);
+			}
+			if (city != null && !city.isEmpty()) {
+				query.setParameter("city", city);
+			}
+			if (abilityID != null) {
+				query.setParameter("abID", abilityID);
+			}
+			helprequests = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return helprequests;
+	}
 }
