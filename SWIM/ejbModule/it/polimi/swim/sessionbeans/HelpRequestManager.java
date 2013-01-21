@@ -243,7 +243,7 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		String from = "FROM HelpRequest h ";
 		if(onlyFriends) {
 			from += "JOIN h.sender u JOIN u.sendedRequests r1 JOIN u.receivedRequests r2 ";
-			where += "((r1.accepted = true AND (r1.sender.ID = :userID OR r1.receiver.ID = :userID)) OR ((r2.accepted = true AND (r2.sender.ID = :userID OR r2.receiver.ID = :userID)) ";
+			where += "((r1.accepted = true AND (r1.sender.ID = :userID OR r1.receiver.ID = :userID)) OR (r2.accepted = true AND (r2.sender.ID = :userID OR r2.receiver.ID = :userID))) ";
 		}
 		if (city != null && !city.isEmpty()) {
 			where += "AND h.city LIKE :city ";
@@ -259,7 +259,6 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 		String queryString = "SELECT DISTINCT h " + from + "WHERE " + where;
 		List<HelpRequest> helprequests= null;
 		try {
-			System.out.println(queryString);
 			Query query = manager.createQuery(queryString);
 			if(onlyFriends) {
 				query.setParameter("userID", userID);
