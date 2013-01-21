@@ -1,3 +1,1 @@
-
-
-<a href="logout.servlet">log out</a>
+<div><a href="logout.servlet">log out</a></div>

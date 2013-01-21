@@ -7,19 +7,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<!--<link rel="stylesheet" href="css/mycss.css" type="text/css">-->
-<link rel="stylesheet" href="css/temporaryStyle.css" type="text/css">
+<link rel="stylesheet" href="css/mycss.css" type="text/css">
 <title>Welcome to SWIMv2</title>
 </head>
 <body>
-
-<p align="center">${log}</p>
-
-<div>
-	<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
-</div>
-
-<c:import url="/WEB-INF/views/compartments/wall.jsp"></c:import>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<p align="center">${log}</p>
+			<c:import url="/WEB-INF/views/compartments/wall.jsp"></c:import>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>
