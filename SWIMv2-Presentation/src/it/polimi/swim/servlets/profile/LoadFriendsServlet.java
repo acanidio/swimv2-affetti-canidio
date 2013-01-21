@@ -46,6 +46,10 @@ public class LoadFriendsServlet extends HttpServlet {
 					.lookup(UserDataManager.REMOTE);
 
 			List<User> friends = usermgr.loadFriends(user.getID());
+			
+			if(friends==null || friends.isEmpty()){
+				request.setAttribute("log", "You don't have any friend.");
+			}
 
 			request.setAttribute("friends", friends);
 		} catch (NamingException e) {

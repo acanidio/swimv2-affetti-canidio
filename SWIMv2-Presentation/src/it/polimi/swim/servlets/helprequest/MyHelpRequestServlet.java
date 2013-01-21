@@ -45,6 +45,11 @@ public class MyHelpRequestServlet extends HttpServlet {
 
 			List<HelpRequest> myhrs = usermgr
 					.loadUserHelpRequests(user.getID());
+			
+			if(myhrs==null || myhrs.isEmpty()){
+				request.setAttribute("log", "You havn't posted any help request yet.");
+			}
+			
 			request.setAttribute("myhrs", myhrs);
 		} catch (NamingException e) {
 			e.printStackTrace();
