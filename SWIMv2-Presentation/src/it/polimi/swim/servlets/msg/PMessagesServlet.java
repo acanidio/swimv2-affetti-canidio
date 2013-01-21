@@ -48,6 +48,10 @@ public class PMessagesServlet extends HttpServlet {
 
 			List<Message> messages = usermgr.loadNewReceivedMessages(user
 					.getID());
+			
+			if(messages==null || messages.isEmpty()){
+				request.setAttribute("log", "You don't have new messages.");
+			}
 
 			request.setAttribute("incoming", messages);
 		} catch (NamingException e) {

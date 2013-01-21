@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class MessageStorer implements DataStorer {
 	private Integer convID;
+	private String forwardingPath = "";
 
 	@Override
 	public void store(HttpServletRequest request) {
@@ -20,6 +21,12 @@ public class MessageStorer implements DataStorer {
 		int recID;
 
 		Person user = (Person) request.getSession().getAttribute("person");
+		
+		if((recipient==null || recipient.isEmpty()) && (stringedConvid==null || stringedConvid.isEmpty())){
+			request.setAttribute("error", "You cannot send a message to nobody!");
+			forwardingPath = "error.view";
+			return;
+		}
 
 		InitialContext ctx = Configuration.getInitialContext();
 
@@ -59,7 +66,11 @@ public class MessageStorer implements DataStorer {
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		return "expandconv.servlet?id=" + convID;
+		if(!forwardingPath.equals("error.view")){
+			forwardingPath = "expandconv.servlet?id="+convID;
+		}
+		
+		return forwardingPath;
 	}
 
 }

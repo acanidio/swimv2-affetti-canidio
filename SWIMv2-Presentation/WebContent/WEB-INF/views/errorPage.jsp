@@ -13,6 +13,6 @@
 <swim:topMenu type="${sessionScope.type}" />
 
 
-<p>${requestScope.error}</p>
+<h3>${requestScope.error}</h3>
 </body>
 </html>

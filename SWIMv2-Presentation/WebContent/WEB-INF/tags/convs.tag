@@ -13,7 +13,7 @@
 <c:if test="${conv.receiver.ID == sessionScope.person.ID }">	
 <li>
 	<p><a href="loaduser.servlet?id=${conv.sender.ID}">${conv.sender.name} ${conv.sender.surname}</a></p>
-	<p><a href="expandconv.servlet?id=${conv.ID}">Message</a></p>
+	<p><a href="expandconv.servlet?id=${conv.ID}">${conv.lastMessage}</a></p>
 </li>
 </c:if>
 </c:forEach>

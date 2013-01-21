@@ -15,9 +15,9 @@
 
 <form action="filterwall.servlet" method="get">
 <ul>
-<li>Friend: <input type="text" name="friend"></li>
-<li>City: <input type="text" name="city"></li>
-<li>Ability: <swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></li>
+<li>Filter by friends' posts: <input type="checkbox" name="friends" value="true"></li>
+<li>Filter by city: <input type="text" name="city"></li>
+<li>Filter by ability: <swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></li>
 <li><input type="submit" value="filter"></li>
 </ul>
 

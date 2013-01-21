@@ -46,6 +46,10 @@ public class ConversationsServlet extends HttpServlet {
 			
 			List<Conversation> convs = usermgr.loadConversations(user.getID());
 			
+			if(convs==null || convs.isEmpty()){
+				request.setAttribute("log", "You don't have any opened conversation.");
+			}
+			
 			request.setAttribute("convs", convs);
 		} catch (NamingException e) {
 			e.printStackTrace();

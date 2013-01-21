@@ -42,7 +42,7 @@ public class SearchServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		Integer abID = null;
 
-		if (!ability.equals("none")) {
+		if (ability != null && !ability.equals("none")) {
 			abID = Integer.parseInt(ability);
 		}
 
@@ -51,6 +51,11 @@ public class SearchServlet extends HttpServlet {
 					.lookup(UserDataManager.REMOTE);
 
 			List<User> results = usermgr.searchUsers(username, city, abID);
+
+			if (results == null || results.isEmpty()) {
+				request.setAttribute("log", "No result found.");
+			}
+
 			request.setAttribute("results", results);
 		} catch (NamingException e) {
 			e.printStackTrace();
