@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 function mandatory_filtering(){
-	var friends = document.forms["filter"]["friends"].value;
+	var friends = document.forms["filter"]["friends"].selected;
 	var city = document.forms["filter"]["city"].value;
 	var ability = document.forms["filter"]["ability0"].value;
 	
@@ -49,7 +49,7 @@ function addNone(){
 <li>Filter by friends' posts: <input type="checkbox" name="friends" value="true"></li>
 <li>Filter by city: <input type="text" name="city"></li>
 <li>Filter by ability: <swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></li>
-<li><input type="submit" value="filter"></li>
+<li><input type="submit" value="Filter"></li>
 </ul>
 
 </form>
