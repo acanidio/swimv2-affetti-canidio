@@ -60,7 +60,6 @@ public class ModifyProfileServlet extends HttpServlet {
 			}
 			String name = request.getParameter("name");
 			String surname = request.getParameter("surname");
-			String avatar = request.getParameter("avatar");
 			String city = request.getParameter("city");
 			String bday = request.getParameter("birthday");
 
@@ -72,7 +71,7 @@ public class ModifyProfileServlet extends HttpServlet {
 
 			String phonenumber = request.getParameter("phonenumber");
 
-			usermgr.modifyUser(user.getID(), password, name, surname, avatar,
+			usermgr.modifyUser(user.getID(), password, name, surname,
 					city, birthday, phonenumber);
 
 			String sabilityID = request.getParameter("ability0");

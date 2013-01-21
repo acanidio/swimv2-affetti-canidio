@@ -20,9 +20,8 @@
 				<input type="submit" value="Give a Feedback">
 			</form>
 	</c:if>
-	<c:if test="${requestScope.hasFeed==true}">
-		
-	${requestScope.bestreply.feedback.mark}
+	<c:if test="${requestScope.hasFeed==true}">	
+	${requestScope.bestreply.feedback.mark}&nbsp;&nbsp;${helpreq.sender.name} ${helpreq.sender.surname} says: ${requestScope.bestreply.feedback.description}
 	</c:if>
 </li>
 </c:if>

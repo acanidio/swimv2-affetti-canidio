@@ -112,9 +112,6 @@ function checkProfileForm(){
 
 <li>Surname*: <input type="text" name="surname" value="${sessionScope.person.surname}"></li>
 
-<li>Avatar: <input type="file" name="avatar"></li>
-
-
 <li>Password: <input type="password" name="password"></li>
 
 <li>Confirm Password: <input type="password" name="cpassword"></li>
