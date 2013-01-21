@@ -37,22 +37,28 @@ function addNone(){
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/mycss.css" type="text/css">
 <title>Filter Wall</title>
 </head>
 <body onload="addNone();">
-
-<swim:topMenu type="${sessionScope.type}" />
-
-
-<form name="filter" action="filterwall.servlet" method="get" onsubmit="return mandatory_filtering();">
-<ul>
-<li>Filter by friends' posts: <input type="checkbox" name="friends" value="true"></li>
-<li>Filter by city: <input type="text" name="city"></li>
-<li>Filter by ability: <swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></li>
-<li><input type="submit" value="Filter"></li>
-</ul>
-
-</form>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<form name="filter" action="filterwall.servlet" method="get" onsubmit="return mandatory_filtering();">
+				<ul>
+					<li>Filter by friends' posts: <input type="checkbox" name="friends" value="true"></li>
+					<li>Filter by city: <input type="text" name="city"></li>
+					<li>Filter by ability: <swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></li>
+					<li><input type="submit" value="Filter"></li>
+				</ul>
+			</form>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

@@ -21,7 +21,7 @@
 					var email = document.forms["login"]["email"].value;
 					var password =  document.forms["login"]["password"].value;
 					var nullField = email==null || password==null;
-					var emptyField = email=="" || password=="";
+					var emptyField = email=="E-mail Address" || password=="Password";
 					
 					if(nullField || emptyField){
 						alert("Missing some fields!");
@@ -41,24 +41,42 @@
 			<div class="external"><a href="loadabilities.servlet?path=signup.view">Sign up</a></div>
 			<div class="external">
 				<form name="login" action="login.servlet" method="post" onsubmit="return checkFields();">
-					<div>E-mail address: <input type="text" name="email"></div>
-					<div>Password: <input type="password" name="password"></div>
+					<div>
+						<input type="text" value="E-mail Address" style="color:#C0C0C0" name="email" onclick="if(value=='E-mail Address'){value=''; style.color='#000000';}" 
+																			onblur="if(value==''){value='E-mail Address'; style.color='#C0C0C0';}" />
+					</div>
+					<div>
+						<input type="password" value="Password" style="color:#C0C0C0" name="password" onclick="if(value=='Password'){value=''; style.color='#000000';}" 
+																			onblur="if(value==''){value='Password'; style.color='#C0C0C0';}" />
+					</div>
 					<div><input type="submit" value="Log In"></div>
 				</form>
 			</div>
 </c:if>
 <c:if test="${type=='USER'}">
-	<c:import url="/WEB-INF/views/compartments/userNotificationPanel.jsp"></c:import>
+			<div class="external"><a href="home.view">HOME</a></div>
+			<div class="external">
+				<div><a href="pfrships.servlet">Pending Friendships</a></div>
+				<div><a href="pmessages.servlet">Received Messages</a></div>
+			</div>
+			<div class="external">
+				<form name="search" method="get" action="search.servlet" onsubmit="return mandatory_Search();">
+					<div><input type="text" value="Username" style="color:#C0C0C0" name="username" onclick="if(value=='Username'){value=''; style.color='#000000';}" 
+																								onblur="if(value==''){value='Username'; style.color='#C0C0C0';}" /></div>
+					<div><input type="submit" value="Search" /></div>
+					<div><a href="loadabilities.servlet?path=advsearch.view">Advanced Search</a></div>
+				</form>
+			</div>
+			<div class="external">
+				<div><a href="loaduser.servlet?id=${sessionScope.person.ID}">${sessionScope.person.name} ${sessionScope.person.surname}</a></div>
+				<div><a href="myhrs.servlet">Help requests</a></div>
+				<div><a href="conversations.servlet">Conversations</a></div>
+			</div>
+			<div class="external"><a href="logout.servlet">log out</a></div>
 </c:if>
 <c:if test="${type=='ADMINISTRATOR'}">
-	<c:import url="/WEB-INF/views/compartments/adminNotificationPanel.jsp"></c:import>
-</c:if>
-<c:if test="${type=='USER'}">
-	<c:import url="/WEB-INF/views/compartments/userMenu.jsp"></c:import>
-</c:if>
-<c:if test="${type=='ADMINISTRATOR'}">
-	<c:import url="/WEB-INF/views/compartments/adminMenu.jsp"></c:import>
-</c:if>
-<c:if test="${type=='USER' || type=='ADMINISTRATOR'}">
-	<c:import url="/WEB-INF/views/compartments/logOutPanel.jsp"></c:import>
+			<div class="external"><a href="home.view">HOME</a></div>
+			<div class="external"><a href="pabilities.servlet">Pending Abilities</a></div>
+			<div class="external"><a href="newability.view">Add New Ability</a></div>
+			<div class="external"><a href="logout.servlet">log out</a></div>
 </c:if>

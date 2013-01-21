@@ -6,16 +6,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/mycss.css" type="text/css">
 <title>Add new ability</title>
 </head>
 <body>
-
-<swim:topMenu type="${sessionScope.type}" />
-
-<form action="ability.store" method="get">
-	Name of the new ability: <input type="text" name="newability">
-	<input type="submit" value="Send">
-</form>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<form action="ability.store" method="get">
+				Name of the new ability: <input type="text" name="newability">
+				<input type="submit" value="Send">
+			</form>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

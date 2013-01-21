@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
+<link rel="stylesheet" href="css/mycss.css" type="text/css">
 <script type="text/javascript">
 function mandatory_HR(){
 	var title = document.forms["newhr"]["title"].value;
@@ -30,20 +30,27 @@ function mandatory_HR(){
 <title>Post Help Request</title>
 </head>
 <body>
-<swim:topMenu type="${sessionScope.type}" />
-
-
-<form name="newhr" action="hr.store" method="post" onsubmit="return mandatory_HR();">
-<ul>
-	<li>Title: <input type="text" name="title"></li>
-	<li>City: <input type="text" name="city"></li>
-	<li>Description: <input type="text" name="description"></li>
-	<li>Ability: <swim:abilitiesSelect abilities="${abilities}"></swim:abilitiesSelect></li>
-	<li>Date:	<input type="date" name="date"></li>
-	<li>Hour:	<input type="time" name="hour"></li>
-	<li><input type="submit" value="Post"></li>
-</ul>
-</form>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<form name="newhr" action="hr.store" method="post" onsubmit="return mandatory_HR();">
+				<ul>
+					<li>Title: <input type="text" name="title"></li>
+					<li>City: <input type="text" name="city"></li>
+					<li>Description: <input type="text" name="description"></li>
+					<li>Ability: <swim:abilitiesSelect abilities="${abilities}"></swim:abilitiesSelect></li>
+					<li>Date:	<input type="date" name="date"></li>
+					<li>Hour:	<input type="time" name="hour"></li>
+					<li><input type="submit" value="Post"></li>
+				</ul>
+			</form>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

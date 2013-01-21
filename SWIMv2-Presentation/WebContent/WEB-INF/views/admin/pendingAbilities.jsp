@@ -10,10 +10,17 @@
 <title>Pending Abilities</title>
 </head>
 <body>
-
-<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
-
-<swim:pendAbilities pendAbilities="${pendAbilities}"></swim:pendAbilities>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<swim:pendAbilities pendAbilities="${pendAbilities}"></swim:pendAbilities>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

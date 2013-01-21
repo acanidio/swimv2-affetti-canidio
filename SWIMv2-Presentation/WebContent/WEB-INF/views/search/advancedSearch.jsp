@@ -40,18 +40,24 @@ function addNone(){
 <title>Advanced Search</title>
 </head>
 <body onload="addNone();">
-
-<swim:topMenu type="${sessionScope.type}" />
-
-
-	<form name="advsearch" method="get" action="search.servlet" onsubmit="return mandatory_advSearch();">
-	<ul>
-		<li>Username: <input type="text" name="username"></li>
-		<li>City: <input type="text" name="city"></li>
-		<li>Ability: 	<swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect> </li>	
-		<li><input type="submit" value="Search"></li>
-	</ul>
-	</form>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<form name="advsearch" method="get" action="search.servlet" onsubmit="return mandatory_advSearch();">
+				<ul>
+					<li>Username: <input type="text" name="username"></li>
+					<li>City: <input type="text" name="city"></li>
+					<li>Ability: 	<swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect> </li>	
+					<li><input type="submit" value="Search"></li>
+				</ul>
+			</form>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

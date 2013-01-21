@@ -1,1 +1,1 @@
-<div><a href="pabilities.servlet">Pending abilities</a></li></div>
+<div><a href="pabilities.servlet">Pending Abilities</a></div>
