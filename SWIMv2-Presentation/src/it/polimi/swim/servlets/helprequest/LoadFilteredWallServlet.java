@@ -42,7 +42,7 @@ public class LoadFilteredWallServlet extends HttpServlet {
 		
 		Person user = (Person) request.getSession().getAttribute("person");
 		
-		if(ability!=null && !ability.isEmpty()){
+		if(ability!=null && !ability.equals("none")){
 			abID = Integer.parseInt(ability);
 		}
 		

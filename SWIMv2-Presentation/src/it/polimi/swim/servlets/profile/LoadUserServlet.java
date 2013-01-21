@@ -61,27 +61,30 @@ public class LoadUserServlet extends HttpServlet {
 			Person loggedUser = (Person) request.getSession().getAttribute(
 					"person");
 
-			FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx
-					.lookup(FriendshipManager.REMOTE);
+			if (loggedUser != null) {
 
-			boolean reqExists = frmgr.haveFriendshipRequestBetween(
-					loggedUser.getID(), otherUserID);
-			Friendship fr = frmgr.getFriendshipRequest(loggedUser.getID(),
-					otherUserID);
-			boolean accepted = false;
-			boolean receiver = false;
-			Integer frID = null;
+				FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx
+						.lookup(FriendshipManager.REMOTE);
 
-			if (fr != null) {
-				accepted = fr.isAccepted();
-				frID = fr.getID();
-				receiver = frmgr.isReceiver(loggedUser.getID(), frID);
+				boolean reqExists = frmgr.haveFriendshipRequestBetween(
+						loggedUser.getID(), otherUserID);
+				Friendship fr = frmgr.getFriendshipRequest(loggedUser.getID(),
+						otherUserID);
+				boolean accepted = false;
+				boolean receiver = false;
+				Integer frID = null;
+
+				if (fr != null) {
+					accepted = fr.isAccepted();
+					frID = fr.getID();
+					receiver = frmgr.isReceiver(loggedUser.getID(), frID);
+				}
+
+				request.setAttribute("reqexists", Boolean.valueOf(reqExists));
+				request.setAttribute("accepted", Boolean.valueOf(accepted));
+				request.setAttribute("imReceiver", Boolean.valueOf(receiver));
+				request.setAttribute("frid", frID);
 			}
-
-			request.setAttribute("reqexists", Boolean.valueOf(reqExists));
-			request.setAttribute("accepted", Boolean.valueOf(accepted));
-			request.setAttribute("imReceiver", Boolean.valueOf(receiver));
-			request.setAttribute("frid", frID);
 
 		} catch (NamingException e) {
 			e.printStackTrace();
