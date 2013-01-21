@@ -1,6 +1,7 @@
 package it.polimi.swim.sessionbeans;
 
 import it.polimi.swim.entities.Ability;
+import it.polimi.swim.entities.Administrator;
 import it.polimi.swim.entities.Conversation;
 import it.polimi.swim.entities.Friendship;
 import it.polimi.swim.entities.HelpRequest;
@@ -190,8 +191,7 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@Override
 	public boolean modifyUser(int IDUser, String password, String name,
-			String surname, String city, Date birthday,
-			String phonenumber) {
+			String surname, String city, Date birthday, String phonenumber) {
 		boolean operationResult = false;
 		try {
 			User modifiedUser = manager.find(User.class, IDUser);
@@ -334,5 +334,28 @@ public class UserDataManager implements UserDataManagerRemote {
 		}
 
 		return friends;
+	}
+
+	@Override
+	public boolean createAdmin() {
+		String email = "admin@admin.com";
+		String name = "admin";
+		String password = "admin";
+
+		if (emailAlreadyExists(email)) {
+			return false;
+		}
+
+		Administrator admin = new Administrator();
+		admin.setEmail(email);
+		admin.setName(name);
+		admin.setPassword(password);
+
+		try {
+			manager.persist(admin);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 }

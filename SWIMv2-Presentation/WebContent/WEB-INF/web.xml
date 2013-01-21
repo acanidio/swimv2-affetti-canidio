@@ -185,4 +185,14 @@
     <servlet-name>LoadFriendsServlet</servlet-name>
     <url-pattern>/LoadFriendsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InitServlet</display-name>
+    <servlet-name>InitServlet</servlet-name>
+    <servlet-class>it.polimi.swim.servlets.admin.InitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InitServlet</servlet-name>
+    <url-pattern>/InitServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
