@@ -239,27 +239,27 @@ public class HelpRequestManager implements HelpRequestManagerRemote {
 	@Override
 	public List<HelpRequest> searchHelpRequests(boolean onlyFriends, int userID,
 			String city, Integer abilityID) {
-		String where = "WHERE ";
+		String where = "";
 		String from = "FROM HelpRequest h ";
 		if(onlyFriends) {
 			from += "JOIN h.sender u JOIN u.sendedRequests r1 JOIN u.receivedRequests r2 ";
 			where += "((r1.accepted = true AND (r1.sender.ID = :userID OR r1.receiver.ID = :userID)) OR ((r2.accepted = true AND (r2.sender.ID = :userID OR r2.receiver.ID = :userID)) ";
 		}
 		if (city != null && !city.isEmpty()) {
-			where += "AND u.city LIKE :city ";
+			where += "AND h.city LIKE :city ";
 			city = "%" + city.replace(' ', '%') + "%";
 		}
 		if (abilityID != null) {
-			where += "AND a.ID = :abID";
+			where += "AND a.ID = :abID ";
 			from += "JOIN h.ability a ";
 		}
 		if (where.substring(0, 3).equals("AND")) {
 			where = where.substring(4);
 		}
-		String queryString = "SELECT DISTINCT h " + from + where;
-		System.out.println(queryString);
+		String queryString = "SELECT DISTINCT h " + from + "WHERE " + where;
 		List<HelpRequest> helprequests= null;
 		try {
+			System.out.println(queryString);
 			Query query = manager.createQuery(queryString);
 			if(onlyFriends) {
 				query.setParameter("userID", userID);
