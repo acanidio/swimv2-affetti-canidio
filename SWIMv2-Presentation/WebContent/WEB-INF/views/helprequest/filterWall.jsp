@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 function mandatory_filtering(){
-	var friends = document.forms["filter"]["friends"].selected;
+	var friends = document.forms["filter"]["friends"].checked;
 	var city = document.forms["filter"]["city"].value;
 	var ability = document.forms["filter"]["ability0"].value;
 	

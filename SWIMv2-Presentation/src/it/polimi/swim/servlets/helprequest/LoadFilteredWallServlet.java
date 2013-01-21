@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class LoadFilteredWallServlet
  */
@@ -39,29 +40,38 @@ public class LoadFilteredWallServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String ability = request.getParameter("ability0");
 		Integer abID = null;
-		
+
 		Person user = (Person) request.getSession().getAttribute("person");
-		
-		if(ability!=null && !ability.equals("none")){
+
+		if (ability != null && !ability.equals("none")) {
 			abID = Integer.parseInt(ability);
 		}
-		
-		if(friends!=null && friends.equals("true")){
+
+		if (friends != null && friends.equals("true")) {
 			checked = true;
 		}
 		InitialContext ctx = Configuration.getInitialContext();
-		
+
 		try {
-			HelpRequestManagerRemote hrmgr = (HelpRequestManagerRemote) ctx.lookup(HelpRequestManager.REMOTE);
-			
-			List<HelpRequest> hrs = hrmgr.searchHelpRequests(checked, user.getID(), city, abID);
+			HelpRequestManagerRemote hrmgr = (HelpRequestManagerRemote) ctx
+					.lookup(HelpRequestManager.REMOTE);
+
+			List<HelpRequest> hrs = hrmgr.searchHelpRequests(checked,
+					user.getID(), city, abID);
+
+			if (hrs == null || hrs.isEmpty()) {
+				request.setAttribute("log",
+						"No result found.");
+			}
+
 			request.setAttribute("hrs", hrs);
 
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher("filteredwall.view").forward(request, response);
+
+		request.getRequestDispatcher("filteredwall.view").forward(request,
+				response);
 	}
 
 	/**
