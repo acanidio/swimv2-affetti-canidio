@@ -33,7 +33,6 @@ public class UserStorer implements DataStorer {
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String surname = request.getParameter("surname");
-			String avatar = request.getParameter("avatar");
 			String city = request.getParameter("city");
 			char gender = request.getParameter("gender").charAt(0);
 			String bday = request.getParameter("birthday");
@@ -46,7 +45,7 @@ public class UserStorer implements DataStorer {
 			String phonenumber = request.getParameter("phonenumber");
 
 			int userID = datamgr.registerNewUser(email, password, name,
-					surname, avatar, city, gender, birthday, phonenumber);
+					surname, "default.gif", city, gender, birthday, phonenumber);
 
 			String sabilityID = request.getParameter("ability0");
 
