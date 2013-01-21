@@ -190,7 +190,7 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@Override
 	public boolean modifyUser(int IDUser, String password, String name,
-			String surname, String avatar, String city, Date birthday,
+			String surname, String city, Date birthday,
 			String phonenumber) {
 		boolean operationResult = false;
 		try {
@@ -203,9 +203,6 @@ public class UserDataManager implements UserDataManagerRemote {
 			}
 			if (!modifiedUser.getSurname().equals(surname)) {
 				modifiedUser.setSurname(surname);
-			}
-			if (!modifiedUser.getAvatar().equals(avatar)) {
-				modifiedUser.setAvatar(avatar);
 			}
 			if (!modifiedUser.getCity().equals(city)) {
 				modifiedUser.setCity(city);
