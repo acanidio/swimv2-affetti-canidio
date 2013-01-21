@@ -7,21 +7,22 @@ html,body {
 body {
 	font-family: arial, sans-serif;
 	font-size: 76%;
-	text-align: center
+	text-align: center;
+	
 }
 
 div#container {
-	width: 1280px;
-	margin: 0 auto;
+	width: 90%;
+	margin: 1em auto;
 	text-align: left;
-	border-left: 1px solid #36c;
-	border-right: 1px solid #36c
+	border-left: 1px solid #3b5998;
+	border-right: 1px solid #3b5998
 }
 
 /*stili generici, su header e footer*/
 div#header {
-	background-color: #36C;
-	border-top: 1px solid #36c;
+	background-color: #3b5998;
+	border-top: 1px solid #3b5998;
 	color: #ff0
 }
 
@@ -32,19 +33,21 @@ h1,h2 {
 
 h1 {
 	padding-left: 0.5em;
-	font: bold 2.3em/80px arial, serif
+	font: bold 2.3em/80px arial, serif;
+	color: #fff;
 }
 
 h2 {
-	color: #999;
+	color: #fff;
 	font-size: 1.5em
 }
 
 div#footer {
 	text-align: center;
 	padding: 0.5em;
-	background-color: #69c;
-	border-bottom: 1px solid #36c;
+	background-color: #8b9dc3;
+	border-top: 1px solid #3b5998;
+	border-bottom: 1px solid #3b5998;
 	color: #000
 }
 
@@ -56,22 +59,19 @@ div#footer a {
 
 /*stili specifici per il layout*/
 div#navigation {
-	background-color: #9cf
-}
-
-div#content {
-	padding: 1em
+	background-color: #3b5998;
 }
 
 /*stili per la navigazione*/
 
 div#navigation div {
 	display: inline-block;
-	margin: 0 0 0 0;
+	margin: 0 0 0 1em;
 	padding: 0
 } /*nota display: inline*/
+
 div#navigation a {
-	color: #369;
+	color: #fff;
 	font: normal bold 1.2em/2.5em arial, sans-serif;
 	text-decoration: none
 }
@@ -82,10 +82,51 @@ div#navigation a:hover {
 }
 
 div#navigation a#activelink {
-	color: #033;
+	color: #fff;
 	text-decoration: none
 }
 
-/*div#navigation div.external {
-	border: 1px solid #36c;
-}*/
+/*stili per il contenuto*/
+
+div#content {
+	padding: 1em;
+	background-color: #dfe3ee;
+	min-height: 500px;
+}
+
+div#content ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+div#content a {
+	color: #369;
+	font: normal bold 1.2em/2.5em arial, sans-serif;
+	text-decoration: none
+}
+
+div#content a:hover {
+	color: #033;
+	text-decoration: underline
+}
+
+div#content a#activelink {
+	color: #369;
+	text-decoration: none
+}
+
+/*stili per la wall*/
+
+div#helprequest {
+	display: inline-block;
+	margin: 0 0 0 2em;
+	padding: 0;
+	border: ridge;
+}
+
+div#helprequest div {
+	display: inline-block;
+	margin: 0 1em 0 1em;
+	padding: 0; 
+}

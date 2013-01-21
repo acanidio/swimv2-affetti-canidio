@@ -9,10 +9,17 @@
 <title>Oops!</title>
 </head>
 <body>
-
-<swim:topMenu type="${sessionScope.type}" />
-
-
-<h3>${requestScope.error}</h3>
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<h3>${requestScope.error}</h3>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

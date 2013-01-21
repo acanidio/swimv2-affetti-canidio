@@ -19,19 +19,27 @@ function mandatory(){
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/mycss.css" type="text/css">
 <title>New message</title>
 </head>
 <body>
-
-<swim:topMenu type="${sessionScope.type}" />
-
-<form name="message" action="message.store" method="post" onsubmit="return mandatory();">
-<ul>
-	<li>To: <swim:friendsSelect friends="${friends}"></swim:friendsSelect></li>
-	<li><input type="text" name="text" height="50" width="200"></li>
-	<li><input type="submit" value="Send"></li>
-</ul>
-</form>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<form name="message" action="message.store" method="post" onsubmit="return mandatory();">
+				<ul>
+					<li>To: <swim:friendsSelect friends="${friends}"></swim:friendsSelect></li>
+					<li><input type="text" name="text" height="50" width="200"></li>
+					<li><input type="submit" value="Send"></li>
+				</ul>
+			</form>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

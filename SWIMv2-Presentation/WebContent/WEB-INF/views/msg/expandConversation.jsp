@@ -19,21 +19,28 @@ function mandatory(){
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/mycss.css" type="text/css">
 <title>Conversation</title>
 </head>
 <body>
-
-<swim:topMenu type="${sessionScope.type}" />
-
-<swim:conv conv="${requestScope.conv}"></swim:conv>
-
-<form name="message" method="post" action="message.store" onsubmit="return mandatory();">
-<input type="hidden" name="convid" value="${requestScope.conv.ID}">
-<ul>
-	<li><input type="text" name="text" height="50" width="200"></li>
-	<li><input type="submit" value="Send"></li>
-</ul>
-</form>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<swim:conv conv="${requestScope.conv}"></swim:conv>
+			<form name="message" method="post" action="message.store" onsubmit="return mandatory();">
+				<input type="hidden" name="convid" value="${requestScope.conv.ID}">
+				<ul>
+					<li><input type="text" name="text" height="50" width="200"></li>
+					<li><input type="submit" value="Send"></li>
+				</ul>
+			</form>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>

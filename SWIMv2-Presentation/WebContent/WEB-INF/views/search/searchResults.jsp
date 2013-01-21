@@ -11,13 +11,20 @@
 <title>Search Results</title>
 </head>
 <body>
-<swim:topMenu type="${sessionScope.type}" />
-
-<c:if test="${not empty requestScope.log}">
-	<h3>${requestScope.log}</h3>
-</c:if>
-
-<swim:userList users="${requestScope.results}"></swim:userList>
-
+	<div id="container">
+		<div id="header"></div>
+		<div id="navigation">
+			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
+		</div>
+		<div id="content">
+			<c:if test="${not empty requestScope.log}">
+				<h3>${requestScope.log}</h3>
+			</c:if>
+			<swim:userList users="${requestScope.results}"></swim:userList>
+		</div>
+		<div id="footer">
+			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+		</div>
+	</div>
 </body>
 </html>
