@@ -29,7 +29,7 @@
 					}
 				}
 			</script>
-			<div class="external"><a href="home.view">HOME</a></div>
+			<div class="external"><a href="home.view">Home</a></div>
 			<div class="external">
 				<form name="search" method="get" action="search.servlet" onsubmit="return mandatory_Search();">
 					<div><input type="text" value="Username" style="color:#C0C0C0" name="username" onclick="if(value=='Username'){value=''; style.color='#000000';}" 
@@ -54,10 +54,10 @@
 			</div>
 </c:if>
 <c:if test="${type=='USER'}">
-			<div class="external"><a href="home.view">HOME</a></div>
+			<div class="external"><a href="home.view">Home</a></div>
 			<div class="external">
-				<div><a href="pfrships.servlet">Pending Friendships</a></div>
-				<div><a href="pmessages.servlet">Received Messages</a></div>
+				<div><a href="pfrships.servlet">New Friendships</a></div>
+				<div><a href="pmessages.servlet">New Messages</a></div>
 			</div>
 			<div class="external">
 				<form name="search" method="get" action="search.servlet" onsubmit="return mandatory_Search();">
@@ -69,14 +69,14 @@
 			</div>
 			<div class="external">
 				<div><a href="loaduser.servlet?id=${sessionScope.person.ID}">${sessionScope.person.name} ${sessionScope.person.surname}</a></div>
-				<div><a href="myhrs.servlet">Help requests</a></div>
+				<div><a href="myhrs.servlet">Help Requests</a></div>
 				<div><a href="conversations.servlet">Conversations</a></div>
 			</div>
-			<div class="external"><a href="logout.servlet">log out</a></div>
+			<div class="external"><a href="logout.servlet">Log Out</a></div>
 </c:if>
 <c:if test="${type=='ADMINISTRATOR'}">
-			<div class="external"><a href="home.view">HOME</a></div>
+			<div class="external"><a href="home.view">Home</a></div>
 			<div class="external"><a href="pabilities.servlet">Pending Abilities</a></div>
 			<div class="external"><a href="newability.view">Add New Ability</a></div>
-			<div class="external"><a href="logout.servlet">log out</a></div>
+			<div class="external"><a href="logout.servlet">Log Out</a></div>
 </c:if>

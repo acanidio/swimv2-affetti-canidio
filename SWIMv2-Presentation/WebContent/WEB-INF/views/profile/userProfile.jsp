@@ -8,6 +8,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/mycss.css" type="text/css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+	    $('span.stars').stars();
+	});
+	$.fn.stars = function() {
+		return $(this).each(function() {
+	        // Get the value
+	        var val = parseFloat($(this).html());
+	        val = Math.round(val * 4) / 4; /* To round to nearest quarter */
+	        // Make sure that the value is in 0 - 5 range, multiply to get width
+	        var size = Math.max(0, (Math.min(5, val))) * 16;
+	        // Create stars holder
+	        var $span = $('<span />').width(size);
+	        // Replace the numerical value with stars
+	        $(this).html($span);
+	    });
+	}
+</script>
 <title>${requestScope.user.name}'s profile</title>
 </head>
 <body>

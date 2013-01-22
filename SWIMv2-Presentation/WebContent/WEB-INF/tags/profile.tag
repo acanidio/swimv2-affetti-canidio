@@ -16,6 +16,6 @@
 	<c:if test="${ability.key.pending == true}">
 		<c:set var="pending" value="(?)"></c:set>
 	</c:if>
-		<li>${ability.key.name} ${pending}: ${ability.value}</li>
+		<li>${ability.key.name} ${pending}: <span class="stars">${ability.value}</span></li>
 	</c:forEach>
 </ul>
