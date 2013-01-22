@@ -17,6 +17,8 @@
 		    selectOtherMonths: true,
 		    showButtonPanel: true,
 		    dateFormat: "yy-mm-dd",
+		    changeMonth: true,
+		    changeYear: true,
 			inline: true
 		});
 		// Hover states on the static widgets
