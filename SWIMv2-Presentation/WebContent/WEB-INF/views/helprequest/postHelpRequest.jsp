@@ -11,13 +11,15 @@
 <script src="js/jquery-1.9.0.js"></script>
 <script src="js/jquery-ui-1.10.0.custom.js"></script>
 <script src="js/jquery-ui-timepicker-addon.js"></script>
-<script>
+<script type="text/javascript">
 	$(function() {
 		$( "#datepicker" ).datepicker({
 			showOtherMonths: true,
 		    selectOtherMonths: true,
 		    showButtonPanel: true,
 		    dateFormat: "yy-mm-dd",
+		    changeMonth: true,
+		    changeYear: true,
 			inline: true
 		});
 		// Hover states on the static widgets
