@@ -7,6 +7,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/mycss.css" type="text/css">
+<link href="css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+<script src="js/jquery-1.9.0.js"></script>
+<script src="js/jquery-ui-1.10.0.custom.js"></script>
+<script src="js/jquery-ui-timepicker-addon.js"></script>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+			showOtherMonths: true,
+		    selectOtherMonths: true,
+		    showButtonPanel: true,
+		    dateFormat: "yy-mm-dd",
+			inline: true
+		});
+		// Hover states on the static widgets
+		$( "#dialog-link, #icons li" ).hover(
+			function() {
+				$( this ).addClass( "ui-state-hover" );
+			},
+			function() {
+				$( this ).removeClass( "ui-state-hover" );
+			}
+		);
+		$("#timepicker").timepicker();
+	});
+</script>
 <script type="text/javascript">
 function mandatory_HR(){
 	var title = document.forms["newhr"]["title"].value;
@@ -42,8 +67,8 @@ function mandatory_HR(){
 					<li>City: <input type="text" name="city"></li>
 					<li>Description: <input type="text" name="description"></li>
 					<li>Ability: <swim:abilitiesSelect abilities="${abilities}"></swim:abilitiesSelect></li>
-					<li>Date:	<input type="date" name="date"></li>
-					<li>Hour:	<input type="time" name="hour"></li>
+					<li>Date:	<input type="text" id="datepicker" name="date"></li>
+					<li>Hour:	<input type="text" id="timepicker" name="hour"></li>
 					<li><input type="submit" value="Post"></li>
 				</ul>
 			</form>

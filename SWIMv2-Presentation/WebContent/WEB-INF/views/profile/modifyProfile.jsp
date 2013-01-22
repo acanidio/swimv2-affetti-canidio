@@ -8,6 +8,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/mycss.css" type="text/css">
+<link href="css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+<script src="js/jquery-1.9.0.js"></script>
+<script src="js/jquery-ui-1.10.0.custom.js"></script>
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker({
+			showOtherMonths: true,
+		    selectOtherMonths: true,
+		    showButtonPanel: true,
+		    dateFormat: "yy-mm-dd",
+			inline: true
+		});
+		// Hover states on the static widgets
+		$( "#dialog-link, #icons li" ).hover(
+			function() {
+				$( this ).addClass( "ui-state-hover" );
+			},
+			function() {
+				$( this ).removeClass( "ui-state-hover" );
+			}
+		);
+	});
+</script>
 <title>Modify Profile</title>
 <script type="text/javascript">
 
@@ -116,7 +139,7 @@ function checkProfileForm(){
 					<li>Password: <input type="password" name="password"></li>
 					<li>Confirm Password: <input type="password" name="cpassword"></li>
 					<li>City: <input type="text" name="city" value="${sessionScope.person.city}"></li>
-					<li>Birthday: <input type="date" name="birthday"></li>
+					<li>Birthday: <input type="text" id="datepicker" name="birthday"></li>
 					<li>Phone number: <input type="text" name="phonenumber"></li>
 					<li> Already owned abilities:
 						<ul>
