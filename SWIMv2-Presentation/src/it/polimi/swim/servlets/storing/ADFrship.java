@@ -12,22 +12,28 @@ public class ADFrship implements DataStorer {
 
 	@Override
 	public void store(HttpServletRequest request) {
-	String ans=request.getParameter("ans").toLowerCase();
-	int frID = Integer.parseInt(request.getParameter("id"));
-	
-	InitialContext ctx = Configuration.getInitialContext();
-	
-	try {
-		FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx.lookup(FriendshipManager.REMOTE);
-		
-		if(ans.equals("accept")){
-			frmgr.acceptFriendshipRequest(frID);
-		}else if(ans.equals("decline")){
-			frmgr.declineFriendshipRequest(frID);
+		String ans = request.getParameter("ans").toLowerCase();
+		String isE = "";
+		int frID = Integer.parseInt(request.getParameter("id"));
+
+		InitialContext ctx = Configuration.getInitialContext();
+
+		try {
+			FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx
+					.lookup(FriendshipManager.REMOTE);
+
+			if (ans.equals("accept")) {
+				frmgr.acceptFriendshipRequest(frID);
+				isE = "e";
+			} else if (ans.equals("decline")) {
+				frmgr.declineFriendshipRequest(frID);
+			}
+
+			request.setAttribute("log", "The friendship has been correctly "
+					+ ans + isE + "d");
+		} catch (NamingException e) {
+			e.printStackTrace();
 		}
-	} catch (NamingException e) {
-		e.printStackTrace();
-	}
 
 	}
 

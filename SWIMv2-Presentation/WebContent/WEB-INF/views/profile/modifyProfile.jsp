@@ -159,7 +159,7 @@ function checkProfileForm(){
 						<input type="button" value="+" onclick="appendSelect();">
 						<input type="button" value="-" onclick="removeSelect();">
 					</li>
-					<li><a href="newability.view">Other...</a></li>
+					<li><a href="loadabilities.servlet?path=newability.view">Other...</a></li>
 					<li><input type="submit" value="Send profile information"></li>
 				</ul>
 			</form>

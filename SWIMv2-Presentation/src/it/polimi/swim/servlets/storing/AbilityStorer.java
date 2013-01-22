@@ -38,6 +38,7 @@ public class AbilityStorer implements DataStorer {
 
 			if (type.equals(Administrator.TYPE)) {
 				abmgr.createNewAcceptedAbility(name);
+				request.setAttribute("log", "The ability has been correctly stored.");
 			} else if (type.equals(User.TYPE)) {
 				int abID = abmgr.createNewPendingAbility(name);
 				
@@ -45,6 +46,7 @@ public class AbilityStorer implements DataStorer {
 				usermgr.addAbilityToUser(user.getID(), abID);
 				
 				request.getSession().setAttribute("person", usermgr.loadProfile(user.getID()));
+				request.setAttribute("log", "Ability request correctly sent to the administrator.");
 			}
 		} catch (NamingException e) {
 			e.printStackTrace();

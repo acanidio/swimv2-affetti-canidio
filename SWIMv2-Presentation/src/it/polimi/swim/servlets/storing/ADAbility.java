@@ -12,23 +12,29 @@ public class ADAbility implements DataStorer {
 
 	@Override
 	public void store(HttpServletRequest request) {
-		String ans=request.getParameter("ans").toLowerCase();
+		String ans = request.getParameter("ans").toLowerCase();
+		String isE = "";
 		int abID = Integer.parseInt(request.getParameter("id"));
-		
+
 		InitialContext ctx = Configuration.getInitialContext();
-		
+
 		try {
-			AbilityManagerRemote abmgr = (AbilityManagerRemote) ctx.lookup(AbilityManager.REMOTE);
-			
-			if(ans.equals("accept")){
+			AbilityManagerRemote abmgr = (AbilityManagerRemote) ctx
+					.lookup(AbilityManager.REMOTE);
+
+			if (ans.equals("accept")) {
 				abmgr.acceptAbility(abID);
-			}else if(ans.equals("decline")){
+				isE = "e";
+			} else if (ans.equals("decline")) {
 				abmgr.removeAbility(abID);
 			}
+
+			request.setAttribute("log", "The ability has been correctly " + ans
+					+ isE + "d");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override

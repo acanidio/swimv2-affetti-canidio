@@ -46,6 +46,8 @@ public class UserStorer implements DataStorer {
 
 			int userID = datamgr.registerNewUser(email, password, name,
 					surname, "default.gif", city, gender, birthday, phonenumber);
+			
+			request.setAttribute("log", "You have successfully signed up.");
 
 			String sabilityID = request.getParameter("ability0");
 
