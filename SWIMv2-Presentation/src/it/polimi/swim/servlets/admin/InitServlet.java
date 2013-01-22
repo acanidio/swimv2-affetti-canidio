@@ -39,7 +39,7 @@ public class InitServlet extends HttpServlet {
 		String pw = request.getParameter("pw");
 		String log = "";
 
-		if (!pw.equals("swim")) {
+		if (pw == null || !pw.equals("swim")) {
 			log += "You don't have the permission to view this page.";
 			request.setAttribute("log", log);
 			request.getRequestDispatcher("init.view")

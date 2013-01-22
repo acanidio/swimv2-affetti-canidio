@@ -1,6 +1,9 @@
 package it.polimi.swim.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -53,8 +56,12 @@ public class Conversation implements Serializable {
 		this.receiver = receiver;
 	}
 
-	public Set<Message> getMessages() {
-		return messages;
+	public List<Message> getMessages() {
+		List<Message> ordered = new ArrayList<Message>(messages);
+		Collections.sort(ordered);
+		
+		
+		return ordered;
 	}
 
 	public void setMessages(Set<Message> messages) {
