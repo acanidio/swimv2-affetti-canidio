@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Message implements Serializable {
+public class Message implements Serializable, Comparable<Message> {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -94,5 +94,23 @@ public class Message implements Serializable {
 	@Override
 	public int hashCode() {
 		return ID;
+	}
+
+	@Override
+	public int compareTo(Message other) {
+		
+		if(this.ID == other.ID){
+			return 0;
+		}
+		
+		if(this.ID > other.ID){
+			return 1;
+		}
+		
+		if(this.ID < other.ID){
+			return -1;
+		}
+		
+		return 0;
 	}
 }

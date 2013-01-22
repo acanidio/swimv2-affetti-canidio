@@ -1,18 +1,25 @@
 package it.polimi.swim.servlets.msg;
 
 import it.polimi.swim.entities.Conversation;
+import it.polimi.swim.entities.Message;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.ConversationManager;
 import it.polimi.swim.sessionbeans.ConversationManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class ExpandConvServlet
  */
@@ -41,16 +48,16 @@ public class ExpandConvServlet extends HttpServlet {
 		try {
 			convmgr = (ConversationManagerRemote) ctx
 					.lookup(ConversationManager.REMOTE);
-			Conversation conv = convmgr.loadSpecificConversation(convID, user.getID());
+			Conversation conv = convmgr.loadSpecificConversation(convID,
+					user.getID());
 
 			request.setAttribute("conv", conv);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 
-		request.getRequestDispatcher(
-				"expandconv.view").forward(
-				request, response);
+		request.getRequestDispatcher("expandconv.view").forward(request,
+				response);
 	}
 
 	/**
