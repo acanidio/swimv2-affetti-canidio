@@ -1,17 +1,12 @@
 package it.polimi.swim.servlets.msg;
 
 import it.polimi.swim.entities.Conversation;
-import it.polimi.swim.entities.Message;
 import it.polimi.swim.entities.Person;
 import it.polimi.swim.sessionbeans.ConversationManager;
 import it.polimi.swim.sessionbeans.ConversationManagerRemote;
 import it.polimi.swim.utils.Configuration;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

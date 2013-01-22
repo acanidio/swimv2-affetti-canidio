@@ -77,6 +77,6 @@
 <c:if test="${type=='ADMINISTRATOR'}">
 			<div class="link"><a href="home.view">Home</a></div>
 			<div class="link"><a href="pabilities.servlet">Pending Abilities</a></div>
-			<div class="link"><a href="newability.view">Add New Ability</a></div>
+			<div class="link"><a href="loadabilities.servlet?path=newability.view">Add New Ability</a></div>
 			<div class="link"><a href="logout.servlet">Log Out</a></div>
 </c:if>

@@ -22,6 +22,8 @@ public class FriendshipStorer implements DataStorer {
 			FriendshipManagerRemote frmgr = (FriendshipManagerRemote) ctx.lookup(FriendshipManager.REMOTE);
 			
 			frmgr.addFriendshipRequest(user.getID(), recID);
+			
+			request.setAttribute("log", "Friendship request correctly sent.");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

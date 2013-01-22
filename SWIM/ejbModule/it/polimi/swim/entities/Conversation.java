@@ -18,28 +18,28 @@ import javax.persistence.OneToMany;
 public class Conversation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
-	
+
 	@ManyToOne(targetEntity = User.class, optional = false)
 	private User sender;
 
 	@ManyToOne(targetEntity = User.class, optional = false)
 	private User receiver;
-	
+
 	@OneToMany(targetEntity = Message.class, mappedBy = "conversation", fetch = FetchType.EAGER)
 	private Set<Message> messages;
-	
+
 	public Conversation() {
 		super();
 	}
-	
+
 	public int getID() {
 		return ID;
 	}
-	
+
 	public User getSender() {
 		return sender;
 	}
@@ -59,38 +59,31 @@ public class Conversation implements Serializable {
 	public List<Message> getMessages() {
 		List<Message> ordered = new ArrayList<Message>(messages);
 		Collections.sort(ordered);
-		
-		
+
 		return ordered;
 	}
 
 	public void setMessages(Set<Message> messages) {
 		this.messages = messages;
 	}
-	
+
 	public Message getLastMessage() {
-		int maxID = 0;
-		Message lastMessage = null;
-		for(Message m: messages) {
-			if(m.getID()>maxID) {
-				lastMessage = m;
-			}
-		}
-		return lastMessage;
+
+		return getMessages().get(messages.size() - 1);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof Conversation)) {
+		if (!(obj instanceof Conversation)) {
 			return false;
 		}
 		Conversation cnv = (Conversation) obj;
-		if(ID == cnv.getID()) {
+		if (ID == cnv.getID()) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return ID;
