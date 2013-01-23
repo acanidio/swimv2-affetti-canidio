@@ -104,11 +104,11 @@ public class Message implements Serializable, Comparable<Message> {
 		}
 		
 		if(this.ID > other.ID){
-			return 1;
+			return -1;
 		}
 		
 		if(this.ID < other.ID){
-			return -1;
+			return 1;
 		}
 		
 		return 0;
