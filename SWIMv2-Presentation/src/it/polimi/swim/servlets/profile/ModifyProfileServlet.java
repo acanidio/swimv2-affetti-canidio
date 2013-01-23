@@ -86,6 +86,8 @@ public class ModifyProfileServlet extends HttpServlet {
 			}
 
 			Person updatedUser = usermgr.loadProfile(user.getID());
+			
+			request.setAttribute("log", "Profile modified succesfully.");
 			request.getSession().setAttribute("person", updatedUser);
 
 		} catch (NamingException e) {

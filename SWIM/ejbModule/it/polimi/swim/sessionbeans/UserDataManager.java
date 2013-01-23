@@ -132,7 +132,8 @@ public class UserDataManager implements UserDataManagerRemote {
 		try {
 			Query query = manager.createQuery("SELECT h "
 					+ "FROM User u, IN (u.helprequests) h "
-					+ "WHERE u.ID = :IDUser");
+					+ "WHERE u.ID = :IDUser "
+					+ "ORDER BY h.ID DESC");
 			helprequests = query.setParameter("IDUser", IDUser).getResultList();
 		} catch (Exception e) {
 			return null;
