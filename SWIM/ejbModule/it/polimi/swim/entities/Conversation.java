@@ -69,7 +69,7 @@ public class Conversation implements Serializable {
 
 	public Message getLastMessage() {
 
-		return getMessages().get(messages.size() - 1);
+		return getMessages().get(0);
 	}
 
 	@Override
