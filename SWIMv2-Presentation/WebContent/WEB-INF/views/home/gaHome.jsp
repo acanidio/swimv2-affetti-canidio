@@ -16,7 +16,11 @@
 		<div id="navigation">
 			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
 		</div>
-		<div id="content"></div>
+		<div id="content">
+			<c:if test="${not empty requestScope.log}">
+				<h3>${requestScope.log}</h3>
+			</c:if>
+		</div>
 		<div id="footer">
 			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
 		</div>

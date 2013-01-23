@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="swim"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 
@@ -31,6 +32,12 @@ function mandatory_ability(){
 			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
 		</div>
 		<div id="content">
+			<h3>Abilities already in SWIM</h3>
+			<ul>
+				<c:forEach var="ability" items="${requestScope.abilities}">
+					<li>${ability.name}</li>
+				</c:forEach>
+			</ul>
 			<form name="newability" action="ability.store" method="get" onsubmit="return mandatory_ability();">
 				Name of the new ability: <input type="text" name="newability">
 				<input type="submit" value="Send">
