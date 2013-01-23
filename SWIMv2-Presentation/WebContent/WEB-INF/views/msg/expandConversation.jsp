@@ -29,13 +29,17 @@ function mandatory(){
 			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
 		</div>
 		<div id="content">
-			<swim:conv conv="${requestScope.conv}"></swim:conv>
 			<form name="message" method="post" action="message.store" onsubmit="return mandatory();">
-				<input type="hidden" name="convid" value="${requestScope.conv.ID}">
-				<ul>
-					<li><input type="text" name="text" height="50" width="200"></li>
-					<li><input type="submit" value="Send"></li>
-				</ul>
+				<fieldset>
+					<input type="hidden" name="convid" value="${requestScope.conv.ID}">
+					<table>
+						<tr>
+							<td><input type="text" name="text"></td>
+							<td><input type="submit" value="Send"></td>
+						</tr>
+						<swim:conv conv="${requestScope.conv}"></swim:conv>
+					</table>
+				</fieldset>
 			</form>
 		</div>
 		<div id="footer">

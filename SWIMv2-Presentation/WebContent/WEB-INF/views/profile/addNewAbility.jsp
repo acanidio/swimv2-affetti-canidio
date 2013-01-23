@@ -33,14 +33,21 @@ function mandatory_ability(){
 		</div>
 		<div id="content">
 			<h3>Abilities already in SWIM</h3>
-			<ul>
+			<table>
 				<c:forEach var="ability" items="${requestScope.abilities}">
-					<li>${ability.name}</li>
+					<tr>
+						<td>${ability.name}</td>
+					</tr>
 				</c:forEach>
-			</ul>
+			</table>
 			<form name="newability" action="ability.store" method="get" onsubmit="return mandatory_ability();">
-				Name of the new ability: <input type="text" name="newability">
-				<input type="submit" value="Send">
+				<table>
+					<tr>
+						<td>Name of the new ability:</td>
+						<td><input type="text" name="newability"></td>
+						<td><input type="submit" value="Send"></td>
+					</tr>
+				</table>
 			</form>
 		</div>
 		<div id="footer">

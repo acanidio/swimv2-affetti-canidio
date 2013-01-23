@@ -119,15 +119,12 @@ div#content a#activelink {
 
 div#helprequest {
 	display: inline-block;
-	margin: 0 0 0 2em;
-	padding: 0;
-	border: ridge;
+	border: groove;
 }
 
-div#helprequest div {
-	display: inline-block;
+div#helprequest table {
 	margin: 0 1em 0 1em;
-	padding: 0; 
+	padding: 0;
 }
 
 /*Displaying stars*/

@@ -20,9 +20,24 @@
 			<c:if test="${not empty requestScope.log}">
 				<h3>${requestScope.log}</h3>
 			</c:if>
+			<c:if test="${empty sessionScope.type}">
+				<h1>Small World hypothesIs Machine v2 (SWIMv2)</h1>
+				<div></div>
+				<div>
+					<p>
+						This is a Social Network with the purpose of getting in touch people. 
+						SWIMv2 allows you to search for people possessing a determinate ability 
+						and to search for help contacting them manually. It also let you 
+						register and search for help automatically through a help request mechanism.
+						As all the famous Social Networks it provides also a friendship mechanism and 
+						a message mechanism to improve your expeience<br><br>
+						Enjoy your usage as we have enjoyed the development!
+					</p>
+				</div>
+			</c:if>
 		</div>
 		<div id="footer">
-			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
+			<p>Developed by <a href="mailto:affox90@gmail.com">Affetti Lorenzo</a> and <a href="mailto:canidio.a@gmail.com">Canidio Andrea</a></p>
 		</div>
 	</div>
 </body>

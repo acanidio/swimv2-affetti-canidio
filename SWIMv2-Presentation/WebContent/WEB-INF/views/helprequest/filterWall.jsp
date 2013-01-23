@@ -48,12 +48,27 @@ function addNone(){
 		</div>
 		<div id="content">
 			<form name="filter" action="filterwall.servlet" method="get" onsubmit="return mandatory_filtering();">
-				<ul>
-					<li>Filter by friends' posts: <input type="checkbox" name="friends" value="true"></li>
-					<li>Filter by city: <input type="text" name="city"></li>
-					<li>Filter by ability: <swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></li>
-					<li><input type="submit" value="Filter"></li>
-				</ul>
+				<fieldset>
+					<legend>Wall's Filter Form</legend>
+					<table>
+						<tr>
+							<td>Filter by friends' posts: </td>
+							<td><input type="checkbox" name="friends" value="true"></td>
+						</tr>
+						<tr>
+							<td>Filter by city:</td>
+							<td><input type="text" name="city"></td>
+						</tr>
+						<tr>
+							<td>Filter by ability:</td>
+							<td><swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Filter"></td>
+						</tr>
+					</table>
+				</fieldset>
 			</form>
 		</div>
 		<div id="footer">

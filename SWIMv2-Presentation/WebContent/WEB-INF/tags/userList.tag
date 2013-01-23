@@ -1,10 +1,10 @@
 <%@ attribute name="users" type="java.util.Collection" required="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<ul>
-<c:forEach var="user" items="${users}">
-	
-	<li><a href="loaduser.servlet?id=${user.ID}">${user.name} ${user.surname}</a></li>
-	
-</c:forEach>
-</ul>
+<table>
+	<c:forEach var="user" items="${users}">
+		<tr>
+			<td><a href="loaduser.servlet?id=${user.ID}">${user.name} ${user.surname}</a></td>
+		</tr>
+	</c:forEach>
+</table>

@@ -138,33 +138,76 @@ function checkProfileForm(){
 				<h3>${requestScope.log}</h3>
 			</c:if>
 			<form name="signup" action="storemodif.servlet" method="post" onsubmit="return checkProfileForm();">
-				<ul>
-					<li>Name*: <input type="text" name="name" value="${sessionScope.person.name}"></li>
-					<li>Surname*: <input type="text" name="surname" value="${sessionScope.person.surname}"></li>
-					<li>Password: <input type="password" name="password"></li>
-					<li>Confirm Password: <input type="password" name="cpassword"></li>
-					<li>City: <input type="text" name="city" value="${sessionScope.person.city}"></li>
-					<li>Birthday: <input type="text" id="datepicker" name="birthday"></li>
-					<li>Phone number: <input type="text" name="phonenumber"></li>
-					<li> Already owned abilities:
-						<ul>
-							<c:forEach var="ability" items="${sessionScope.person.abilities}">
-								<li>${ability.name}</li>
-							</c:forEach>
-						</ul>
-					</li>
-					<li>
-						<ul id="abilities">
-							<li>
-								<swim:abilitiesSelect abilities="${abilities}" />
-							</li>
-						</ul>
-						<input type="button" value="+" onclick="appendSelect();">
-						<input type="button" value="-" onclick="removeSelect();">
-					</li>
-					<li><a href="loadabilities.servlet?path=newability.view">Other...</a></li>
-					<li><input type="submit" value="Send profile information"></li>
-				</ul>
+				<fieldset>
+					<legend>Profile's Modification</legend>
+				<table>
+					<tr>
+						<td>Name*: </td>
+						<td><input type="text" name="name" value="${sessionScope.person.name}"></td>
+					</tr>
+					<tr>
+						<td>Surname*: </td>
+						<td><input type="text" name="surname" value="${sessionScope.person.surname}"></td>
+					</tr>
+					<tr>
+						<td>Password: </td>
+						<td><input type="password" name="password"></td>
+					</tr>
+					<tr>
+						<td>Confirm Password: </td>
+						<td><input type="password" name="cpassword"></td>
+					</tr>
+					<tr>
+						<td>City: </td>
+						<td><input type="text" name="city" value="${sessionScope.person.city}"></td>
+					</tr>
+					<tr>
+						<td>Birthday: </td>
+						<td><input type="text" id="datepicker" name="birthday"></td>
+					</tr>
+					<tr>
+						<td>Phone number: </td>
+						<td><input type="text" name="phonenumber"></td>
+					</tr>
+					<c:set var="counter" value="1"></c:set>
+					<c:forEach var="ability" items="${sessionScope.person.abilities}">
+						<tr>
+							<td>
+								<c:if test="${counter == '1'}">
+									Already owned abilities: 
+									<c:set var="counter" value="0"></c:set> 
+								</c:if>
+							</td>
+							<td>${ability.name}</td>
+						</tr>
+					</c:forEach>
+					<tr>
+						<td>New Abilities: </td>
+						<td>
+							<ul id="abilities">
+								<li>
+									<swim:abilitiesSelect abilities="${abilities}" />
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<input type="button" value="+" onclick="appendSelect();">
+							<input type="button" value="-" onclick="removeSelect();">
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><a href="loadabilities.servlet?path=newability.view">Other...</a></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Send profile information"></td>
+					</tr>
+				</table>
+				</fieldset>
 			</form>
 		</div>
 		<div id="footer">

@@ -47,12 +47,27 @@ function addNone(){
 		</div>
 		<div id="content">
 			<form name="advsearch" method="get" action="search.servlet" onsubmit="return mandatory_advSearch();">
-				<ul>
-					<li>Username: <input type="text" name="username"></li>
-					<li>City: <input type="text" name="city"></li>
-					<li>Ability: 	<swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect> </li>	
-					<li><input type="submit" value="Search"></li>
-				</ul>
+				<fieldset>
+					<legend>Advanced Search</legend>
+					<table>
+						<tr>
+							<td>Username: </td>
+							<td><input type="text" name="username"></td>
+						</tr>
+						<tr>
+							<td>City: </td>
+							<td><input type="text" name="city"></td>
+						</tr>
+						<tr>
+							<td>Ability:</td>
+							<td><swim:abilitiesSelect abilities="${requestScope.abilities}"></swim:abilitiesSelect></td>
+						</tr>	
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Search"></td>
+						</tr>
+					</table>
+				</fieldset>
 			</form>
 		</div>
 		<div id="footer">

@@ -30,11 +30,17 @@ function mandatory(){
 		</div>
 		<div id="content">
 			<form name="message" action="message.store" method="post" onsubmit="return mandatory();">
-				<ul>
-					<li>To: <swim:friendsSelect friends="${friends}"></swim:friendsSelect></li>
-					<li><input type="text" name="text" height="50" width="200"></li>
-					<li><input type="submit" value="Send"></li>
-				</ul>
+				<table>
+					<tr>
+						<td>To: </td>
+						<td><swim:friendsSelect friends="${friends}"></swim:friendsSelect></td>
+					</tr>
+					<tr>
+						<td>Message: </td>
+						<td><input type="text" name="text" height="50" width="200"></td>
+						<td><input type="submit" value="Send"></td>
+					</tr>
+				</table>
 			</form>
 		</div>
 		<div id="footer">
