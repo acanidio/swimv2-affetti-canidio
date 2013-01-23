@@ -17,21 +17,30 @@
 		</div>
 		<div id="content">
 			<form action="feedback.store" method="post">
-				<input type="hidden" value="${param.replyid}" name="replyid">
-				<ul>
-					<li>
-						<fieldset>
-							<legend>Mark:</legend>
-							1<input name="mark" type="radio" value="1">
-							2<input name="mark" type="radio" value="2">
-							3<input name="mark" type="radio" value="3">
-							4<input name="mark" type="radio" value="4">
-							5<input name="mark" type="radio" value="5" checked="checked">
-						</fieldset>
-					</li>
-					<li>Description: <input type="text" name="description"></li>
-					<li><input type="submit" value="Send"></li>
-				</ul>
+				<fieldset>
+					<legend>Feedback Form</legend>
+					<input type="hidden" value="${param.replyid}" name="replyid">
+					<table>
+						<tr>
+							<td>Mark:</td>
+							<td>
+								1<input name="mark" type="radio" value="1">
+								2<input name="mark" type="radio" value="2">
+								3<input name="mark" type="radio" value="3">
+								4<input name="mark" type="radio" value="4">
+								5<input name="mark" type="radio" value="5" checked="checked">
+							</td>
+						</tr>
+						<tr>
+							<td>Description:</td>
+							<td><input type="text" name="description"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Send"></td>
+						</tr>
+					</table>
+				</fieldset>
 			</form>
 		</div>
 		<div id="footer">

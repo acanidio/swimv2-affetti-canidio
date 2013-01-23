@@ -141,33 +141,74 @@ function checkProfileForm(){
 		</div>
 		<div id="content">
 			<form name="signup" action="user.store" method="post" onsubmit="return checkProfileForm();">
-				<ul>
-					<li>Name*: <input type="text" name="name" value="${sessionScope.person.name}"></li>
-					<li>Surname*: <input type="text" name="surname" value="${sessionScope.person.surname}"></li>
-					<li>
-						<fieldset>
-							<legend>Gender*:</legend>
+				<fieldset>
+					<legend>Registration Form</legend>
+				<table>
+					<tr>
+						<td>Name*: </td>
+						<td><input type="text" name="name" value="${sessionScope.person.name}"></td>
+					</tr>
+					<tr>
+						<td>Surname*: </td>
+						<td><input type="text" name="surname" value="${sessionScope.person.surname}"></td>
+					</tr>
+					<tr>
+						<td>Gender*: </td>
+						<td>
 							M<input name="gender" type="radio" value="M" checked="checked">
 							F<input name="gender" type="radio" value="F">
-						</fieldset>
-					</li>
-					<li>Password*: <input type="password" name="password"></li>
-					<li>Confirm Password*: <input type="password" name="cpassword"></li>
-					<li>E-mail address*: <input type="text" name="email"></li>
-					<li>City: <input type="text" name="city" value="${sessionScope.person.city}"></li>
-					<li>Birthday: <input type="text" id="datepicker" name="birthday"></li>
-					<li>Phone number: <input type="text" name="phonenumber"></li>
-					<li>
-						<ul id="abilities">
-							<li>
-								<swim:abilitiesSelect abilities="${abilities}" />
-							</li>
-						</ul>
-						<input type="button" value="+" onclick="appendSelect();">
-						<input type="button" value="-" onclick="removeSelect();">
-					</li>
-					<li><input type="submit" value="Send profile information"></li>
-				</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>Password*: </td>
+						<td><input type="password" name="password"></td>
+					</tr>
+					<tr>
+						<td>Confirm Password*: </td>
+						<td><input type="password" name="cpassword"></td>
+					</tr>
+					<tr>
+						<td>E-mail address*: </td>
+						<td><input type="text" name="email"></td>
+					</tr>
+					<tr>
+						<td>City: </td>
+						<td><input type="text" name="city" value="${sessionScope.person.city}"></td>
+					</tr>
+					<tr>
+						<td>Birthday: </td>
+						<td><input type="text" id="datepicker" name="birthday"></td>
+					</tr>
+					<tr>
+						<td>Phone number: </td>
+						<td><input type="text" name="phonenumber"></td>
+					</tr>
+					<tr>
+						<td>
+							Abilities: 
+						</td>
+						<td>
+							<ul id="abilities">
+								<li>
+									<swim:abilitiesSelect abilities="${abilities}" />
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<input type="button" value="+" onclick="appendSelect();">
+							<input type="button" value="-" onclick="removeSelect();">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" value="Send profile information">
+						</td>
+					</tr>
+				</table>
+				</fieldset>
 			</form>
 		</div>
 		<div id="footer">

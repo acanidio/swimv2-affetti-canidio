@@ -4,19 +4,20 @@
 <div id="helprequests">
 <c:forEach var="helpreq" items="${helpreqs}">
 	<div id="helprequest">
-		<div>
-			<ul>
-				<li><a href="loaduser.servlet?id=${helpreq.sender.ID}">${helpreq.sender.name} ${helpreq.sender.surname}</a></li>
-				<li><a href="loadhr.servlet?id=${helpreq.ID}">${helpreq.title}</a></li>
-			</ul>
-		</div>
-		<div>
-			<ul>
-				<li>${helpreq.ability.name}</li>
-				<li>${helpreq.date}</li>
-				<li>${helpreq.hour}</li>
-			</ul>
-		</div>
+		<table>
+			<tr>
+				<td><a href="loaduser.servlet?id=${helpreq.sender.ID}">${helpreq.sender.name} ${helpreq.sender.surname}</a></td>
+				<td>${helpreq.ability.name}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>${helpreq.date}</td>
+			</tr>
+			<tr>
+				<td><a href="loadhr.servlet?id=${helpreq.ID}">${helpreq.title}</a></td>
+				<td>${helpreq.hour}</td>
+			</tr>
+		</table>
 	</div>
 </c:forEach>
 </div>

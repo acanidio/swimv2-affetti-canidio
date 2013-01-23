@@ -64,15 +64,41 @@ function mandatory_HR(){
 		</div>
 		<div id="content">
 			<form name="newhr" action="hr.store" method="post" onsubmit="return mandatory_HR();">
-				<ul>
-					<li>Title: <input type="text" name="title"></li>
-					<li>City: <input type="text" name="city"></li>
-					<li>Description: <input type="text" name="description"></li>
-					<li>Ability: <swim:abilitiesSelect abilities="${abilities}"></swim:abilitiesSelect></li>
-					<li>Date:	<input type="text" id="datepicker" name="date"></li>
-					<li>Hour:	<input type="text" id="timepicker" name="hour"></li>
-					<li><input type="submit" value="Post"></li>
-				</ul>
+				<fieldset>
+					<legend>Help Request Form</legend>
+					<table>
+						<tr>
+							<td>Title:</td>
+							<td><input type="text" name="title"></td>
+						</tr>
+						<tr>
+							<td>City:</td>
+							<td><input type="text" name="city"></td>
+						</tr>
+						<tr>
+							<td>Description:</td>
+							<td>
+								<textarea rows="6" cols="17" name="description"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>Ability:</td>
+							<td><swim:abilitiesSelect abilities="${abilities}"></swim:abilitiesSelect></td>
+						</tr>
+						<tr>
+							<td>Date:</td>
+							<td><input type="text" id="datepicker" name="date"></td>
+						</tr>
+						<tr>
+							<td>Hour:</td>
+							<td><input type="text" id="timepicker" name="hour"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Post"></td>
+						</tr>
+					</table>
+				</fieldset>
 			</form>
 		</div>
 		<div id="footer">
