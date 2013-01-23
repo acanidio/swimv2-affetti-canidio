@@ -1,6 +1,8 @@
 <%@ attribute name="user" required="true" type="it.polimi.swim.entities.Person"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<c:if test="${not empty requestScope.log}">
+	<h3>${requestScope.log}</h3>
+</c:if>
 <ul>
 <li>${user.name}</li>
 <li>${user.surname}</li>

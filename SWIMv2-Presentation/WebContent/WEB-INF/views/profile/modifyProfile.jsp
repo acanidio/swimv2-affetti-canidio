@@ -134,6 +134,9 @@ function checkProfileForm(){
 			<swim:topMenu type="${sessionScope.type}"></swim:topMenu>
 		</div>
 		<div id="content">
+			<c:if test="${not empty requestScope.log}">
+				<h3>${requestScope.log}</h3>
+			</c:if>
 			<form name="signup" action="storemodif.servlet" method="post" onsubmit="return checkProfileForm();">
 				<ul>
 					<li>Name*: <input type="text" name="name" value="${sessionScope.person.name}"></li>
