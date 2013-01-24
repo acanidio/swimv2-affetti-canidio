@@ -25,9 +25,7 @@
 			<br>
 			<a href="loadfriends.servlet?path=newmsg.view">Send New Message</a>
 		</div>
-		<div id="footer">
-			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
-		</div>
+		<swim:footer/>
 	</div>
 </body>
 </html>
