@@ -41,5 +41,6 @@
 				<span class="stars">${ability.value}</span>
 			</td>
 		</tr>
+		<c:set var="pending" value=""></c:set>
 	</c:forEach>
 </table>

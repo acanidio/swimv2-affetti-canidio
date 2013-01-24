@@ -41,6 +41,11 @@ public class PendingAbilitiesServlet extends HttpServlet {
 			abmgr = (AbilityManagerRemote) ctx.lookup(AbilityManager.REMOTE);
 
 			List<Ability> abilities = abmgr.loadPendingAbilities();
+			
+			if(abilities==null || abilities.isEmpty()){
+				request.setAttribute("info", "You don't have pending abilities.");
+			}
+			
 			request.setAttribute("pendAbilities", abilities);
 		} catch (NamingException e) {
 			e.printStackTrace();

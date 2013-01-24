@@ -20,6 +20,9 @@
 			<c:if test="${not empty requestScope.log}">
 				<h3>${requestScope.log}</h3>
 			</c:if>
+			<c:if test="${not empty requestScope.info}">
+				<h3>${requestScope.info}</h3>
+			</c:if>
 			<swim:pendAbilities pendAbilities="${pendAbilities}"></swim:pendAbilities>
 		</div>
 		<swim:footer/>

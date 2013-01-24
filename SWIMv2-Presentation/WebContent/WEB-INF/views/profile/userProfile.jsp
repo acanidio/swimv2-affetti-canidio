@@ -45,7 +45,7 @@
 						<a href="frship.store?id=${requestScope.user.ID}">Add to friends</a>
 					</c:if>
 					<c:if test="${sessionScope.type=='USER' && requestScope.reqexists==true && requestScope.accepted==false && requestScope.imReceiver == true}">
-						<a href="adfrship.store?id=${requestScope.frid}&ans=accept">Accept the friendship request</a>
+						<a href="adfrship.store?id=${requestScope.frid}&ans=accept&userid=${requestScope.user.ID}">Accept the friendship request</a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>

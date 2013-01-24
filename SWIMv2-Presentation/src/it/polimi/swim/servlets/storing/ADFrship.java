@@ -30,7 +30,7 @@ public class ADFrship implements DataStorer {
 			}
 
 			request.setAttribute("log", "The friendship has been correctly "
-					+ ans + isE + "d");
+					+ ans + isE + "d.");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -39,7 +39,11 @@ public class ADFrship implements DataStorer {
 
 	@Override
 	public String getForwardingPath(HttpServletRequest request) {
-		return "pfrships.servlet";
+		String fromPendingFr = request.getParameter("frompending");
+		if(fromPendingFr != null && fromPendingFr.equals("true")){
+			return "pfrships.servlet";
+		}
+		return "loaduser.servlet?id="+request.getParameter("userid");
 	}
 
 }

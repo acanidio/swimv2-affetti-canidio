@@ -1,12 +1,12 @@
 /*stili per il layout fisso*/
 html,body {
 	margin: 0;
-	padding: 0
+	padding: 0;
 }
 
 body {
 	font-family: arial, sans-serif;
-	font-size: 76%;
+	font-size: 83%;
 	text-align: center;
 }
 
@@ -97,6 +97,7 @@ div#navigation div.link:hover {
 div#navigation a {
 	color: #fff;
 	font: normal bold 1.2em/2.5em arial, sans-serif;
+	font-size: 112%;
 	text-decoration: none
 }
 
