@@ -43,9 +43,7 @@
 				</fieldset>
 			</form>
 		</div>
-		<div id="footer">
-			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
-		</div>
+		<swim:footer/>
 	</div>
 </body>
 </html>

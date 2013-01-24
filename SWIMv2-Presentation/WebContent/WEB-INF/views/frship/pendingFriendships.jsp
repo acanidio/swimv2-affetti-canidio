@@ -22,9 +22,7 @@
 			</c:if>
 			<swim:pendFR pendingFR="${requestScope.pfriendships}"></swim:pendFR>
 		</div>
-		<div id="footer">
-			<p>Developed by Affetti Lorenzo and Canidio Andrea</p>
-		</div>
+		<swim:footer/>
 	</div>
 </body>
 </html>
