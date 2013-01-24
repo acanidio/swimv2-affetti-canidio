@@ -8,22 +8,31 @@ body {
 	font-family: arial, sans-serif;
 	font-size: 76%;
 	text-align: center;
-	
 }
 
 div#container {
 	width: 90%;
 	margin: 1em auto;
 	text-align: left;
-	border-left: 1px solid #3b5998;
-	border-right: 1px solid #3b5998
+	background-color: #B20000;
+	border-left: 1px solid #B20000;
+	border-right: 1px solid #B20000
+}
+
+div#container .logo {
+	width: 70%;
+	height: 30%;
+	align: center;
+}
+
+div#container .description {
+	font-style: italic;
+	align: center;
 }
 
 /*stili generici, su header e footer*/
 div#header {
-	background-color: #3b5998;
-	border-top: 1px solid #3b5998;
-	color: #ff0
+	border-top: 1px solid #B20000;
 }
 
 h1,h2 {
@@ -45,9 +54,9 @@ h2 {
 div#footer {
 	text-align: center;
 	padding: 0.5em;
-	background-color: #8b9dc3;
-	border-top: 1px solid #3b5998;
-	border-bottom: 1px solid #3b5998;
+	background-color: #FE8080;
+	border-top: 1px solid #B20000;
+	border-bottom: 1px solid #B20000;
 	color: #000
 }
 
@@ -59,7 +68,8 @@ div#footer a {
 
 /*stili specifici per il layout*/
 div#navigation {
-	background-color: #3b5998;
+	background-color: #B20000;
+	border-bottom: 1px solid #B20000;
 }
 
 /*stili per la navigazione*/
@@ -71,7 +81,7 @@ div#navigation div {
 } /*nota display: inline*/
 
 div#navigation div.link:hover {
-	background-color: #537BCF;
+	background-color: #FE8080;
 }
 
 div#navigation a {
@@ -89,7 +99,7 @@ div#navigation a#activelink {
 
 div#content {
 	padding: 1em;
-	background-color: #dfe3ee;
+	background-color: #FEDFBF;
 	min-height: 500px;
 }
 
@@ -100,19 +110,18 @@ div#content ul {
 }
 
 div#content a {
-	color: #369;
+	color: #B20000;
 	font: normal bold 1.2em/2.5em arial, sans-serif;
 	text-decoration: none
 }
 
 div#content a:hover {
-	color: #033;
-	text-decoration: underline
+	text-decoration: underline;
 }
 
-div#content a#activelink {
-	color: #369;
-	text-decoration: none
+div#content a.subject {
+	color: #FE8080;
+	font-style: italic;
 }
 
 /*stili per la wall*/
@@ -120,11 +129,15 @@ div#content a#activelink {
 div#helprequest {
 	display: inline-block;
 	border: groove;
+	border-color: #B20000;
 }
 
 div#helprequest table {
 	margin: 0 1em 0 1em;
 	padding: 0;
+}
+div#helprequest table .firstcol{
+	margin: 0 0 0 1em;
 }
 
 /*Displaying stars*/
