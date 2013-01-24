@@ -6,7 +6,7 @@
 	<c:forEach var="msg" items="${incomingmsgs}">
 		<tr>
 			<td><a href="loaduser.servlet?id=${msg.sender.ID}">${msg.sender.name} ${msg.sender.surname}: </a></td>
-			<td><a href="expandconv.servlet?id=${msg.conversation.ID}">${msg.text}</a></td>
+			<td><a class="subject" href="expandconv.servlet?id=${msg.conversation.ID}">${msg.text}</a></td>
 		</tr>
 	</c:forEach>
 </table>

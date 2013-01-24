@@ -47,7 +47,7 @@ public class PFriendshipServlet extends HttpServlet {
 			List<Friendship> pfriendships = usermgr.loadPendingFriendships(user.getID());
 			
 			if(pfriendships==null || pfriendships.isEmpty()){
-				request.setAttribute("log", "You don't have pending friendships.");
+				request.setAttribute("info", "You don't have pending friendships.");
 			}
 			
 			request.setAttribute("pfriendships", pfriendships);

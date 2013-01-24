@@ -30,7 +30,7 @@ public class ADAbility implements DataStorer {
 			}
 
 			request.setAttribute("log", "The ability has been correctly " + ans
-					+ isE + "d");
+					+ isE + "d.");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
