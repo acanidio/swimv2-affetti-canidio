@@ -20,9 +20,9 @@
 			<c:if test="${not empty requestScope.log}">
 				<h3>${requestScope.log}</h3>
 			</c:if>
+			<div id="logo"><img class="logo" src="img/logo.png"></div>
 			<c:if test="${empty sessionScope.type}">
-				<div><img class="logo" src="img/logo.png"></div>
-				<div class="description">
+				<div id="cooldescription"class="description">
 					<p>
 						SWIMv2 (Small World hypothesIs Machine v2) is the link between a person and his needs.<br>
 						We tried to develop this platform in order to provide the best way to find help in the web.<br>
