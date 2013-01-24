@@ -21,12 +21,12 @@
 				<h3>${requestScope.log}</h3>
 			</c:if>
 			<c:if test="${empty sessionScope.type}">
-				<h1>Small World hypothesIs Machine v2 (SWIMv2)</h1>
 				<div></div>
 				<div>
 					<p>
-						SWIMv2 is the link between a person and his needs.<br>We tried to develop this platform in order to provide the best way
-						to find help in the web.<br>For instance, have you ever got into these situations?<br><br>
+						SWIMv2 (Small World hypothesIs Machine v2) is the link between a person and his needs.<br>
+						We tried to develop this platform in order to provide the best way to find help in the web.<br>
+						For instance, have you ever got into these situations?<br><br>
 						
 						My web site leaks in design.. I absolutely need a web designer! But who?<br>
 						My piano is out of tune... But who can help me?<br>
