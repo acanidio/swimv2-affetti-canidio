@@ -55,9 +55,9 @@ public class InitServlet extends HttpServlet {
 
 			boolean created = usermgr.createAdmin();
 			if (!created) {
-				log += "Administrator already created.\n";
+				log += "Administrator already created.<br/>";
 			} else {
-				log += "Administrator correctly added to the database.\n";
+				log += "Administrator correctly added to the database.<br/>";
 			}
 			
 			String ability = "Cooker";
