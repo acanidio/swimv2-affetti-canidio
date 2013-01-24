@@ -25,13 +25,20 @@
 				<div></div>
 				<div>
 					<p>
-						This is a Social Network with the purpose of getting in touch people. 
-						SWIMv2 allows you to search for people possessing a determinate ability 
-						and to search for help contacting them manually. It also let you 
-						register and search for help automatically through a help request mechanism.
-						As all the famous Social Networks it provides also a friendship mechanism and 
-						a message mechanism to improve your expeience<br><br>
-						Enjoy your usage as we have enjoyed the development!
+						SWIMv2 is the link between a person and his needs.<br>We tried to develop this platform in order to provide the best way
+						to find help in the web.<br>For instance, have you ever got into these situations?<br><br>
+						
+						My web site leaks in design.. I absolutely need a web designer! But who?<br>
+						My piano is out of tune... But who can help me?<br>
+						I want to organize a big party, but which is the best catering service in town?<br><br>
+						
+						Now, with SWIMv2, you can solve these problems in few clicks!<br>
+						You can post a new help request that will be seen worldwide.<br>
+						Thanks to the feedback mechanism you will have the possibility to choose among a lot of answers the one you think it is the best<br>
+						and, in turn, give a feedback standing on the performance received.<br>
+						You can also search for jobs that fits you among the help requested posted by anyone in the world and contact your friends directly through the platform.<br><br>
+						
+						Enjoy SWIMv2 experience as we have enjoyed the development!
 					</p>
 				</div>
 			</c:if>
