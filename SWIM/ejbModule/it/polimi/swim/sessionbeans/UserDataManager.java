@@ -339,8 +339,8 @@ public class UserDataManager implements UserDataManagerRemote {
 
 	@Override
 	public boolean createAdmin() {
-		String email = "admin@admin.com";
-		String name = "admin";
+		String email = "admin@swim.com";
+		String name = "Admin";
 		String password = "admin";
 
 		if (emailAlreadyExists(email)) {
