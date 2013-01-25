@@ -49,7 +49,7 @@ function addNone(){
 		<div id="content">
 			<form name="filter" action="filterwall.servlet" method="get" onsubmit="return mandatory_filtering();">
 				<fieldset>
-					<legend>Wall's Filter Form</legend>
+					<legend>Wall Filtering Form</legend>
 					<table>
 						<tr>
 							<td>Filter by friends' posts: </td>
