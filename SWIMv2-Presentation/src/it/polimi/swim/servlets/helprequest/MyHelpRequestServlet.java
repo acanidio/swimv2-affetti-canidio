@@ -47,7 +47,7 @@ public class MyHelpRequestServlet extends HttpServlet {
 					.loadUserHelpRequests(user.getID());
 			
 			if(myhrs==null || myhrs.isEmpty()){
-				request.setAttribute("log", "You havn't posted any help request yet.");
+				request.setAttribute("log", "You haven't posted any help request yet.");
 			}
 			
 			request.setAttribute("myhrs", myhrs);

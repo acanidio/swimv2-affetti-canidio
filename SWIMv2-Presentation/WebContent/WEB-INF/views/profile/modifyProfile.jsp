@@ -139,7 +139,7 @@ function checkProfileForm(){
 			</c:if>
 			<form name="signup" action="storemodif.servlet" method="post" onsubmit="return checkProfileForm();">
 				<fieldset>
-					<legend>Profile's Modification</legend>
+					<legend>Profile Modification Form</legend>
 				<table>
 					<tr>
 						<td>Name*: </td>

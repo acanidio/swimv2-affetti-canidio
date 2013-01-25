@@ -31,7 +31,7 @@ public class AbilityStorer implements DataStorer {
 
 			if (abmgr.verifyNewAbility(name)) {
 				request.setAttribute("error",
-						"The ability is already into the database");
+						"The ability is already into the database.");
 				forwardingPath = "error.view";
 				return;
 			}
@@ -57,7 +57,7 @@ public class AbilityStorer implements DataStorer {
 	public String getForwardingPath(HttpServletRequest request) {
 
 		if (request.getSession().getAttribute("type")
-				.equals(Administrator.TYPE)) {
+				.equals(Administrator.TYPE) && !forwardingPath.equals("error.view")) {
 			forwardingPath = "home.servlet";
 		}
 		return forwardingPath;
