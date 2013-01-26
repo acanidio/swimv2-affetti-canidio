@@ -163,11 +163,11 @@ function checkProfileForm(){
 					</tr>
 					<tr>
 						<td>Birthday: </td>
-						<td><input type="text" id="datepicker" name="birthday"></td>
+						<td><input type="text" id="datepicker" name="birthday" value="${sessionScope.person.birthday}"></td>
 					</tr>
 					<tr>
 						<td>Phone number: </td>
-						<td><input type="text" name="phonenumber"></td>
+						<td><input type="text" name="phonenumber" value="${sessionScope.person.phonenumber}"></td>
 					</tr>
 					<c:set var="counter" value="1"></c:set>
 					<c:forEach var="ability" items="${sessionScope.person.abilities}">
